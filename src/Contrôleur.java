@@ -5,9 +5,9 @@ public class Contrôleur {
 	Grille grille;
 	Collection<Aventurier> aventuriers;
 	TasCartesTrésor cartesTresorEnJeu;
-	TasCarteTrésorDeffosse cartesTresor;
-	TasCartesInnondation cartesInnondation;
-	DefausseCarteInnondation cartesInnondationsHorsjeu;
+	Collection<TasCartesTrésor> cartesTresor;
+	Collection<TasCartesInnondation> cartesInnondation;
+	Collection<TasCartesInnondation> cartesInnondationsHorsjeu;
 
 	/**
 	 * 
