@@ -1,7 +1,8 @@
 public enum TypeFigurine {
-	la Pierre sacrée,
-	la Statue du Zéphyr,
-	le Calice de l'onde,
-	le Cristal Ardent,
+    
+	la_Pierre_sacrée,
+	la_Statue_du_Zéphyr,
+	e_Calice_de_londe,
+        le_Cristal_Ardent,
 	vide
 }
