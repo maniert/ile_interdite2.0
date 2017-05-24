@@ -1,6 +1,6 @@
 public class Tuile {
 
-	private string nomTuile;
+	private String nomTuile;
 	private int x;
 	private int y;
 
