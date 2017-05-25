@@ -1,9 +1,14 @@
+
+import java.util.ArrayList;
+
 public class Aventurier {
 
 	private int typeRole;
 	private int nbPA = 3;
 	private int idaventurier;
-
+        private Tuile t;
+        private ArrayList<Carte> main;
+        
 	/**
 	 * 
 	 * @param tuile
@@ -31,10 +36,7 @@ public class Aventurier {
 		throw new UnsupportedOperationException();
 	}
 
-	public void DeplacementPossible() {
-		// TODO - implement Aventurier.DeplacementPossible
-		throw new UnsupportedOperationException();
-	}
+	
 
 	public void setNbPA() {
 		// TODO - implement Aventurier.setNbPA
@@ -75,8 +77,38 @@ public class Aventurier {
                 
 	}
         
-        public void deplacementbasique(){
-            
-        }
-        
+
+
+    /**
+     * @return the typeRole
+     */
+    public int getTypeRole() {
+        return typeRole;
+    }
+
+    /**
+     * @return the nbPA
+     */
+    public int getNbPA() {
+        return nbPA;
+    }
+
+    /**
+     * @return the t
+     */
+    public Tuile getTuile() {
+        return t;
+    }
+
+    /**
+     * @return the main
+     */
+    public ArrayList<Carte> getMain() {
+        return main;
+    }
+
+    /**
+     * @return the caseAtteignable
+     */
+      
 }
