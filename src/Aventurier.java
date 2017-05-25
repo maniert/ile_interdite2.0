@@ -3,7 +3,7 @@ public class Aventurier {
 	private int typeRole;
 	private int nbPA = 3;
 	private int idaventurier;
-	private int afficherdeplacement;
+        
 
 	/**
 	 * 
@@ -72,11 +72,7 @@ public class Aventurier {
 
 	public void jouerCarteSpéciale() {
 		// TODO - implement Aventurier.jouerCarteSpéciale
-		throw new UnsupportedOperationException();
-                
-	}public void jouerCarte() {
-		// TODO - implement Aventurier.jouerCarteSpéciale
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException();   
 	}
 
         
