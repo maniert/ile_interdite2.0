@@ -75,4 +75,8 @@ public class Aventurier {
                 
 	}
         
+        public void deplacementbasique(){
+            
+        }
+        
 }
