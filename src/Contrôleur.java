@@ -9,7 +9,8 @@ public class Contrôleur {
     Collection<TasCartesTrésor> cartesTresor;
     Collection<TasCartesInnondation> cartesInnondation;
     Collection<TasCartesInnondation> cartesInnondationsHorsjeu;
-
+    private ArrayList<Tuile> caseAtteignable;
+    
     /**
      *
      * @param a
@@ -61,5 +62,22 @@ public class Contrôleur {
         // TODO - implement Contrôleur.utiliserCarteSpeciale
         throw new UnsupportedOperationException();
     }
-
+    
+    public void DeplacementPossible() {
+		// TODO - implement Aventurier.DeplacementPossible
+		throw new UnsupportedOperationException();
+	}
+    
+    public void deplacementbasique(Aventurier a){
+        int xPerso;
+        int yPerso;
+        xPerso = a.getTuile().getX();
+        yPerso = a.getTuile().getY();
+        
+    }
+    
+    public ArrayList<Tuile> getCaseAtteignable() {
+        return caseAtteignable;
+    }
+        
 }
