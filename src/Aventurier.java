@@ -73,6 +73,12 @@ public class Aventurier {
 	public void jouerCarteSpéciale() {
 		// TODO - implement Aventurier.jouerCarteSpéciale
 		throw new UnsupportedOperationException();
+                
+	}public void jouerCarte() {
+		// TODO - implement Aventurier.jouerCarteSpéciale
+		throw new UnsupportedOperationException();
 	}
 
+        
+        
 }
