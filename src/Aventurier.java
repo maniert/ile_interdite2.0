@@ -3,7 +3,6 @@ public class Aventurier {
 	private int typeRole;
 	private int nbPA = 3;
 	private int idaventurier;
-	private int afficherdeplacement;
 
 	/**
 	 * 
