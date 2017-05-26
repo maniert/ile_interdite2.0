@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 public class Plongeur extends Aventurier {
 
 	public void plonger() {

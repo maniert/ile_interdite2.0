@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 public class Pilote extends Aventurier {
 
 	public void voler() {

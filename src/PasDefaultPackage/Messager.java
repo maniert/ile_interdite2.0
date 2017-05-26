@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 public class Messager extends Aventurier {
 
 	public void envoyerCarte() {

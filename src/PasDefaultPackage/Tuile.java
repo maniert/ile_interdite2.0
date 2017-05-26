@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 public class Tuile {
 
 	private String nomTuile;

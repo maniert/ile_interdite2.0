@@ -20,6 +20,10 @@ import util.Utils.Pion;
 public class VueAventurier  {
      
     private final JPanel panelBoutons ;
+    
+    private final JPanel mainAutreJoueur ;
+    private final JPanel plateau ;
+    
     private final JPanel panelCentre ;
     private final JFrame window;
     private final JPanel panelAventurier;
@@ -33,7 +37,7 @@ public class VueAventurier  {
     public VueAventurier (String nomJoueur, String nomAventurier, Color couleur){
 
         this.window = new JFrame();
-        window.setSize(350, 200);
+        window.setSize(1080, 720);
 
         window.setTitle(nomJoueur);
         mainPanel = new JPanel(new BorderLayout());
@@ -65,9 +69,17 @@ public class VueAventurier  {
 
         // =================================================================================
         // SUD : les boutons
-        this.panelBoutons = new JPanel(new GridLayout(2,2));
+        this.panelBoutons = new JPanel(new GridLayout(4,1));
         this.panelBoutons.setOpaque(false);
-        mainPanel.add(this.panelBoutons, BorderLayout.SOUTH);
+        mainPanel.add(this.panelBoutons, BorderLayout.EAST);
+        
+        this.mainAutreJoueur = new JPanel(new GridLayout(3,5));
+        this.mainAutreJoueur.setOpaque(false);
+        mainPanel.add(this.mainAutreJoueur, BorderLayout.WEST);
+        
+        this.plateau = new JPanel(new GridLayout(6,6));
+        this.plateau.setOpaque(false);
+        mainPanel.add(this.plateau, BorderLayout.CENTER);
 
         this.btnAller = new JButton("Aller") ;
         this.btnAssecher = new JButton( "Assecher");
@@ -78,7 +90,60 @@ public class VueAventurier  {
         this.panelBoutons.add(btnAssecher);
         this.panelBoutons.add(btnAutreAction);
         this.panelBoutons.add(btnTerminerTour);
+        
+        this.mainAutreJoueur.add(new JButton("1"));
+        this.mainAutreJoueur.add(new JButton("2"));
+        this.mainAutreJoueur.add(new JButton("3"));
+        this.mainAutreJoueur.add(new JButton("4"));
+        this.mainAutreJoueur.add(new JButton("5"));
+        this.mainAutreJoueur.add(new JButton("6"));
+        this.mainAutreJoueur.add(new JButton("7"));
+        this.mainAutreJoueur.add(new JButton("8"));
+        this.mainAutreJoueur.add(new JButton("9"));
+        this.mainAutreJoueur.add(new JButton("10"));
+        this.mainAutreJoueur.add(new JButton("11"));
+        this.mainAutreJoueur.add(new JButton("12"));
+        this.mainAutreJoueur.add(new JButton("13"));
+        this.mainAutreJoueur.add(new JButton("14"));
+        this.mainAutreJoueur.add(new JButton("15"));
 
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton("3"));
+        this.plateau.add(new JButton("4"));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton("8"));
+        this.plateau.add(new JButton("9"));
+        this.plateau.add(new JButton("10"));
+        this.plateau.add(new JButton("11"));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton("13"));
+        this.plateau.add(new JButton("14"));
+        this.plateau.add(new JButton("15"));
+        this.plateau.add(new JButton("1"));
+        this.plateau.add(new JButton("2"));
+        this.plateau.add(new JButton("3"));
+        this.plateau.add(new JButton("4"));
+        this.plateau.add(new JButton("5"));
+        this.plateau.add(new JButton("6"));
+        this.plateau.add(new JButton("7"));
+        this.plateau.add(new JButton("8"));
+        this.plateau.add(new JButton("9"));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton("11"));
+        this.plateau.add(new JButton("12"));
+        this.plateau.add(new JButton("13"));
+        this.plateau.add(new JButton("14"));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton("12"));
+        this.plateau.add(new JButton("13"));
+        this.plateau.add(new JButton(""));
+        this.plateau.add(new JButton(""));
+        
         this.window.setVisible(true);
         mainPanel.repaint();
     }  

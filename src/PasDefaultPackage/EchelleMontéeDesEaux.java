@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 public class EchelleMontéeDesEaux {
 
 	private int niveauEau = 2;

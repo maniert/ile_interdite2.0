@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 public enum TypeFigurine {
     
 	la_Pierre_sacrée,

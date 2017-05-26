@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 public class Carte {
 
 	private int numID;

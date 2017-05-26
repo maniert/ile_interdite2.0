@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 import java.util.*;
 
 public class TasCartesInnondation {

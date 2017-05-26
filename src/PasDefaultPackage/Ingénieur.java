@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 public class Ingénieur extends Aventurier {
 
 	public void asseche2tuiles() {

@@ -1,3 +1,5 @@
+package PasDefaultPackage;
+
 public class Explorateur extends Aventurier {
 
 	public void deplaceDiago() {
