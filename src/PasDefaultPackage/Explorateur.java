@@ -11,5 +11,5 @@ public class Explorateur extends Aventurier {
 		// TODO - implement Explorateur.assecheDiago
 		throw new UnsupportedOperationException();
 	}
-
+       
 }

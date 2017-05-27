@@ -5,13 +5,12 @@ import java.util.*;
 
 public class Contrôleur {
 
-    Grille grille;
+    private Grille grille;
     Collection<Aventurier> aventuriers;
     TasCartesTrésor cartesTresorEnJeu;
     Collection<TasCartesTrésor> cartesTresor;
     Collection<TasCartesInnondation> cartesInnondation;
     Collection<TasCartesInnondation> cartesInnondationsHorsjeu;
-    private ArrayList<Tuile> caseAtteignable;
     
     /**
      *
@@ -70,16 +69,13 @@ public class Contrôleur {
 		throw new UnsupportedOperationException();
 	}
     
-    public void deplacementbasique(Aventurier a){
-        int xPerso;
-        int yPerso;
-        xPerso = a.getTuile().getX();
-        yPerso = a.getTuile().getY();
-        
-    }
     
-    public ArrayList<Tuile> getCaseAtteignable() {
-        return caseAtteignable;
+    
+    /**
+     * @return the grille
+     */
+    public Grille getGrille() {
+        return grille;
     }
         
 }

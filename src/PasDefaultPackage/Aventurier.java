@@ -10,7 +10,9 @@ public class Aventurier {
 	private int idaventurier;
         private Tuile t;
         private ArrayList<Carte> main;
+        private ArrayList<Tuile> caseAtteignable;
         
+         
 	/**
 	 * 
 	 * @param tuile
@@ -109,8 +111,42 @@ public class Aventurier {
         return main;
     }
 
-    /**
-     * @return the caseAtteignable
-     */
+
       
+    public void deplacementbasique(Aventurier a){
+        int xPerso;
+        int yPerso;
+        xPerso = a.getTuile().getX();//récupére les coordonnées
+        yPerso = a.getTuile().getY();//x et y du joueur de ce tour
+        /*Haut   (xPerso)(yPerso-1)
+        /*Bas   (xPerso)(yPerso+1) 
+        /*gauche(xPerso-1)(yPerso)
+        /*droite (xPerso+1)(yPerso)*/
+        int i =0;
+        getTuileAtteignable().add(getGrille().getLaTuile(xPerso, yPerso-1));
+        getTuileAtteignable().add(getGrille().getLaTuile(xPerso, yPerso+1));
+        getTuileAtteignable().add(getGrille().getLaTuile(xPerso-1, yPerso));
+        getTuileAtteignable().add(getGrille().getLaTuile(xPerso+1, yPerso));
+        
+    }
+    
+    public void deplacementDiagonal(Aventurier a){
+        int xPerso;
+        int yPerso;
+        xPerso = a.getTuile().getX();//récupére les coordonnées
+        yPerso = a.getTuile().getY();//x et y du joueur de ce tour
+        getTuileAtteignable().add(getGrille().getLaTuile(xPerso-1, yPerso-1));
+        getTuileAtteignable().add(getGrille().getLaTuile(xPerso+1, yPerso-1));
+        getTuileAtteignable().add(getGrille().getLaTuile(xPerso-1, yPerso+1));
+        getTuileAtteignable().add(getGrille().getLaTuile(xPerso+1, yPerso+1));
+    }
+      
+    public ArrayList<Tuile> getTuileAtteignable() {
+        return caseAtteignable;
+    }
+
+    private Grille getGrille() {
+         return grille;
+       }
+   
 }
