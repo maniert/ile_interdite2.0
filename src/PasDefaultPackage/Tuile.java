@@ -1,25 +1,38 @@
 package PasDefaultPackage;
 
+import java.util.ArrayList;
+
 public class Tuile {
 
         private int idTuile;
 	private String nomTuile;
 	private int x;
 	private int y;
+        private Etat etat;
+        private ArrayList<Aventurier> aventuriers;
 
+        @SuppressWarnings("Convert2Diamond")
     public Tuile(int idTuile, String nomTuile, int x, int y) {
         this.idTuile = idTuile;
         this.nomTuile = nomTuile;
         this.x = x;
         this.y = y;
+        this.etat = Etat.sec;
+        this.aventuriers = new ArrayList<Aventurier>();
     }
 
     
+
         
         
-	public void getEtat() {
-		// TODO - implement Tuile.getEtat
-		throw new UnsupportedOperationException();
+    
+
+    
+
+        
+        
+	public Etat getEtat() {
+		return etat;
 	}
 
     /**
@@ -68,6 +81,13 @@ public class Tuile {
      */
     public void setY(int y) {
         this.y = y;
+    }
+
+    /**
+     * @return the aventuriers
+     */
+    public ArrayList<Aventurier> getAventuriers() {
+        return aventuriers;
     }
 
 }

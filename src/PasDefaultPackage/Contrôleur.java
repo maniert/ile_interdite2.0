@@ -64,11 +64,23 @@ public class Contrôleur {
         throw new UnsupportedOperationException();
     }
     
-    public void DeplacementPossible() {
-		// TODO - implement Aventurier.DeplacementPossible
-		throw new UnsupportedOperationException();
-	}
+    public void DemandeDeplacement(Aventurier a) {//tuile de destination + aventurier concerné
+        boolean enAttenteDAppuie = true; 
+        
+        a.setTuileAtteignable(grille);	
+        /*AFFICHAGE MATHILDE*/
+        /*debut loop EN ATTENTE DE detection click sur bouton possible
+                     attente d'appuie sur une tuile valide   */
+        Tuile tDest = null;/*récupérer tuile au click
+          fin loop*/
+        Deplacement(tDest,a);
+    }
     
+    public void Deplacement(Tuile tDest,Aventurier a){
+        a.getTuile().getAventuriers().remove(a);
+        a.setT(tDest);
+        tDest.getAventuriers().add(a);
+    }
     
     
     /**
