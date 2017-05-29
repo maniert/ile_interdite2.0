@@ -21,9 +21,9 @@ public class VueAventurier  {
      
     private final JPanel panelBoutons ;
     
-    private final JPanel mainAutreJoueur ;
-    private final JPanel plateau ;
-    
+    private JPanel mainAutreJoueur ;
+    private JPanel plateau ;
+    private JPanel mainJoueur;
     private final JPanel panelCentre ;
     private final JFrame window;
     private final JPanel panelAventurier;
@@ -68,19 +68,22 @@ public class VueAventurier  {
 
 
         // =================================================================================
-        // SUD : les boutons
+        // Est : Les boutons assècher ect 
         this.panelBoutons = new JPanel(new GridLayout(4,1));
         this.panelBoutons.setOpaque(false);
         mainPanel.add(this.panelBoutons, BorderLayout.EAST);
-        
+        // Ouest : les mains des autres joueurs
         this.mainAutreJoueur = new JPanel(new GridLayout(3,5));
         this.mainAutreJoueur.setOpaque(false);
         mainPanel.add(this.mainAutreJoueur, BorderLayout.WEST);
-        
+        // Center : Le plateau
         this.plateau = new JPanel(new GridLayout(6,6));
         this.plateau.setOpaque(false);
         mainPanel.add(this.plateau, BorderLayout.CENTER);
-        
+        // Sud : Main du joueur ++
+        this.mainJoueur = new JPanel(new GridLayout(4,1));
+        this.mainJoueur.setOpaque(false);
+        mainPanel.add(this.mainJoueur, BorderLayout.SOUTH);
     
 
         this.btnAller = new JButton("Aller") ;
@@ -145,6 +148,12 @@ public class VueAventurier  {
         this.plateau.add(new JButton("Le Jardin Des Murmures"));
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
+        
+        
+        this.mainJoueur.add(new JButton(""));
+        this.mainJoueur.add(new JButton(""));
+        this.mainJoueur.add(new JButton(""));
+        this.mainJoueur.add(new JButton(""));
         
         this.window.setVisible(true);
         mainPanel.repaint();
