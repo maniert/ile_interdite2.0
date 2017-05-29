@@ -25,7 +25,6 @@ public class Aventurier {
     }
         
         
-        
 	/**
 	 * 
 	 * @param tuile

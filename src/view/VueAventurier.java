@@ -1,5 +1,6 @@
 package view;
 
+import PasDefaultPackage.Tuile;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -33,6 +34,8 @@ public class VueAventurier  {
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
     private final JTextField position;
+    
+    
     
     public VueAventurier (String nomJoueur, String nomAventurier, Color couleur){
 
@@ -112,6 +115,7 @@ public class VueAventurier  {
         this.mainAutreJoueur.add(new JButton("14"));
         this.mainAutreJoueur.add(new JButton("15"));
 
+        //JButton 11 = new JButton("");
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton("Le Pont Des Abimes"));
@@ -180,6 +184,14 @@ public class VueAventurier  {
     }
  
 
+    //Mettre tuile sur l'interface selon son état donner une couleur et regarder son nom + Coordonées 
+    public String affichageTuile (Tuile t)  {
+        //chercher la tuile et l'afficher
+
+        return t.getNomTuile();
+        
+    }
+   
     
      public static void main(String [] args) {
         // Instanciation de la fenêtre 
