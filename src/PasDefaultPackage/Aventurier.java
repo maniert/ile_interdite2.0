@@ -114,7 +114,7 @@ public class Aventurier {
     public int getNbPA() {
         return nbPA;
     }
-
+/*test*/
     /**
      * @return the t
      */
