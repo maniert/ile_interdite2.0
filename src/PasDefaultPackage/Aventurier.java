@@ -61,10 +61,10 @@ public class Aventurier {
      *
      * @param tuile
      */
-    public void assecher(Tuile tuile) {
+    //public void assecher(Tuile tuile) {
         // TODO - implement Aventurier.secher
-        throw new UnsupportedOperationException();
-    }
+    //    throw new UnsupportedOperationException();
+    //}
 
     /**
      *
