@@ -7,22 +7,42 @@ import java.util.ArrayList;
 
 public class Aventurier {
 
-	private TypeRole typeRole;
 	private int nbPA = 3;
 	private int idaventurier;
         private Tuile t;
         private ArrayList<Carte> main;
-        private ArrayList<Tuile> tuilesAtteignable;
+        ArrayList<Tuile> tuilesAtteignable;
         private boolean deplacementSpePilote;
-        
+        private TypeRole typeRole;
     public Aventurier(TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
-        this.typeRole = typeRole;
         this.idaventurier = idaventurier;
         this.t = t;
         this.main = main;
         this.tuilesAtteignable = new ArrayList<Tuile>();
         this.deplacementSpePilote = true;
+        
+    }  public void deplacementPossiblePlongeur(Grille g){
+        int xPerso;
+        int yPerso;
+        xPerso = this.getTuile().getX();//récupére les coordonnées
+        yPerso = this.getTuile().getY();//x et y du joueur de ce tour
+        deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles
+        getTuileAtteignable(g).add(g.getLaTuile(xPerso-1, yPerso-1));//HG
+        getTuileAtteignable(g).add(g.getLaTuile(xPerso+1, yPerso-1));//HD
+        getTuileAtteignable(g).add(g.getLaTuile(xPerso-1, yPerso+1));//BG
+        getTuileAtteignable(g).add(g.getLaTuile(xPerso+1, yPerso+1));//BD
     }
+         
+    public void filtrageDeplacementpossiblePlongeur(ArrayList<Tuile> tuileAtteignable,Grille g) {
+        int i = 0;
+        while (i != this.getTuileAtteignable(g).size()+1){
+            if (this.getTuileAtteignable(g).get(i) == null ){
+                this.getTuileAtteignable(g).remove(this.getTuileAtteignable(g).get(i));
+            } else {
+                i++;
+            }
+        }
+    } 
         
         
         
@@ -81,13 +101,6 @@ public class Aventurier {
 
 
     /**
-     * @return the typeRole
-     */
-    public TypeRole getTypeRole() {
-        return typeRole;
-    }
-
-    /**
      * @return the nbPA
      */
     public int getNbPA() {
@@ -124,25 +137,16 @@ public class Aventurier {
     }
     
     public ArrayList<Tuile> getTuileAtteignable(Grille g) {
+        getTuileAtteignable(g).clear(); // vider l'arraylist avant de le remplir
+        deplacementPossiblePilote(g);   // ajout de toutes les tuiles possible sauf ça 
+        filtrageDeplacementpossible(tuilesAtteignable, g); //filtrage null+innondé,immergé   
         return tuilesAtteignable;
     }
 
       
-    public ArrayList<Tuile> setTuileAtteignable(Grille g) {
-        getTuileAtteignable(g).clear();// vider l'arraylist avant de le remplir
-        if(this.getTypeRole() == pilote ){ //si c'est un pilote
-            deplacementPossiblePilote(g);   // ajout de toutes les tuiles possible sauf ça 
-             filtrageDeplacementpossible(tuilesAtteignable, g); //filtrage null+innondé,immergé
-        } else if(this.getTypeRole() == plongeur ) { //si c'est plongeur
-            deplacementPossiblePlongeur(g); //ajout des tuiles en diagonal
-            filtrageDeplacementpossiblePlongeur(tuilesAtteignable,g);//filtrage null
-        } else{
-            deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles
-            filtrageDeplacementpossible(tuilesAtteignable, g);//filtrage null+innondé,immergé
-        }
-        return tuilesAtteignable; //retourne un arraylist de toutes les tuiles possible
-    }                             //permettant de proposer des tuiles au joueur avant de
-                                  //démarrer le déplacement
+    public void setTuileAtteignable(Grille g) {
+                  
+    }                            
     
    
     public void filtrageDeplacementpossible(ArrayList<Tuile> tuileAtteignable, Grille g) {
@@ -185,31 +189,8 @@ public class Aventurier {
         }
     }
     
-    public void deplacementPossiblePlongeur(Grille g){
-        int xPerso;
-        int yPerso;
-        xPerso = this.getTuile().getX();//récupére les coordonnées
-        yPerso = this.getTuile().getY();//x et y du joueur de ce tour
-        deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles
-        getTuileAtteignable(g).add(g.getLaTuile(xPerso-1, yPerso-1));//HG
-        getTuileAtteignable(g).add(g.getLaTuile(xPerso+1, yPerso-1));//HD
-        getTuileAtteignable(g).add(g.getLaTuile(xPerso-1, yPerso+1));//BG
-        getTuileAtteignable(g).add(g.getLaTuile(xPerso+1, yPerso+1));//BD
-    }
-         
-    public void filtrageDeplacementpossiblePlongeur(ArrayList<Tuile> tuileAtteignable,Grille g) {
-        int i = 0;
-        while (i != this.getTuileAtteignable(g).size()+1){
-            if (this.getTuileAtteignable(g).get(i) == null ){
-                this.getTuileAtteignable(g).remove(this.getTuileAtteignable(g).get(i));
-            } else {
-                i++;
-            }
-        }
-    }       
         
         
-    
     //-------------------------------------------------------------------------------------
 
     /**
@@ -218,11 +199,10 @@ public class Aventurier {
     public void setT(Tuile t) {
         this.t = t;
     }
-    
-    
-    
-    
-    
-    
+
+    TypeRole getTypeRole() {
+        return typeRole;
+    }
+  
     
 }
