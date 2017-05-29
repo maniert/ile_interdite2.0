@@ -115,8 +115,12 @@ public class VueAventurier  {
         this.mainAutreJoueur.add(new JButton("14"));
         this.mainAutreJoueur.add(new JButton("15"));
 
+        
+        for (int i = 1; i <= 36; i ++ ) {
+            this.plateau.add(new JButton(""));
+        }
         //JButton 11 = new JButton("");
-        this.plateau.add(new JButton(""));
+        /*
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton("Le Pont Des Abimes"));
         this.plateau.add(new JButton("La Porte De Bronze"));
@@ -152,7 +156,7 @@ public class VueAventurier  {
         this.plateau.add(new JButton("Le Jardin Des Murmures"));
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
-        
+        */
         
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
