@@ -80,6 +80,8 @@ public class VueAventurier  {
         this.plateau = new JPanel(new GridLayout(6,6));
         this.plateau.setOpaque(false);
         mainPanel.add(this.plateau, BorderLayout.CENTER);
+        
+    
 
         this.btnAller = new JButton("Aller") ;
         this.btnAssecher = new JButton( "Assecher");
@@ -109,38 +111,38 @@ public class VueAventurier  {
 
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("3"));
-        this.plateau.add(new JButton("4"));
+        this.plateau.add(new JButton("Le Pont Des Abimes"));
+        this.plateau.add(new JButton("La Porte De Bronze"));
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("8"));
-        this.plateau.add(new JButton("9"));
-        this.plateau.add(new JButton("10"));
-        this.plateau.add(new JButton("11"));
+        this.plateau.add(new JButton("La Caverne Des Ombres"));
+        this.plateau.add(new JButton("La Porte De Fer"));
+        this.plateau.add(new JButton("La Porte d'Or"));
+        this.plateau.add(new JButton("Les Falaises De L'Oubli"));
         this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("13"));
-        this.plateau.add(new JButton("14"));
-        this.plateau.add(new JButton("15"));
-        this.plateau.add(new JButton("1"));
-        this.plateau.add(new JButton("2"));
-        this.plateau.add(new JButton("3"));
-        this.plateau.add(new JButton("4"));
-        this.plateau.add(new JButton("5"));
-        this.plateau.add(new JButton("6"));
-        this.plateau.add(new JButton("7"));
-        this.plateau.add(new JButton("8"));
-        this.plateau.add(new JButton("9"));
+        this.plateau.add(new JButton("Le Palais De Corail"));
+        this.plateau.add(new JButton("La Porte d'Argent"));
+        this.plateau.add(new JButton("Les Dunes De L'Illusion"));
+        this.plateau.add(new JButton("Heliport"));
+        this.plateau.add(new JButton("La Porte De Cuivre"));
+        this.plateau.add(new JButton("Le Jardin Des Hurlements"));
+        this.plateau.add(new JButton("La Forêt Pourpre"));
+        this.plateau.add(new JButton("Le Lagon Perdu"));
+        this.plateau.add(new JButton("Le Marais Brumeux"));
+        this.plateau.add(new JButton("Observatoire"));
+        this.plateau.add(new JButton("Le Rocher Fantôme"));
+        this.plateau.add(new JButton("La Caverne Du Braisier"));
         this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("11"));
-        this.plateau.add(new JButton("12"));
-        this.plateau.add(new JButton("13"));
-        this.plateau.add(new JButton("14"));
+        this.plateau.add(new JButton("Le Temple Du Soleil"));
+        this.plateau.add(new JButton("Le Temple De La Lune"));
+        this.plateau.add(new JButton("Le Palais Des Marees"));
+        this.plateau.add(new JButton("Le Val Du Crepuscule"));
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("12"));
-        this.plateau.add(new JButton("13"));
+        this.plateau.add(new JButton("La Tour Du Guet"));
+        this.plateau.add(new JButton("Le Jardin Des Murmures"));
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
         
@@ -172,7 +174,7 @@ public class VueAventurier  {
     
      public static void main(String [] args) {
         // Instanciation de la fenêtre 
-        VueAventurier vueAventurier = new VueAventurier ("Manon", "Explorateur",Pion.ROUGE.getCouleur() );
+        VueAventurier vueAventurier = new VueAventurier ("Mathildeuh", "Explorateur",Pion.VERT.getCouleur() );
     }
 }
 
