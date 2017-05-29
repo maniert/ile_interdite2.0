@@ -1,17 +1,25 @@
 package PasDefaultPackage;
 
-
+import static PasDefaultPackage.TypeRole.explorateur;
+import java.awt.Color;
 import java.util.*;
+import view.VueAventurier;
 
 public class Contrôleur {
 
     private Grille grille;
-    Collection<Aventurier> aventuriers;
-    TasCartesTrésor cartesTresorEnJeu;
-    Collection<TasCartesTrésor> cartesTresor;
-    Collection<TasCartesInnondation> cartesInnondation;
-    Collection<TasCartesInnondation> cartesInnondationsHorsjeu;
-    
+    private Collection<Aventurier> aventuriers;
+    private TasCartesTrésor cartesTresor;
+    private TasCartesInnondation cartesInnondation;
+
+    public static void main(String[] args) {
+        Tuile t = new Tuile(0, "Le Pont Des Abimes", 3, 1);
+        Aventurier av1 = new Aventurier("Thibaud", explorateur, 0, t, null);
+        VueAventurier window = new VueAventurier("Thibaud", "Explorateur", Color.blue);
+        //window.setVisible(true);
+
+    }
+
     /**
      *
      * @param a
@@ -63,31 +71,30 @@ public class Contrôleur {
         // TODO - implement Contrôleur.utiliserCarteSpeciale
         throw new UnsupportedOperationException();
     }
-    
+
     public void DemandeDeplacement(Aventurier a) {//tuile de destination + aventurier concerné
-        boolean enAttenteDAppuie = true; 
-        
-        a.setTuileAtteignable(grille);	
+        boolean enAttenteDAppuie = true;
+
+        a.setTuileAtteignable(grille);
         /*AFFICHAGE MATHILDE*/
-        /*debut loop EN ATTENTE DE detection click sur bouton possible
+ /*debut loop EN ATTENTE DE detection click sur bouton possible
                      attente d'appuie sur une tuile valide   */
         Tuile tDest = null;/*récupérer tuile au click
           fin loop*/
-        Deplacement(tDest,a);
+        Deplacement(tDest, a);
     }
-    
-    public void Deplacement(Tuile tDest,Aventurier a){
+
+    public void Deplacement(Tuile tDest, Aventurier a) {
         a.getTuile().getAventuriers().remove(a);
         a.setT(tDest);
         tDest.getAventuriers().add(a);
     }
-    
-    
+
     /**
      * @return the grille
      */
     public Grille getGrille() {
         return grille;
     }
-        
+
 }

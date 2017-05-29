@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 public class Tuile {
 
-        private int idTuile;
-	private String nomTuile;
-	private int x;
-	private int y;
-        private Etat etat;
-        private ArrayList<Aventurier> aventuriers;
+    private int idTuile;
+    private String nomTuile;
+    private int x;
+    private int y;
+    private Etat etat;
+    private ArrayList<Aventurier> aventuriers;
 
-        @SuppressWarnings("Convert2Diamond")
     public Tuile(int idTuile, String nomTuile, int x, int y) {
         this.idTuile = idTuile;
         this.nomTuile = nomTuile;
@@ -21,19 +20,9 @@ public class Tuile {
         this.aventuriers = new ArrayList<Aventurier>();
     }
 
-    
-
-        
-        
-    
-
-    
-
-        
-        
-	public Etat getEtat() {
-		return etat;
-	}
+    public Etat getEtat() {
+        return etat;
+    }
 
     /**
      * @return the nomTuile
@@ -48,16 +37,15 @@ public class Tuile {
     public int getX() {
         return x;
     }
-    
-      public int getX(int idTuile) {
+
+    public int getX(int idTuile) {
         return x;
     }
 
-    
     public int getY() {
         return y;
     }
-    
+
     /**
      * @param idTuile
      * @return the y
@@ -66,16 +54,13 @@ public class Tuile {
         return y;
     }
 
-    
-    
-    
-        /**
+    /**
      * @param x the x to set
      */
     public void setX(int x) {
         this.x = x;
     }
-    
+
     /**
      * @param y the y to set
      */
