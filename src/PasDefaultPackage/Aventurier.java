@@ -22,29 +22,7 @@ public class Aventurier {
         this.tuilesAtteignable = new ArrayList<Tuile>();
         this.deplacementSpePilote = true;
         
-    }  public void deplacementPossiblePlongeur(Grille g){
-        int xPerso;
-        int yPerso;
-        xPerso = this.getTuile().getX();//récupére les coordonnées
-        yPerso = this.getTuile().getY();//x et y du joueur de ce tour
-        deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles
-        getTuileAtteignable(g).add(g.getLaTuile(xPerso-1, yPerso-1));//HG
-        getTuileAtteignable(g).add(g.getLaTuile(xPerso+1, yPerso-1));//HD
-        getTuileAtteignable(g).add(g.getLaTuile(xPerso-1, yPerso+1));//BG
-        getTuileAtteignable(g).add(g.getLaTuile(xPerso+1, yPerso+1));//BD
-    }
-         
-    public void filtrageDeplacementpossiblePlongeur(ArrayList<Tuile> tuileAtteignable,Grille g) {
-        int i = 0;
-        while (i != this.getTuileAtteignable(g).size()+1){
-            if (this.getTuileAtteignable(g).get(i) == null ){
-                this.getTuileAtteignable(g).remove(this.getTuileAtteignable(g).get(i));
-            } else {
-                i++;
-            }
-        }
-    } 
-        
+    }         
         
 	/**
 	 * 
