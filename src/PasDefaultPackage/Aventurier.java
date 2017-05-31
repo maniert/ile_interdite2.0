@@ -21,17 +21,17 @@ public class Aventurier {
         this.main = main;
         this.tuilesAtteignable = new ArrayList<Tuile>();
         this.deplacementSpePilote = true;
-
-    }
-
-    /**
-     *
-     * @param tuile
-     */
-    public void assecher(Tuile tuile) {
-        // TODO - implement Aventurier.secher
-        throw new UnsupportedOperationException();
-    }
+        
+    }         
+        
+	/**
+	 * 
+	 * @param tuile
+	 */
+	public void assecher(Tuile tuile) {
+		// TODO - implement Aventurier.secher
+		throw new UnsupportedOperationException();
+	}
 
     /**
      *
