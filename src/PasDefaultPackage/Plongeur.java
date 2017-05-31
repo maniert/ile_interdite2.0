@@ -29,17 +29,15 @@ public class Plongeur extends Aventurier {
                 mem = tuilessouslocean;
                 for (int j = 0; j < this.tuilessouslocean.size(); j++) {
                     for (int k = 0; k < this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).size(); k++) {
-                        if (existedéjà(this.getTuileAtteignable(), this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).get(k))) {
-
-                        } else {
+                        if (!existedéjà(this.getTuileAtteignable(), this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).get(k))) {
                             this.getTuileAtteignable().add(this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).get(k));
-
-                        }
-
+                        } else if (!existedéjà(tuilessouslocean, this.tuilesAutour(innondé, this.tuilessouslocean.get(j), g).get(k))){
+                            this.tuilessouslocean.add(this.tuilesAutour(innondé, this.tuilessouslocean.get(j), g).get(k));
+                        } else if (!existedéjà(tuilessouslocean, this.tuilesAutour(immergé, this.tuilessouslocean.get(j), g).get(k))){
+                            this.tuilessouslocean.add(this.tuilesAutour(immergé, this.tuilessouslocean.get(j), g).get(k));
+                        }       
                     }
-
                 }
-
             }
 
         }
