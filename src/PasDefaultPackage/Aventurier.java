@@ -1,7 +1,5 @@
 package PasDefaultPackage;
 
-import static PasDefaultPackage.TypeRole.pilote;
-import static PasDefaultPackage.TypeRole.plongeur;
 import java.util.ArrayList;
 
 public class Aventurier {
@@ -10,9 +8,9 @@ public class Aventurier {
     private TypeRole typeRole;
     private int nbPA = 3;
     private int idaventurier;
-    Tuile t;
+    private Tuile t;
     private ArrayList<Carte> main;
-    ArrayList<Tuile> tuilesAtteignable;
+    private ArrayList<Tuile> tuilesAtteignable;
     boolean deplacementSpePilote;
 
     public Aventurier(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {

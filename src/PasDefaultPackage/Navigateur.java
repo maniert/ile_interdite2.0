@@ -8,16 +8,14 @@ public class Navigateur extends Aventurier{
         super(nomJoueur, typeRole, idaventurier, t, main);
     }
     
-    public ArrayList<Tuile> getTuileAtteignable(Grille g) {
+    public void setTuileAtteignable(Grille g) {
     int xPerso;
     int yPerso;
     getTuileAtteignable(g).clear();// vider l'arraylist avant de le remplir
     xPerso = this.getTuile().getX();//récupére les coordonnées
     yPerso = this.getTuile().getY();//x et y du joueur de ce tour
     deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles 
-    filtrageDeplacementpossible(tuilesAtteignable, g); //filtrage null+innondé,immergé 
-        return tuilesAtteignable;
-        
+    filtrageDeplacementpossible(getTuileAtteignable(g), g); //filtrage null+innondé,immergé         
     }
     
     

@@ -8,12 +8,10 @@ public class Messager extends Aventurier{
         super(nomJoueur, typeRole, idaventurier, t, main);
     }
     
-    public ArrayList<Tuile> getTuileAtteignable(Grille g) {
+    public void setTuileAtteignable(Grille g) {
     getTuileAtteignable(g).clear();// vider l'arraylist avant de le remplir
     deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles
-    filtrageDeplacementpossible(tuilesAtteignable, g); //filtrage null+innondé,immergé 
-    return tuilesAtteignable;
-        
+    filtrageDeplacementpossible(getTuileAtteignable(g), g); //filtrage null+innondé,immergé   
     }
     
     

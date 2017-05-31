@@ -9,7 +9,7 @@ public class Explorateur extends Aventurier{
     }
     
     
-    public ArrayList<Tuile> getTuileAtteignable(Grille g) {
+    public void setTuileAtteignable(Grille g) {
     int xPerso;
     int yPerso;
     getTuileAtteignable(g).clear();// vider l'arraylist avant de le remplir
@@ -20,8 +20,7 @@ public class Explorateur extends Aventurier{
     getTuileAtteignable(g).add(g.getLaTuile(xPerso + 1, yPerso - 1));//HD
     getTuileAtteignable(g).add(g.getLaTuile(xPerso - 1, yPerso + 1));//BG
     getTuileAtteignable(g).add(g.getLaTuile(xPerso + 1, yPerso + 1));//BD 
-    filtrageDeplacementpossible(tuilesAtteignable, g); //filtrage null+innondé,immergé 
-    return tuilesAtteignable;
+    filtrageDeplacementpossible(getTuileAtteignable(g), g); //filtrage null+innondé,immergé 
         
     }
     

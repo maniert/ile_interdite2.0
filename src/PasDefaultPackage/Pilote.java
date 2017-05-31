@@ -8,18 +8,18 @@ public class Pilote extends Aventurier{
         super(nomJoueur, typeRole, idaventurier, t, main);
     }
     
-    public ArrayList<Tuile> getTuileAtteignable(Grille g) {
+    public void setTuileAtteignable(Grille g) {
         int i = 0;
         getTuileAtteignable(g).clear();// vider l'arraylist avant de le remplir
         if (deplacementSpePilote) {
-            while (i != 36 && this.t != g.getTuiles().get(i)) {       // tant que l'on a pas parcouru tout et 
+            while (i != 36 && this.getTuile() != g.getTuiles().get(i)) {       // tant que l'on a pas parcouru tout et 
                 getTuileAtteignable(g).add(g.getTuiles().get(i)); // que l'on est pas à la tuile de l'aventurier
             }                                                      // on ajout aux tuiles atteingables
         } else {
             deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles
         }
-        filtrageDeplacementpossible(tuilesAtteignable, g); //filtrage null+innondé,immergé 
-        return tuilesAtteignable;
+        filtrageDeplacementpossible(getTuileAtteignable(g), g); //filtrage null+innondé,immergé 
+
     }
     
 }
