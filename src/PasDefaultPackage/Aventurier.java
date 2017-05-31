@@ -145,10 +145,7 @@ public class Aventurier {
         return tuilesAtteignable;
     }
 
-      
-    public void setTuileAtteignable(Grille g) {
-                  
-    }                            
+                          
     
    
     public void filtrageDeplacementpossible(ArrayList<Tuile> tuileAtteignable, Grille g) {
