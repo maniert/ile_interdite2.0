@@ -1,8 +1,7 @@
 package PasDefaultPackage;
 
 import static PasDefaultPackage.TypeRole.explorateur;
-import static PasDefaultPackage.TypeRole.pilote;
-import static PasDefaultPackage.TypeRole.plongeur;
+import java.awt.Color;
 import java.util.*;
 import view.VueAventurier;
 
@@ -14,15 +13,10 @@ public class Contrôleur {
     private TasCartesInnondation cartesInnondation;
 
     public static void main(String[] args) {
-
         Tuile t = new Tuile(0, "Le Pont Des Abimes", 3, 1);
-
         Aventurier av1 = new Aventurier("Thibaud", explorateur, 0, t, null);
-        Aventurier av2 = new Aventurier("Alexis", pilote, 1, t, null);
-        Aventurier av3 = new Aventurier("Mathilde", plongeur, 2, t, null);
-        Aventurier av4 = new Aventurier("Thibaud", explorateur, 3, t, null);
-        VueAventurier window;
-        //window = new VueAventurier(av4, Color.blue, grille);
+        VueAventurier window = new VueAventurier("Thibaud", "Explorateur", Color.blue);
+        //window.setVisible(true);
 
     }
 
@@ -51,6 +45,15 @@ public class Contrôleur {
 
     /**
      *
+     * @param a
+     */
+    public void seDeplacer(Aventurier a) {
+        // TODO - implement Contrôleur.seDeplacer
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     *
      * @param aventurier
      * @param carte
      */
@@ -72,7 +75,7 @@ public class Contrôleur {
     public void DemandeDeplacement(Aventurier a) {//tuile de destination + aventurier concerné
         boolean enAttenteDAppuie = true;
 
-        a.getTuileAtteignable();
+        a.setTuileAtteignable(grille);
         /*AFFICHAGE MATHILDE*/
  /*debut loop EN ATTENTE DE detection click sur bouton possible
                      attente d'appuie sur une tuile valide   */
@@ -85,24 +88,6 @@ public class Contrôleur {
         a.getTuile().getAventuriers().remove(a);
         a.setT(tDest);
         tDest.getAventuriers().add(a);
-    }
-    
-    public void Demandeassecher(Aventurier a) {//tuile de destination + aventurier concerné
-        boolean enAttenteDAppuie = true;
-        a.getTuileAssechable();
-        /*AFFICHAGE MATHILDE*/
- /*debut loop EN ATTENTE DE detection click sur bouton possible
-                     attente d'appuie sur une tuile valide   */
-        Tuile tDest = null;/*récupérer tuile au click
-          fin loop*/
-        Deplacement(tDest, a);
-    }
-    
-    public void assecher(Tuile tDest, Aventurier a) {
-	a.getTuile().getAventuriers().remove(a);
-        a.setT(tDest);
-        tDest.getAventuriers().add(a);	
-		
     }
 
     /**

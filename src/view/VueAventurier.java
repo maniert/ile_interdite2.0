@@ -1,7 +1,5 @@
 package view;
 
-import PasDefaultPackage.Aventurier;
-import PasDefaultPackage.Grille;
 import PasDefaultPackage.Tuile;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,15 +13,17 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.MatteBorder;
+import util.Utils.Pion;
 
-public class VueAventurier {
-
-    private final JPanel panelBoutons;
-
-    private JPanel mainAutreJoueur;
-    private JPanel plateau;
+ 
+public class VueAventurier  {
+     
+    private final JPanel panelBoutons ;
+    
+    private JPanel mainAutreJoueur ;
+    private JPanel plateau ;
     private JPanel mainJoueur;
-    private final JPanel panelCentre;
+    private final JPanel panelCentre ;
     private final JFrame window;
     private final JPanel panelAventurier;
     private final JPanel mainPanel;
@@ -32,13 +32,15 @@ public class VueAventurier {
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
     private final JTextField position;
-
-    public VueAventurier(Aventurier a, Color couleur, Grille g) {
+    
+    
+    
+    public VueAventurier (String nomJoueur, String nomAventurier, Color couleur){
 
         this.window = new JFrame();
         window.setSize(1080, 720);
 
-        window.setTitle(a.getNomJoueur());
+        window.setTitle(nomJoueur);
         mainPanel = new JPanel(new BorderLayout());
         this.window.add(mainPanel);
 
@@ -49,7 +51,7 @@ public class VueAventurier {
         // NORD : le titre = nom de l'aventurier + nom du joueur sur la couleurActive du pion
         this.panelAventurier = new JPanel();
         panelAventurier.setBackground(couleur);
-        panelAventurier.add(new JLabel(a.getTypeRole().toString(), SwingConstants.CENTER));
+        panelAventurier.add(new JLabel(nomAventurier, SwingConstants.CENTER));
         mainPanel.add(panelAventurier, BorderLayout.NORTH);
 
         // =================================================================================
@@ -66,21 +68,22 @@ public class VueAventurier {
 
         // =================================================================================
         // Est : Les boutons assècher ect 
-        this.panelBoutons = new JPanel(new GridLayout(4, 1));
+        this.panelBoutons = new JPanel(new GridLayout(4,1));
         this.panelBoutons.setOpaque(false);
         mainPanel.add(this.panelBoutons, BorderLayout.EAST);
         // Ouest : les mains des autres joueurs
-        this.mainAutreJoueur = new JPanel(new GridLayout(3, 5));
+        this.mainAutreJoueur = new JPanel(new GridLayout(3,5));
         this.mainAutreJoueur.setOpaque(false);
         mainPanel.add(this.mainAutreJoueur, BorderLayout.WEST);
         // Center : Le plateau
-        this.plateau = new JPanel(new GridLayout(6, 6));
+        this.plateau = new JPanel(new GridLayout(6,6));
         this.plateau.setOpaque(false);
         mainPanel.add(this.plateau, BorderLayout.CENTER);
         // Sud : Main du joueur ++
-        this.mainJoueur = new JPanel(new GridLayout(4, 1));
+        this.mainJoueur = new JPanel(new GridLayout(4,1));
         this.mainJoueur.setOpaque(false);
         mainPanel.add(this.mainJoueur, BorderLayout.SOUTH);
+    
 
         this.btnAller = new JButton("Aller");
         this.btnAssecher = new JButton("Assecher");
@@ -108,8 +111,9 @@ public class VueAventurier {
         this.mainAutreJoueur.add(new JButton("14"));
         this.mainAutreJoueur.add(new JButton("15"));
 
-        for (int i = 1; i <= 36; i++) {
-            this.plateau.add(new JButton());
+        
+        for (int i = 1; i <= 36; i ++ ) {
+            this.plateau.add(new JButton(""));
         }
         //JButton 11 = new JButton("");
         /*
@@ -148,13 +152,13 @@ public class VueAventurier {
         this.plateau.add(new JButton("Le Jardin Des Murmures"));
         this.plateau.add(new JButton(""));
         this.plateau.add(new JButton(""));
-         */
-
+        */
+        
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
-
+        
         this.window.setVisible(true);
         mainPanel.repaint();
     }
@@ -180,15 +184,17 @@ public class VueAventurier {
     }
 
     //Mettre tuile sur l'interface selon son état donner une couleur et regarder son nom + Coordonées 
-    public String affichageTuile(Tuile t) {
+    public String affichageTuile (Tuile t)  {
         //chercher la tuile et l'afficher
 
         return t.getNomTuile();
-
+        
+    }
+   
+    
+     public static void main(String [] args) {
+        // Instanciation de la fenêtre 
+        VueAventurier vueAventurier = new VueAventurier ("Mathildeuh", "Explorateur",Pion.VERT.getCouleur() );
     }
 
-    //public static void main(String[] args) {
-    // Instanciation de la fenêtre 
-    //VueAventurier vueAventurier = new VueAventurier(av2, Pion.VERT.getCouleur());
-    //}
 }
