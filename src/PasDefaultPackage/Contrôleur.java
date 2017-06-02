@@ -1,7 +1,8 @@
 package PasDefaultPackage;
 
 import static PasDefaultPackage.TypeRole.explorateur;
-import java.awt.Color;
+import static PasDefaultPackage.TypeRole.pilote;
+import static PasDefaultPackage.TypeRole.plongeur;
 import java.util.*;
 import view.VueAventurier;
 
@@ -13,10 +14,15 @@ public class Contrôleur {
     private TasCartesInnondation cartesInnondation;
 
     public static void main(String[] args) {
+
         Tuile t = new Tuile(0, "Le Pont Des Abimes", 3, 1);
+
         Aventurier av1 = new Aventurier("Thibaud", explorateur, 0, t, null);
-        VueAventurier window = new VueAventurier("Thibaud", "Explorateur", Color.blue);
-        //window.setVisible(true);
+        Aventurier av2 = new Aventurier("Alexis", pilote, 1, t, null);
+        Aventurier av3 = new Aventurier("Mathilde", plongeur, 2, t, null);
+        Aventurier av4 = new Aventurier("Thibaud", explorateur, 3, t, null);
+        VueAventurier window;
+        //window = new VueAventurier(av4, Color.blue, grille);
 
     }
 
