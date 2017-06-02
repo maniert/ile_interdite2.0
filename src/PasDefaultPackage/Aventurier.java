@@ -11,6 +11,7 @@ public class Aventurier {
     private Tuile t;
     private ArrayList<Carte> main;
     private ArrayList<Tuile> tuilesAtteignable;
+    private ArrayList<Tuile> tuileAssechable;
     boolean deplacementSpePilote;
 
     public Aventurier(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
@@ -30,7 +31,7 @@ public class Aventurier {
 	 */
 	public void assecher(Tuile tuile) {
 		// TODO - implement Aventurier.secher
-		throw new UnsupportedOperationException();
+		
 	}
 
     /**
@@ -120,10 +121,7 @@ public class Aventurier {
     public ArrayList<Tuile> getTuileAtteignable(Grille g) {
         return tuilesAtteignable;
     }
-
-                          
-    
-   
+      
     public void filtrageDeplacementpossible(ArrayList<Tuile> tuileAtteignable, Grille g) {
         int i = 0;
         while (i != this.getTuileAtteignable(g).size() + 1) {
@@ -135,6 +133,36 @@ public class Aventurier {
         }
     }
 
+    
+    
+    public void tuileAssechablebasique(Grille g) {
+        int xPerso;
+        int yPerso;
+        xPerso = this.getTuile().getX();//récupére les coordonnées
+        yPerso = this.getTuile().getY();//x et y du joueur de ce tour
+        int i = 0;
+        getTuileAssechable(g).add(g.getLaTuile(xPerso, yPerso - 1));//haut
+        getTuileAssechable(g).add(g.getLaTuile(xPerso, yPerso + 1));//bas
+        getTuileAssechable(g).add(g.getLaTuile(xPerso - 1, yPerso));//gauche
+        getTuileAssechable(g).add(g.getLaTuile(xPerso + 1, yPerso));//droite
+    }
+    
+    public ArrayList<Tuile> getTuileAssechable(Grille g) {
+        return tuilesAtteignable;
+    }
+    
+    public void filtrageTuileAssechable(ArrayList<Tuile> tuileAssechable, Grille g) {
+        int i = 0;
+        while (i != this.getTuileAssechable(g).size() + 1) {
+            if (this.getTuileAssechable(g).get(i) == null || this.getTuileAssechable(g).get(i).getEtat() == Etat.sec || this.getTuileAssechable(g).get(i).getEtat() == Etat.immergé) {
+                this.getTuileAssechable(g).remove(this.getTuileAssechable(g).get(i));
+            } else {
+                i++;
+            }
+        }
+    }
+    
+  
     /**
      * @param t the t to set
      */
@@ -145,6 +173,4 @@ public class Aventurier {
     TypeRole getTypeRole() {
         return typeRole;
     }
-  
-    
 }
