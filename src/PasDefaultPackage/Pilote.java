@@ -24,9 +24,9 @@ public class Pilote extends Aventurier {
     
     public void setTuileAssechable(Grille g) {
         int i = 0;
-        getTuileAssechable(g).clear();   
+        getTuileAssechable().clear();   
         tuileAssechablebasique(g);
-        filtrageTuileAssechable(getTuileAssechable(g), g); //filtrage null+innondé,immergé 
+        filtrageTuileAssechable(getTuileAssechable(), g);
     }
     
 }

@@ -25,15 +25,6 @@ public class Aventurier {
 
         
     }         
-        
-	/**
-	 * 
-	 * @param tuile
-	 */
-	public void assecher(Tuile tuile) {
-		// TODO - implement Aventurier.secher
-		
-	}
 
     /**
      *
@@ -149,21 +140,21 @@ public class Aventurier {
         xPerso = this.getTuile().getX();//récupére les coordonnées
         yPerso = this.getTuile().getY();//x et y du joueur de ce tour
         int i = 0;
-        getTuileAssechable(g).add(g.getLaTuile(xPerso, yPerso - 1));//haut
-        getTuileAssechable(g).add(g.getLaTuile(xPerso, yPerso + 1));//bas
-        getTuileAssechable(g).add(g.getLaTuile(xPerso - 1, yPerso));//gauche
-        getTuileAssechable(g).add(g.getLaTuile(xPerso + 1, yPerso));//droite
+        getTuileAssechable().add(g.getLaTuile(xPerso, yPerso - 1));//haut
+        getTuileAssechable().add(g.getLaTuile(xPerso, yPerso + 1));//bas
+        getTuileAssechable().add(g.getLaTuile(xPerso - 1, yPerso));//gauche
+        getTuileAssechable().add(g.getLaTuile(xPerso + 1, yPerso));//droite
     }
     
-    public ArrayList<Tuile> getTuileAssechable(Grille g) {
+    public ArrayList<Tuile> getTuileAssechable() {
         return tuilesAtteignable;
     }
     
     public void filtrageTuileAssechable(ArrayList<Tuile> tuileAssechable, Grille g) {
         int i = 0;
-        while (i != this.getTuileAssechable(g).size() + 1) {
-            if (this.getTuileAssechable(g).get(i) == null || this.getTuileAssechable(g).get(i).getEtat() == Etat.sec || this.getTuileAssechable(g).get(i).getEtat() == Etat.immergé) {
-                this.getTuileAssechable(g).remove(this.getTuileAssechable(g).get(i));
+        while (i != this.getTuileAssechable().size() + 1) {
+                if (this.getTuileAssechable().get(i) == null || this.getTuileAssechable().get(i).getEtat() == Etat.sec || this.getTuileAssechable().get(i).getEtat() == Etat.immergé) {
+                this.getTuileAssechable().remove(this.getTuileAssechable().get(i));
             } else {
                 i++;
             }

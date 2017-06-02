@@ -88,10 +88,14 @@ public class Plongeur extends Aventurier {
         return at;
     }
 
-    /**
-     * @return the tuilessouslocean
-     */
     public ArrayList<Tuile> getTuilessouslocean() {
         return tuilessouslocean;
+    }
+    
+    public void setTuileAssechable(Grille g) {
+        int i = 0;
+        getTuileAssechable().clear();   
+        tuileAssechablebasique(g);
+        filtrageTuileAssechable(getTuileAssechable(), g); 
     }
 }

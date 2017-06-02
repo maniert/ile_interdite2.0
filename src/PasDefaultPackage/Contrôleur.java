@@ -45,15 +45,6 @@ public class Contrôleur {
 
     /**
      *
-     * @param a
-     */
-    public void seDeplacer(Aventurier a) {
-        // TODO - implement Contrôleur.seDeplacer
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     *
      * @param aventurier
      * @param carte
      */
@@ -88,6 +79,24 @@ public class Contrôleur {
         a.getTuile().getAventuriers().remove(a);
         a.setT(tDest);
         tDest.getAventuriers().add(a);
+    }
+    
+    public void Demandeassecher(Aventurier a) {//tuile de destination + aventurier concerné
+        boolean enAttenteDAppuie = true;
+        a.getTuileAssechable();
+        /*AFFICHAGE MATHILDE*/
+ /*debut loop EN ATTENTE DE detection click sur bouton possible
+                     attente d'appuie sur une tuile valide   */
+        Tuile tDest = null;/*récupérer tuile au click
+          fin loop*/
+        Deplacement(tDest, a);
+    }
+    
+    public void assecher(Tuile tDest, Aventurier a) {
+	a.getTuile().getAventuriers().remove(a);
+        a.setT(tDest);
+        tDest.getAventuriers().add(a);	
+		
     }
 
     /**

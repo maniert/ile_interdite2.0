@@ -17,5 +17,12 @@ public class Navigateur extends Aventurier {
         deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles 
         filtrageDeplacementpossible(getTuileAtteignable(), g); //filtrage null+innondé,immergé         
     }
+    
+    public void setTuileAssechable(Grille g) {
+        int i = 0;
+        getTuileAssechable().clear();   
+        tuileAssechablebasique(g);
+        filtrageTuileAssechable(getTuileAssechable(), g);
+    }
 
 }
