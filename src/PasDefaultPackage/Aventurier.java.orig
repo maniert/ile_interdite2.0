@@ -23,16 +23,12 @@ public class Aventurier {
         this.tuilesAtteignable = new ArrayList<Tuile>();
         this.deplacementSpePilote = true;
 
+<<<<<<< HEAD
     }
-
-    /**
-     *
-     * @param tuile
-     */
-    public void assecher(Tuile tuile) {
-        // TODO - implement Aventurier.secher
-        throw new UnsupportedOperationException();
-    }
+=======
+        
+    }         
+>>>>>>> origin/master
 
     /**
      *
@@ -104,9 +100,10 @@ public class Aventurier {
     public ArrayList<Carte> getMain() {
         return main;
     }
-
+    
+    
     //------------------------------------------------------------------
-    //-------------------deplacement-------------------------------------
+   //-------------------deplacement-------------------------------------
     public void deplacementPossiblebasique(Grille g) {
         int xPerso;
         int yPerso;
@@ -117,7 +114,10 @@ public class Aventurier {
         getTuileAtteignable().add(g.getLaTuile(xPerso, yPerso + 1));//bas
         getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso));//gauche
         getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso));//droite
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/master
     }
 
     public ArrayList<Tuile> getTuileAtteignable() {
@@ -135,8 +135,10 @@ public class Aventurier {
         }
     }
     //-------------------------fin-deplacement-----------------------
-    //----------------------------------------------------------------
-
+   //----------------------------------------------------------------
+    
+    
+    
     //---------------------------------------------------------------
     //----------------------debut-assecher---------------------------
     public void tuileAssechablebasique(Grille g) {
@@ -150,24 +152,23 @@ public class Aventurier {
         getTuileAssechable().add(g.getLaTuile(xPerso - 1, yPerso));//gauche
         getTuileAssechable().add(g.getLaTuile(xPerso + 1, yPerso));//droite
     }
-
+    
     public ArrayList<Tuile> getTuileAssechable() {
         return tuilesAtteignable;
     }
-
+    
     public void filtrageTuileAssechable(ArrayList<Tuile> tuileAssechable, Grille g) {
         int i = 0;
         while (i != this.getTuileAssechable().size() + 1) {
-            if (this.getTuileAssechable().get(i) == null || this.getTuileAssechable().get(i).getEtat() == Etat.sec || this.getTuileAssechable().get(i).getEtat() == Etat.immergé) {
+                if (this.getTuileAssechable().get(i) == null || this.getTuileAssechable().get(i).getEtat() == Etat.sec || this.getTuileAssechable().get(i).getEtat() == Etat.immergé) {
                 this.getTuileAssechable().remove(this.getTuileAssechable().get(i));
             } else {
                 i++;
             }
         }
     }
-    //--------------------fin-assecher----------------------------------
-    //-------------------------------------------------------------------
-
+   //--------------------fin-assecher----------------------------------
+  //-------------------------------------------------------------------
     /**
      * @param t the t to set
      */
@@ -175,10 +176,11 @@ public class Aventurier {
         this.t = t;
     }
 
-    public TypeRole getTypeRole() {
+    TypeRole getTypeRole() {
         return typeRole;
     }
 
+<<<<<<< HEAD
     /**
      * @return the nomJoueur
      */
@@ -192,5 +194,8 @@ public class Aventurier {
     public int getIdaventurier() {
         return idaventurier;
     }
+=======
+>>>>>>> origin/master
 
 }
+

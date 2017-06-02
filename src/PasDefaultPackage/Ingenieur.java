@@ -18,11 +18,7 @@ import java.util.ArrayList;
     filtrageDeplacementpossible(getTuileAtteignable(g), g); //filtrage null+innondé,immergé 
     }
     
-    public void setTuileAssechable(Grille g) {
-        int i = 0;
-        getTuileAssechable().clear();   
-        tuileAssechablebasique(g);
-        filtrageTuileAssechable(getTuileAssechable(), g); //filtrage null+innondé,immergé 
-    }
-
+    
+    
+    
 }

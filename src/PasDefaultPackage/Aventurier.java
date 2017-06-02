@@ -29,9 +29,10 @@ public class Aventurier {
      * @param tuile
      */
     //public void assecher(Tuile tuile) {
-    // TODO - implement Aventurier.secher
+        // TODO - implement Aventurier.secher
     //    throw new UnsupportedOperationException();
     //}
+
     /**
      *
      * @param typefigurine
@@ -80,7 +81,6 @@ public class Aventurier {
     public int getNbPA() {
         return nbPA;
     }
-
     /**
      * @return the t
      */
@@ -107,10 +107,13 @@ public class Aventurier {
         getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso));//droite
     }
 
-    public ArrayList<Tuile> getTuileAtteignable() {
+    public ArrayList<Tuile> getTuileAtteignable(Grille g) {
         return tuilesAtteignable;
     }
 
+                          
+    
+   
     public void filtrageDeplacementpossible(ArrayList<Tuile> tuileAtteignable, Grille g) {
         int i = 0;
         while (i != this.getTuileAtteignable(g).size() + 1) {
