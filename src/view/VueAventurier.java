@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -109,52 +110,56 @@ public class VueAventurier {
             switch (i) {
                 case 3:
                     //this.plateau.add(new JButton("Le Pont Des Abimes"));
-                      JPanel TPontAbimes = new JPanel();
-                       plateau.add(TPontAbimes ); 
-                     
-                     TPontAbimes.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    System.out.println("Test 1 2 ");
-                }
+                    JPanel TPontAbimes = new JPanel();
+                    plateau.add(TPontAbimes);
 
-                @Override
-                public void mousePressed(MouseEvent e) {
-                   
-                    System.out.println("Test 3 ");
-                }
+                    TPontAbimes.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            System.out.println("Test 1 2 ");
+                        }
 
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                 
-                    System.out.println("Test 4 ");
-                }
+                        @Override
+                        public void mousePressed(MouseEvent e) {
 
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                   
-                    System.out.println("Test 1 ");
-                }
+                            System.out.println("Test 3 ");
+                        }
 
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    
-                    System.out.println("Test2");
-                }
-            });
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                            System.out.println("Test 4 ");
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                            System.out.println("Test 1 ");
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                            System.out.println("Test2");
+                        }
+                    });
                     break;
                 case 4:
                     //this.plateau.add(new JButton("La Porte De Bronze"));
                     JLabel TPorteBronze = new JLabel("La Porte DE Bronze ");
-                       plateau.add(TPorteBronze ); 
-                       
+                    plateau.add(TPorteBronze);
+
                     break;
                 case 8:
-                    this.plateau.add(new JButton("La Caverne Des Ombres"));
-                    
+                    this.plateau.add(new JButton("La Caverne Des Ombres", new ImageIcon("/users/info/etu-s2/benettim/Projet_Ile_Interdite/ile_interdite2.0/src/view/rond vide.png")));
+
                     break;
                 case 9:
-                    this.plateau.add(new JButton("La Porte De Fer"));
+                    //this.plateau.add(new JButton("La Porte De Fer"));
+                    JButton b = new JButton("La Porte De Fer");
+                    ImageIcon image = new ImageIcon("/users/info/etu-s2/benettim/Projet_Ile_Interdite/ile_interdite2.0/src/view/rond vide.png");
+                    b.setIcon(image);
+                            this.plateau.add(b);
                     break;
                 case 10:
                     this.plateau.add(new JButton("La Porte d'Or"));
@@ -228,7 +233,8 @@ public class VueAventurier {
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
-
+        //ferme la fenêtre correctement.
+        this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setVisible(true);
         mainPanel.repaint();
     }
@@ -255,6 +261,7 @@ public class VueAventurier {
 
     //Mettre tuile sur l'interface selon son état donner une couleur et regarder son nom + Coordonées 
     public String affichageTuile(Tuile t) {
+        
         //chercher la tuile et l'afficher
 
         return t.getNomTuile();
