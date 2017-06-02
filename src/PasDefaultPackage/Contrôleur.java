@@ -75,7 +75,7 @@ public class Contrôleur {
     public void DemandeDeplacement(Aventurier a) {//tuile de destination + aventurier concerné
         boolean enAttenteDAppuie = true;
 
-        a.getTuileAtteignable(grille);
+        a.getTuileAtteignable();
         /*AFFICHAGE MATHILDE*/
  /*debut loop EN ATTENTE DE detection click sur bouton possible
                      attente d'appuie sur une tuile valide   */
