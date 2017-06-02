@@ -21,17 +21,17 @@ public class Aventurier {
         this.main = main;
         this.tuilesAtteignable = new ArrayList<Tuile>();
         this.deplacementSpePilote = true;
-        
-    }         
-        
-	/**
-	 * 
-	 * @param tuile
-	 */
-	public void assecher(Tuile tuile) {
-		// TODO - implement Aventurier.secher
-		throw new UnsupportedOperationException();
-	}
+
+    }
+
+    /**
+     *
+     * @param tuile
+     */
+    public void assecher(Tuile tuile) {
+        // TODO - implement Aventurier.secher
+        throw new UnsupportedOperationException();
+    }
 
     /**
      *
@@ -114,7 +114,6 @@ public class Aventurier {
         getTuileAtteignable().add(g.getLaTuile(xPerso, yPerso + 1));//bas
         getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso));//gauche
         getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso));//droite
-
     }
 
     public ArrayList<Tuile> getTuileAtteignable() {
@@ -139,8 +138,22 @@ public class Aventurier {
         this.t = t;
     }
 
-    TypeRole getTypeRole() {
+    public TypeRole getTypeRole() {
         return typeRole;
+    }
+
+    /**
+     * @return the nomJoueur
+     */
+    public String getNomJoueur() {
+        return nomJoueur;
+    }
+
+    /**
+     * @return the idaventurier
+     */
+    public int getIdaventurier() {
+        return idaventurier;
     }
 
 }

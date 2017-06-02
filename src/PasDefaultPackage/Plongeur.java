@@ -33,7 +33,6 @@ public class Plongeur extends Aventurier {
 
                         } else {
                             this.getTuileAtteignable().add(this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).get(k));
-
                         }
 
                     }
