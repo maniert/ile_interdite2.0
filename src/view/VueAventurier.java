@@ -84,9 +84,9 @@ public class VueAventurier {
         this.mainJoueur.setOpaque(false);
         mainPanel.add(this.mainJoueur, BorderLayout.SOUTH);
 
-        this.btnAller = new JButton("Aller");
+        this.btnAller = new JButton("Se Déplacer");
         this.btnAssecher = new JButton("Assecher");
-        this.btnAutreAction = new JButton("AutreAction");
+        this.btnAutreAction = new JButton("Autre Action");
         this.btnTerminerTour = new JButton("Terminer Tour");
 
         this.panelBoutons.add(btnAller);
@@ -112,30 +112,34 @@ public class VueAventurier {
                       JPanel TPontAbimes = new JPanel();
                        plateau.add(TPontAbimes ); 
                      
-                      plateau.addMouseListener(new MouseListener() {
+                     TPontAbimes.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    System.out.println("Bonjour");
+                    System.out.println("Test 1 2 ");
                 }
 
                 @Override
                 public void mousePressed(MouseEvent e) {
                    
+                    System.out.println("Test 3 ");
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
                  
+                    System.out.println("Test 4 ");
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
                    
+                    System.out.println("Test 1 ");
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
                     
+                    System.out.println("Test2");
                 }
             });
                     break;
@@ -143,45 +147,11 @@ public class VueAventurier {
                     //this.plateau.add(new JButton("La Porte De Bronze"));
                     JLabel TPorteBronze = new JLabel("La Porte DE Bronze ");
                        plateau.add(TPorteBronze ); 
-                       plateau.addMouseMotionListener(new MouseInputListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                 
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                   
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                 
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                 
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                 
-                }
-
-                @Override
-                public void mouseDragged(MouseEvent e) {
-                   
-                }
-
-                @Override
-                public void mouseMoved(MouseEvent e) {
-                    
-                }
-            });
+                       
                     break;
                 case 8:
                     this.plateau.add(new JButton("La Caverne Des Ombres"));
+                    
                     break;
                 case 9:
                     this.plateau.add(new JButton("La Porte De Fer"));
