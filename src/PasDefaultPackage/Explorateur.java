@@ -23,10 +23,17 @@ public class Explorateur extends Aventurier {
 
     }
     
-    public void setTuileAssechable(Grille g) {
+    public void setTuileAssechable(Grille g) { //ajout des diagonals qui peuvent être asséché
         int i = 0;
+        int xPerso;
+        int yPerso;
+        xPerso = this.getTuile().getX();//récupére les coordonnées
+        yPerso = this.getTuile().getY();//x et y du joueur de ce tour
         getTuileAssechable().clear();   
         tuileAssechablebasique(g);
+        getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso - 1));//HD
+        getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso + 1));//BG
+        getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso + 1));//BD
         filtrageTuileAssechable(getTuileAssechable(), g);
     }
 

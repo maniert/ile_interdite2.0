@@ -92,10 +92,4 @@ public class Plongeur extends Aventurier {
         return tuilessouslocean;
     }
     
-    public void setTuileAssechable(Grille g) {
-        int i = 0;
-        getTuileAssechable().clear();   
-        tuileAssechablebasique(g);
-        filtrageTuileAssechable(getTuileAssechable(), g); 
-    }
 }

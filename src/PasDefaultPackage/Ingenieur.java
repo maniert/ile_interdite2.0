@@ -18,7 +18,7 @@ public class Ingenieur extends Aventurier {
         filtrageDeplacementpossible(getTuileAtteignable(), g); //filtrage null+innondé,immergé 
     }
     
-    public void setTuileAssechable(Grille g) {
+    public void setTuileAssechable(Grille g) { // devra pouvoir selectionner 2 cases
         int i = 0;
         getTuileAssechable().clear();   
         tuileAssechablebasique(g);
