@@ -31,6 +31,7 @@ public class Explorateur extends Aventurier {
         yPerso = this.getTuile().getY();//x et y du joueur de ce tour
         getTuileAssechable().clear();   
         tuileAssechablebasique(g);
+        getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso - 1));//HG
         getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso - 1));//HD
         getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso + 1));//BG
         getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso + 1));//BD
