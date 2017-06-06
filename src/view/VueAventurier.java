@@ -151,7 +151,7 @@ public class VueAventurier {
 
                     break;
                 case 8:
-                    this.plateau.add(new JButton("La Caverne Des Ombres", new ImageIcon("/users/info/etu-s2/benettim/Projet_Ile_Interdite/ile_interdite2.0/src/view/rond vide.png")));
+                    this.plateau.add(new JButton("La Caverne Des Ombres", new ImageIcon("/users/info/etu-s2/benettim/Projet_Ile_Interdite/ile_interdite2.0/src/view/9122512-14519887.jpg")));
 
                     break;
                 case 9:
