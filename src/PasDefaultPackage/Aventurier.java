@@ -1,7 +1,5 @@
 package PasDefaultPackage;
 
-import static PasDefaultPackage.TypeRole.pilote;
-import static PasDefaultPackage.TypeRole.plongeur;
 import java.util.ArrayList;
 
 public class Aventurier {
@@ -25,8 +23,7 @@ public class Aventurier {
         this.tuilesAtteignable = new ArrayList<Tuile>();
         this.deplacementSpePilote = true;
 
-        
-    }         
+    }
 
     /**
      *
@@ -98,10 +95,9 @@ public class Aventurier {
     public ArrayList<Carte> getMain() {
         return main;
     }
-    
-    
+
     //------------------------------------------------------------------
-   //-------------------deplacement-------------------------------------
+    //-------------------deplacement-------------------------------------
     public void deplacementPossiblebasique(Grille g) {
         int xPerso;
         int yPerso;
@@ -117,13 +113,11 @@ public class Aventurier {
 
     public void setTuileAssechable(Grille g) {
         int i = 0;
-        getTuileAssechable().clear();   
+        getTuileAssechable().clear();
         tuileAssechablebasique(g);
         filtrageTuileAssechable(getTuileAssechable(), g); //filtrage null+innondé,immergé 
     }
 
-    
-    
     public ArrayList<Tuile> getTuileAtteignable() {
         return tuilesAtteignable;
     }
@@ -139,10 +133,8 @@ public class Aventurier {
         }
     }
     //-------------------------fin-deplacement-----------------------
-   //----------------------------------------------------------------
-    
-    
-    
+    //----------------------------------------------------------------
+
     //---------------------------------------------------------------
     //----------------------debut-assecher---------------------------
     public void tuileAssechablebasique(Grille g) {
@@ -156,23 +148,24 @@ public class Aventurier {
         getTuileAssechable().add(g.getLaTuile(xPerso - 1, yPerso));//gauche
         getTuileAssechable().add(g.getLaTuile(xPerso + 1, yPerso));//droite
     }
-    
+
     public ArrayList<Tuile> getTuileAssechable() {
         return tuilesAtteignable;
     }
-    
+
     public void filtrageTuileAssechable(ArrayList<Tuile> tuileAssechable, Grille g) {
         int i = 0;
         while (i != this.getTuileAssechable().size() + 1) {
-                if (this.getTuileAssechable().get(i) == null || this.getTuileAssechable().get(i).getEtat() == Etat.sec || this.getTuileAssechable().get(i).getEtat() == Etat.immergé) {
+            if (this.getTuileAssechable().get(i) == null || this.getTuileAssechable().get(i).getEtat() == Etat.sec || this.getTuileAssechable().get(i).getEtat() == Etat.immergé) {
                 this.getTuileAssechable().remove(this.getTuileAssechable().get(i));
             } else {
                 i++;
             }
         }
     }
-   //--------------------fin-assecher----------------------------------
-  //-------------------------------------------------------------------
+    //--------------------fin-assecher----------------------------------
+    //-------------------------------------------------------------------
+
     /**
      * @param t the t to set
      */
@@ -180,10 +173,22 @@ public class Aventurier {
         this.t = t;
     }
 
-    TypeRole getTypeRole() {
+    public TypeRole getTypeRole() {
         return typeRole;
     }
 
+    /**
+     * @return the nomJoueur
+     */
+    public String getNomJoueur() {
+        return nomJoueur;
+    }
+
+    /**
+     * @param nomJoueur the nomJoueur to set
+     */
+    public void setNomJoueur(String nomJoueur) {
+        this.nomJoueur = nomJoueur;
+    }
 
 }
-

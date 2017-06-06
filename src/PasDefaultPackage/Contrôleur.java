@@ -1,6 +1,11 @@
 package PasDefaultPackage;
 
 import static PasDefaultPackage.TypeRole.explorateur;
+import static PasDefaultPackage.TypeRole.ingénieur;
+import static PasDefaultPackage.TypeRole.messager;
+import static PasDefaultPackage.TypeRole.navigateur;
+import static PasDefaultPackage.TypeRole.pilote;
+import static PasDefaultPackage.TypeRole.plongeur;
 import java.awt.Color;
 import java.util.*;
 import view.VueAventurier;
@@ -13,9 +18,91 @@ public class Contrôleur {
     private TasCartesInnondation cartesInnondation;
 
     public static void main(String[] args) {
-        Tuile t = new Tuile(0, "Le Pont Des Abimes", 3, 1);
-        Aventurier av1 = new Aventurier("Thibaud", explorateur, 0, t, null);
-        VueAventurier window = new VueAventurier("Thibaud", "Explorateur", Color.blue);
+        Tuile t1 = new Tuile(0, "", 1, 1);
+        Tuile t2 = new Tuile(0, "", 2, 1);
+        Tuile t3 = new Tuile(0, "Le Pont Des Abimes", 3, 1);
+        Tuile t4 = new Tuile(0, "La porte De Bronze", 4, 1);
+        Tuile t5 = new Tuile(0, "", 5, 1);
+        Tuile t6 = new Tuile(0, "", 6, 1);
+        Tuile t7 = new Tuile(0, "", 1, 2);
+        Tuile t8 = new Tuile(0, "La Caverne Des Ombres", 2, 2);
+        Tuile t9 = new Tuile(0, "La porte De Fer", 3, 2);
+        Tuile t10 = new Tuile(0, "La porte D'or", 4, 2);
+        Tuile t11 = new Tuile(0, "Les Falaises De L'Oubli", 5, 2);
+        Tuile t12 = new Tuile(0, "", 6, 2);
+        Tuile t13 = new Tuile(0, "Le Palais De Corail", 1, 3);
+        Tuile t14 = new Tuile(0, "La porte D'Argent", 2, 3);
+        Tuile t15 = new Tuile(0, "Les Dunes De L'Illusion", 3, 3);
+        Tuile t16 = new Tuile(0, "Héliport", 4, 3);
+        Tuile t17 = new Tuile(0, "La Porte De Cuivre", 5, 3);
+        Tuile t18 = new Tuile(0, "Le Jardin des Hurlements", 6, 3);
+        Tuile t19 = new Tuile(0, "La Foret Pourpre", 1, 4);
+        Tuile t20 = new Tuile(0, "Le Lagon Perdu", 2, 4);
+        Tuile t21 = new Tuile(0, "Le Marais Brumeux", 3, 4);
+        Tuile t22 = new Tuile(0, "Observatoire", 4, 4);
+        Tuile t23 = new Tuile(0, "Le Rocher Fantôme", 5, 4);
+        Tuile t24 = new Tuile(0, "La Caserne Du Brasier", 6, 4);
+        Tuile t25 = new Tuile(0, "", 1, 5);
+        Tuile t26 = new Tuile(0, "Le Temple Du Soleil", 2, 5);
+        Tuile t27 = new Tuile(0, "Le Temple De La Lune", 3, 5);
+        Tuile t28 = new Tuile(0, "Le Palais Des Marées", 4, 5);
+        Tuile t29 = new Tuile(0, "Le Val Du Crépuscule", 5, 5);
+        Tuile t30 = new Tuile(0, "", 6, 5);
+        Tuile t31 = new Tuile(0, "", 1, 6);
+        Tuile t32 = new Tuile(0, "", 2, 6);
+        Tuile t33 = new Tuile(0, "La Tour Du Guet", 3, 6);
+        Tuile t34 = new Tuile(0, "Le Jardin Des Murmures", 4, 6);
+        Tuile t35 = new Tuile(0, "", 5, 6);
+        Tuile t36 = new Tuile(0, "", 6, 6);
+
+        Grille g = new Grille();
+
+        g.getTuiles().add(t1);
+        g.getTuiles().add(t2);
+        g.getTuiles().add(t3);
+        g.getTuiles().add(t4);
+        g.getTuiles().add(t5);
+        g.getTuiles().add(t6);
+        g.getTuiles().add(t7);
+        g.getTuiles().add(t8);
+        g.getTuiles().add(t9);
+        g.getTuiles().add(t10);
+        g.getTuiles().add(t11);
+        g.getTuiles().add(t12);
+        g.getTuiles().add(t13);
+        g.getTuiles().add(t14);
+        g.getTuiles().add(t15);
+        g.getTuiles().add(t16);
+        g.getTuiles().add(t17);
+        g.getTuiles().add(t18);
+        g.getTuiles().add(t19);
+        g.getTuiles().add(t20);
+        g.getTuiles().add(t21);
+        g.getTuiles().add(t22);
+        g.getTuiles().add(t23);
+        g.getTuiles().add(t24);
+        g.getTuiles().add(t25);
+        g.getTuiles().add(t26);
+        g.getTuiles().add(t27);
+        g.getTuiles().add(t28);
+        g.getTuiles().add(t29);
+        g.getTuiles().add(t30);
+        g.getTuiles().add(t31);
+        g.getTuiles().add(t32);
+        g.getTuiles().add(t33);
+        g.getTuiles().add(t34);
+        g.getTuiles().add(t35);
+        g.getTuiles().add(t36);
+
+        Aventurier av1 = new Aventurier("le Prof", ingénieur, 0, t4, null);
+        Aventurier av2 = new Aventurier("Thibaud", plongeur, 0, t9, null);
+        Aventurier av3 = new Aventurier("Alexis", navigateur, 0, t10, null);
+        Aventurier av4 = new Aventurier("Mathilde", messager, 0, t14, null);
+        Aventurier av5 = new Aventurier("Sami", pilote, 0, t16, null);
+        Aventurier av6 = new Aventurier("l'autre Prof", explorateur, 0, t14, null);
+
+        VueAventurier window = new VueAventurier(g, av1, Color.blue);
+
         //window.setVisible(true);
     }
 

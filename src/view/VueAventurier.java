@@ -1,5 +1,8 @@
 package view;
 
+import PasDefaultPackage.Aventurier;
+import PasDefaultPackage.Etat;
+import PasDefaultPackage.Grille;
 import PasDefaultPackage.Tuile;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,7 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.MatteBorder;
-import util.Utils.Pion;
 
 public class VueAventurier {
 
@@ -32,12 +34,12 @@ public class VueAventurier {
     private final JButton btnTerminerTour;
     private final JTextField position;
 
-    public VueAventurier(String nomJoueur, String nomAventurier, Color couleur) {
+    public VueAventurier(Grille g, Aventurier aJoueur, Color couleur) {
 
         this.window = new JFrame();
         window.setSize(1080, 720);
 
-        window.setTitle(nomJoueur);
+        window.setTitle(aJoueur.getNomJoueur());
         mainPanel = new JPanel(new BorderLayout());
         this.window.add(mainPanel);
 
@@ -48,7 +50,7 @@ public class VueAventurier {
         // NORD : le titre = nom de l'aventurier + nom du joueur sur la couleurActive du pion
         this.panelAventurier = new JPanel();
         panelAventurier.setBackground(couleur);
-        panelAventurier.add(new JLabel(nomAventurier, SwingConstants.CENTER));
+        panelAventurier.add(new JLabel(aJoueur.getTypeRole().toString(), CENTER));
         mainPanel.add(panelAventurier, BorderLayout.NORTH);
 
         // =================================================================================
@@ -81,9 +83,9 @@ public class VueAventurier {
         this.mainJoueur.setOpaque(false);
         mainPanel.add(this.mainJoueur, BorderLayout.SOUTH);
 
-        this.btnAller = new JButton("Aller");
+        this.btnAller = new JButton("Se Déplacer");
         this.btnAssecher = new JButton("Assecher");
-        this.btnAutreAction = new JButton("AutreAction");
+        this.btnAutreAction = new JButton("Autre Action");
         this.btnTerminerTour = new JButton("Terminer Tour");
 
         this.panelBoutons.add(btnAller);
@@ -91,12 +93,6 @@ public class VueAventurier {
         this.panelBoutons.add(btnAutreAction);
         this.panelBoutons.add(btnTerminerTour);
 
-        this.mainAutreJoueur.add(new JButton("1"));
-        this.mainAutreJoueur.add(new JButton("2"));
-        this.mainAutreJoueur.add(new JButton("3"));
-        this.mainAutreJoueur.add(new JButton("4"));
-        this.mainAutreJoueur.add(new JButton("5"));
-        this.mainAutreJoueur.add(new JButton("6"));
         this.mainAutreJoueur.add(new JButton("7"));
         this.mainAutreJoueur.add(new JButton("8"));
         this.mainAutreJoueur.add(new JButton("9"));
@@ -108,52 +104,134 @@ public class VueAventurier {
         this.mainAutreJoueur.add(new JButton("15"));
 
         for (int i = 1; i <= 36; i++) {
-            this.plateau.add(new JButton(""));
+
+            switch (i) {
+                case 3:
+                    this.plateau.add(new JButton(g.getTuiles().get(2).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(2)));
+                    //JPanel TPontAbimes = new JPanel();
+                    //plateau.add(TPontAbimes);
+
+                    /*TPontAbimes.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            System.out.println("Test 1 2 ");
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                            System.out.println("Test 3 ");
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                            System.out.println("Test 4 ");
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                            System.out.println("Test 1 ");
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                            System.out.println("Test2");
+                        }
+                    }); */
+                    break;
+                case 4:
+                    this.plateau.add(new JButton(g.getTuiles().get(3).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(3)));
+                    /*JLabel TPorteBronze = new JLabel("La Porte DE Bronze ");
+                    plateau.add(TPorteBronze);*/
+
+                    break;
+                case 8:
+                    this.plateau.add(new JButton(g.getTuiles().get(7).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(7)));         // new ImageIcon("/users/info/etu-s2/maniert/ile_interdite_projet/Ile_interdite/src/view/9122512-14519887.jpg"))
+                    break;
+                case 9:
+                    this.plateau.add(new JButton(g.getTuiles().get(8).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(8)));
+                    /*JButton b = new JButton("La Porte De Fer");
+                    ImageIcon image = new ImageIcon("/users/info/etu-s2/maniert/ile_interdite_projet/Ile_interdite/src/view/rond vide.png");
+                    b.setIcon(image);
+                    this.plateau.add(b);*/
+                    break;
+                case 10:
+                    this.plateau.add(new JButton(g.getTuiles().get(9).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(9)));
+                    break;
+                case 11:
+                    this.plateau.add(new JButton(g.getTuiles().get(10).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(10)));
+                    break;
+                case 13:
+                    this.plateau.add(new JButton(g.getTuiles().get(12).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(12)));
+                    break;
+                case 14:
+                    this.plateau.add(new JButton(g.getTuiles().get(13).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(13)));
+                    break;
+                case 15:
+                    this.plateau.add(new JButton(g.getTuiles().get(14).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(14)));
+                    break;
+                case 16:
+                    this.plateau.add(new JButton(g.getTuiles().get(15).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(15)));
+                    break;
+                case 17:
+                    this.plateau.add(new JButton(g.getTuiles().get(16).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(16)));
+                    break;
+                case 18:
+                    this.plateau.add(new JButton(g.getTuiles().get(17).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(17)));
+                    break;
+                case 19:
+                    this.plateau.add(new JButton(g.getTuiles().get(18).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(18)));
+                    break;
+                case 20:
+                    this.plateau.add(new JButton(g.getTuiles().get(19).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(19)));
+                    break;
+                case 21:
+                    this.plateau.add(new JButton(g.getTuiles().get(20).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(20)));
+                    break;
+                case 22:
+                    this.plateau.add(new JButton(g.getTuiles().get(21).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(21)));
+                    break;
+                case 23:
+                    this.plateau.add(new JButton(g.getTuiles().get(22).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(22)));
+                    break;
+                case 24:
+                    this.plateau.add(new JButton(g.getTuiles().get(23).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(23)));
+                    break;
+                case 26:
+                    this.plateau.add(new JButton(g.getTuiles().get(25).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(25)));
+                    break;
+                case 27:
+                    this.plateau.add(new JButton(g.getTuiles().get(26).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(26)));
+                    break;
+                case 28:
+                    this.plateau.add(new JButton(g.getTuiles().get(27).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(27)));
+                    break;
+                case 29:
+                    this.plateau.add(new JButton(g.getTuiles().get(28).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(28)));
+                    break;
+                case 33:
+                    this.plateau.add(new JButton(g.getTuiles().get(32).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(32)));
+                    break;
+                case 34:
+                    this.plateau.add(new JButton(g.getTuiles().get(33).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(33)));
+                    break;
+                default:
+                    this.plateau.add(new JButton(g.getTuiles().get(0).getNomTuile())).setBackground(Color.BLACK);
+                    break;
+
+            }
+
         }
-        //JButton 11 = new JButton("");
-        /*
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("Le Pont Des Abimes"));
-        this.plateau.add(new JButton("La Porte De Bronze"));
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("La Caverne Des Ombres"));
-        this.plateau.add(new JButton("La Porte De Fer"));
-        this.plateau.add(new JButton("La Porte d'Or"));
-        this.plateau.add(new JButton("Les Falaises De L'Oubli"));
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("Le Palais De Corail"));
-        this.plateau.add(new JButton("La Porte d'Argent"));
-        this.plateau.add(new JButton("Les Dunes De L'Illusion"));
-        this.plateau.add(new JButton("Heliport"));
-        this.plateau.add(new JButton("La Porte De Cuivre"));
-        this.plateau.add(new JButton("Le Jardin Des Hurlements"));
-        this.plateau.add(new JButton("La Forêt Pourpre"));
-        this.plateau.add(new JButton("Le Lagon Perdu"));
-        this.plateau.add(new JButton("Le Marais Brumeux"));
-        this.plateau.add(new JButton("Observatoire"));
-        this.plateau.add(new JButton("Le Rocher Fantôme"));
-        this.plateau.add(new JButton("La Caverne Du Braisier"));
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("Le Temple Du Soleil"));
-        this.plateau.add(new JButton("Le Temple De La Lune"));
-        this.plateau.add(new JButton("Le Palais Des Marees"));
-        this.plateau.add(new JButton("Le Val Du Crepuscule"));
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton("La Tour Du Guet"));
-        this.plateau.add(new JButton("Le Jardin Des Murmures"));
-        this.plateau.add(new JButton(""));
-        this.plateau.add(new JButton(""));
-         */
 
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
-
+        //ferme la fenêtre correctement.
+        this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setVisible(true);
         mainPanel.repaint();
     }
@@ -181,14 +259,17 @@ public class VueAventurier {
     //Mettre tuile sur l'interface selon son état donner une couleur et regarder son nom + Coordonées 
     public String affichageTuile(Tuile t) {
         //chercher la tuile et l'afficher
-
         return t.getNomTuile();
-
     }
 
-    public static void main(String[] args) {
-        // Instanciation de la fenêtre 
-        VueAventurier vueAventurier = new VueAventurier("Mathildeuh", "Explorateur", Pion.VERT.getCouleur());
+    public Color CouleurTuile(Tuile t) {
+        if (t.getEtat() == Etat.sec) {
+            return Color.yellow;
+        } else if (t.getEtat() == Etat.innondé) {
+            return Color.CYAN;
+        } else {
+            return Color.GRAY;
+        }
     }
 
 }
