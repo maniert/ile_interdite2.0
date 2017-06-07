@@ -75,4 +75,11 @@ public class Tuile {
         return aventuriers;
     }
 
+    /**
+     * @param etat the etat to set
+     */
+    public void setEtat(Etat etat) {
+        this.etat = etat;
+    }
+
 }

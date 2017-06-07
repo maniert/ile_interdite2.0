@@ -5,42 +5,58 @@
  */
 package view;
 
-/**
- *
- * @author benettim
- */
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
-
 import javax.swing.JPanel;
 
-
+/**
+ *
+ * @author benettim
+ */
 public class Pion extends JPanel {
 
-  
-    
-   
+    private Couleur couleur;
+    private boolean monte;
+
+    public Pion(Color coul, boolean monte) {
+        this.monte = monte;
+        this.couleur = couleur;
+        setOpaque(false);
+        // Plusieurs pion de différente couleur
+        setForeground(coul);
+
+    }
+
+    // Fais les pions (ou les montres du moins)
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         Paint paint;
         Graphics2D g2d;
         if (g instanceof Graphics2D) {
             g2d = (Graphics2D) g;
-        }
-        else {
+        } else {
             System.out.println("Error");
             return;
         }
-        paint = new GradientPaint(0,0, getBackground(), getWidth(), getHeight(), getForeground());
+        paint = new GradientPaint(0, 0, getBackground(), getWidth(), getHeight(), getForeground());
         g2d.setPaint(paint);
-        g.fillOval(5, 5, getWidth()-10, getHeight()-10);
+        g.fillOval(5, 5, getWidth() - 25, getHeight() - 10);
 
     }
 
-    
+    public Couleur getCouleur() {
+        return couleur;
     }
 
+    public boolean isMonte() {
+        return monte;
+    }
 
+    public void setMonte(boolean monte) {
+        this.monte = monte;
+    }
+
+}
