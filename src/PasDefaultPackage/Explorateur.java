@@ -29,7 +29,7 @@ public class Explorateur extends Aventurier {
         int yPerso;
         xPerso = this.getTuile().getX();//récupére les coordonnées
         yPerso = this.getTuile().getY();//x et y du joueur de ce tour
-        getTuileAssechable().clear();
+        getTuileAssechable().clear(); // clear vide le vecteur
         tuileAssechablebasique(g);
         getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso - 1));//HG
         getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso - 1));//HD

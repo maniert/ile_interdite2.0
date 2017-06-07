@@ -145,21 +145,21 @@ public class VueAventurier {
                     });
                     break;
                 case 4:
-                    //this.plateau.add(new JButton("La Porte De Bronze"));
-                    JLabel TPorteBronze = new JLabel("La Porte DE Bronze ");
-                    plateau.add(TPorteBronze);
+                    this.plateau.add(new JButton("La Porte De Bronze"));
+                    /*JLabel TPorteBronze = new JLabel("La Porte DE Bronze ");
+                    plateau.add(TPorteBronze); */
 
                     break;
                 case 8:
-                    this.plateau.add(new JButton("La Caverne Des Ombres", new ImageIcon("/users/info/etu-s2/benettim/Projet_Ile_Interdite/ile_interdite2.0/src/view/9122512-14519887.jpg")));
+                    this.plateau.add(new JButton("La Caverne Des Ombres")); //  new ImageIcon("/users/info/etu-s2/benettim/Projet_Ile_Interdite/ile_interdite2.0/src/view/9122512-14519887.jpg")));
 
                     break;
                 case 9:
-                    //this.plateau.add(new JButton("La Porte De Fer"));
-                    JButton b = new JButton("La Porte De Fer");
-                    ImageIcon image = new ImageIcon("/users/info/etu-s2/benettim/Projet_Ile_Interdite/ile_interdite2.0/src/view/rond vide.png");
+                    this.plateau.add(new JButton("La Porte De Fer"));
+                 /*   JButton b = new JButton("La Porte De Fer");
+                    ImageIcon image = new ImageIcon("https://www.google.fr/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwi_xt2y5KjUAhXDBBoKHWf1AT4QjRwIBw&url=http%3A%2F%2Fwww.senioractu.com%2FUne-pomme-par-jour-pour-vivre-plus-longtemps_a18841.html&psig=AFQjCNH1SO2-kdJnYYiEfM2oMyaXAYC3-A&ust=1496823546348100");
                     b.setIcon(image);
-                            this.plateau.add(b);
+                            this.plateau.add(b); */
                     break;
                 case 10:
                     this.plateau.add(new JButton("La Porte d'Or"));

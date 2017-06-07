@@ -25,7 +25,7 @@ public class Contrôleur {
      */
     public void jouerTour(Aventurier a) {
         // TODO - implement Contrôleur.jouerTour
-        throw new UnsupportedOperationException();
+        
     }
 
     /**
@@ -34,12 +34,12 @@ public class Contrôleur {
      */
     public void realiserAction(Aventurier a) {
         // TODO - implement Contrôleur.realiserAction
-        throw new UnsupportedOperationException();
+        
     }
 
     public void monterEchelleEau() {
         // TODO - implement Contrôleur.monterEchelleEau
-        throw new UnsupportedOperationException();
+        
     }
 
     /**
@@ -49,7 +49,7 @@ public class Contrôleur {
      */
     public void defausserCarteTresorJoueur(Aventurier aventurier, Ctrésor carte) {
         // TODO - implement Contrôleur.defausserCarteTresorJoueur
-        throw new UnsupportedOperationException();
+        
     }
 
     /**
@@ -59,7 +59,7 @@ public class Contrôleur {
      */
     public void utiliserCarteSpeciale(Aventurier aventurier, CSpéciale carteS) {
         // TODO - implement Contrôleur.utiliserCarteSpeciale
-        throw new UnsupportedOperationException();
+        
     }
 
     public void DemandeDeplacement(Aventurier a) {//tuile de destination + aventurier concerné
@@ -105,4 +105,9 @@ public class Contrôleur {
         return grille;
     }
 
+    
+    
+    
+    
+    
 }
