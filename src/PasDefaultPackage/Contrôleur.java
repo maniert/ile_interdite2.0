@@ -103,6 +103,9 @@ public class Contrôleur {
 
         VueAventurier window = new VueAventurier(g, av1, Color.blue);
 
+        
+        
+        
         //window.setVisible(true);
     }
 

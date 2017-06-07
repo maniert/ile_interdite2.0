@@ -110,14 +110,13 @@ public class Aventurier {
         getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso));//droite
 
     }
-
-    public void setTuileAssechable(Grille g) {
-        int i = 0;
-        getTuileAssechable().clear();
-        tuileAssechablebasique(g);
-        filtrageTuileAssechable(getTuileAssechable(), g); //filtrage null+innondé,immergé 
+    
+    public void setTuileAtteignable(Grille g) {
+        getTuileAtteignable().clear();// vider l'arraylist avant de le remplir
+        deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles
+        filtrageDeplacementpossible(getTuileAtteignable(), g); //filtrage null+innondé,immergé   
     }
-
+    
     public ArrayList<Tuile> getTuileAtteignable() {
         return tuilesAtteignable;
     }
@@ -152,7 +151,14 @@ public class Aventurier {
     public ArrayList<Tuile> getTuileAssechable() {
         return tuilesAtteignable;
     }
-
+    
+    public void setTuileAssechable(Grille g) {
+        int i = 0;
+        getTuileAssechable().clear();
+        tuileAssechablebasique(g);
+        filtrageTuileAssechable(getTuileAssechable(), g); //filtrage null+innondé,immergé 
+    }
+    
     public void filtrageTuileAssechable(ArrayList<Tuile> tuileAssechable, Grille g) {
         int i = 0;
         while (i != this.getTuileAssechable().size() + 1) {
