@@ -7,6 +7,8 @@ import PasDefaultPackage.Tuile;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -107,40 +109,35 @@ public class VueAventurier {
 
             switch (i) {
                 case 3:
-                    this.plateau.add(new JButton(g.getTuiles().get(2).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(2)));
-                    //JPanel TPontAbimes = new JPanel();
-                    //plateau.add(TPontAbimes);
-
-                    /*TPontAbimes.addMouseListener(new MouseListener() {
+                    //this.plateau.add(new JButton(g.getTuiles().get(2).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(2)));
+                    JPanel TPontAbimes = new JPanel();
+                    
+                    plateau.add(TPontAbimes);
+                    TPontAbimes.setBackground(CouleurTuile(g.getTuiles().get(2)));
+                    TPontAbimes.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            System.out.println("Test 1 2 ");
+                            
                         }
 
                         @Override
                         public void mousePressed(MouseEvent e) {
-
-                            System.out.println("Test 3 ");
                         }
 
                         @Override
                         public void mouseReleased(MouseEvent e) {
-
-                            System.out.println("Test 4 ");
                         }
 
                         @Override
                         public void mouseEntered(MouseEvent e) {
 
-                            System.out.println("Test 1 ");
                         }
 
                         @Override
                         public void mouseExited(MouseEvent e) {
 
-                            System.out.println("Test2");
                         }
-                    }); */
+                    }); 
                     break;
                 case 4:
                     this.plateau.add(new JButton(g.getTuiles().get(3).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(3)));
@@ -221,7 +218,7 @@ public class VueAventurier {
                 default:
                     this.plateau.add(new JButton(g.getTuiles().get(0).getNomTuile())).setBackground(Color.BLACK);
                     break;
-
+                    
             }
 
         }

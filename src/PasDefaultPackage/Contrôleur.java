@@ -102,12 +102,23 @@ public class Contrôleur {
         Aventurier av6 = new Aventurier("l'autre Prof", explorateur, 0, t14, null);
 
         VueAventurier window = new VueAventurier(g, av1, Color.blue);
+        
+        
+        
+    
+        
+        
+        
 
         
         
         
         //window.setVisible(true);
     }
+    
+    
+    
+    
 
     /**
      *
@@ -152,7 +163,7 @@ public class Contrôleur {
         throw new UnsupportedOperationException();
     }
 
-    public void DemandeDeplacement(Aventurier a) {//tuile de destination + aventurier concerné
+    public void demandeDeplacement(Aventurier a) {//tuile de destination + aventurier concerné
         boolean enAttenteDAppuie = true;
 
         a.getTuileAtteignable();
@@ -161,16 +172,16 @@ public class Contrôleur {
                      attente d'appuie sur une tuile valide   */
         Tuile tDest = null;/*récupérer tuile au click
           fin loop*/
-        Deplacement(tDest, a);
+        deplacement(tDest, a);
     }
 
-    public void Deplacement(Tuile tDest, Aventurier a) {
+    public void deplacement(Tuile tDest, Aventurier a) {
         a.getTuile().getAventuriers().remove(a);
         a.setT(tDest);
         tDest.getAventuriers().add(a);
     }
 
-    public void Demandeassecher(Aventurier a) {//tuile de destination + aventurier concerné
+    public void demandeassecher(Aventurier a) {//tuile de destination + aventurier concerné
         boolean enAttenteDAppuie = true;
         a.getTuileAssechable();
         /*AFFICHAGE MATHILDE*/
@@ -178,7 +189,7 @@ public class Contrôleur {
                      attente d'appuie sur une tuile valide   */
         Tuile tDest = null;/*récupérer tuile au click
           fin loop*/
-        Deplacement(tDest, a);
+        deplacement(tDest, a);
     }
 
     public void assecher(Tuile tDest, Aventurier a) {
