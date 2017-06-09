@@ -8,7 +8,6 @@ import static PasDefaultPackage.TypeRole.pilote;
 import static PasDefaultPackage.TypeRole.plongeur;
 import java.awt.Color;
 import java.util.*;
-import javax.swing.JButton;
 import view.VueAventurier;
 
 public class Contrôleur {
@@ -17,8 +16,8 @@ public class Contrôleur {
     private Collection<Aventurier> aventuriers;
     private TasCartesTrésor cartesTresor;
     private TasCartesInnondation cartesInnondation;
-    
 
+//blabla
     public static void main(String[] args) {
         Tuile t1 = new Tuile(0, "", 1, 1);
         Tuile t2 = new Tuile(0, "", 2, 1);
@@ -119,23 +118,9 @@ public class Contrôleur {
         t14.getAventuriers().add(av6);
 
         VueAventurier window = new VueAventurier(g, av1, Color.blue);
-        
-        
-        
-    
-        
-        
-        
 
-        
-        
-        
         //window.setVisible(true);
     }
-    
-    
-    
-    
 
     /**
      *
@@ -143,7 +128,7 @@ public class Contrôleur {
      */
     public void jouerTour(Aventurier a) {
         // TODO - implement Contrôleur.jouerTour
-        
+
     }
 
     /**
@@ -152,12 +137,12 @@ public class Contrôleur {
      */
     public void realiserAction(Aventurier a) {
         // TODO - implement Contrôleur.realiserAction
-        
+
     }
 
     public void monterEchelleEau() {
         // TODO - implement Contrôleur.monterEchelleEau
-        
+
     }
 
     /**
@@ -167,7 +152,7 @@ public class Contrôleur {
      */
     public void defausserCarteTresorJoueur(Aventurier aventurier, Ctrésor carte) {
         // TODO - implement Contrôleur.defausserCarteTresorJoueur
-        
+
     }
 
     /**
@@ -177,7 +162,7 @@ public class Contrôleur {
      */
     public void utiliserCarteSpeciale(Aventurier aventurier, CSpéciale carteS) {
         // TODO - implement Contrôleur.utiliserCarteSpeciale
-        
+
     }
 
     public void demandeDeplacement(Aventurier a) {//tuile de destination + aventurier concerné
@@ -222,7 +207,4 @@ public class Contrôleur {
         return grille;
     }
 
-
-    
-    
 }
