@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Grille {
 
-    private final int nbcolonne;
-    private final int nbligne;
+    private int nbcolonne;
+    private int nbligne;
     private ArrayList<Tuile> tuiles;
 
     public Grille() {

@@ -20,18 +20,24 @@ public class Contrôleur {
 //blabla
     public static void main(String[] args) {
         Tuile t1 = new Tuile(0, "", 1, 1);
+        t1.setEtat(Etat.vide);
         Tuile t2 = new Tuile(0, "", 2, 1);
+        t2.setEtat(Etat.vide);
         Tuile t3 = new Tuile(0, "Le Pont Des Abimes", 3, 1);
         Tuile t4 = new Tuile(0, "La porte De Bronze", 4, 1);
         t4.setEtat(Etat.innondé);
         Tuile t5 = new Tuile(0, "", 5, 1);
+        t5.setEtat(Etat.vide);
         Tuile t6 = new Tuile(0, "", 6, 1);
+        t6.setEtat(Etat.vide);
         Tuile t7 = new Tuile(0, "", 1, 2);
+        t7.setEtat(Etat.vide);
         Tuile t8 = new Tuile(0, "La Caverne Des Ombres", 2, 2);
         Tuile t9 = new Tuile(0, "La porte De Fer", 3, 2);
         Tuile t10 = new Tuile(0, "La porte D'or", 4, 2);
         Tuile t11 = new Tuile(0, "Les Falaises De L'Oubli", 5, 2);
         Tuile t12 = new Tuile(0, "", 6, 2);
+        t12.setEtat(Etat.vide);
         Tuile t13 = new Tuile(0, "Le Palais De Corail", 1, 3);
         Tuile t14 = new Tuile(0, "La porte D'Argent", 2, 3);
         Tuile t15 = new Tuile(0, "Les Dunes De L'Illusion", 3, 3);
@@ -51,6 +57,7 @@ public class Contrôleur {
         Tuile t24 = new Tuile(0, "La Caserne Du Brasier", 6, 4);
         t24.setEtat(Etat.innondé);
         Tuile t25 = new Tuile(0, "", 1, 5);
+        t25.setEtat(Etat.vide);
         Tuile t26 = new Tuile(0, "Le Temple Du Soleil", 2, 5);
         Tuile t27 = new Tuile(0, "Le Temple De La Lune", 3, 5);
         t27.setEtat(Etat.immergé);
@@ -64,7 +71,11 @@ public class Contrôleur {
         t34.setEtat(Etat.innondé);
         Tuile t35 = new Tuile(0, "", 5, 6);
         Tuile t36 = new Tuile(0, "", 6, 6);
-
+        t30.setEtat(Etat.vide);
+        t31.setEtat(Etat.vide);
+        t32.setEtat(Etat.vide);
+        t35.setEtat(Etat.vide);
+        t36.setEtat(Etat.vide);
         Grille g = new Grille();
 
         g.getTuiles().add(t1);
@@ -173,15 +184,10 @@ public class Contrôleur {
                      attente d'appuie sur une tuile valide   */
         Tuile tDest = null;/*récupérer tuile au click
           fin loop*/
-        deplacement(tDest, a);
+        a.deplacement(tDest);
     }
 
-    public void deplacement(Tuile tDest, Aventurier a) {
-        a.getTuile().getAventuriers().remove(a);
-        a.setT(tDest);
-        tDest.getAventuriers().add(a);
-    }
-
+   
     public void demandeassecher(Aventurier a) {//tuile de destination + aventurier concerné
         boolean enAttenteDAppuie = true;
         a.getTuileAssechable();
@@ -190,7 +196,7 @@ public class Contrôleur {
                      attente d'appuie sur une tuile valide   */
         Tuile tDest = null;/*récupérer tuile au click
           fin loop*/
-        deplacement(tDest, a);
+        a.deplacement(tDest);
     }
 
     public void assecher(Tuile tDest, Aventurier a) {

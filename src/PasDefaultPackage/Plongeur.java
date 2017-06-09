@@ -56,14 +56,7 @@ public class Plongeur extends Aventurier {
         }
     }
 
-    public boolean existedéjà(ArrayList<Tuile> at, Tuile t) {
-        for (int i = 0; i < at.size(); i++) {
-            if (at.get(i) == t) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     public ArrayList<Tuile> tuilesAutour(Etat e, Tuile t, Grille g) {
         int x, y;

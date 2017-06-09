@@ -45,7 +45,7 @@ public class Pion extends JPanel {
         }
         paint = new GradientPaint(0, 0, getBackground(), getWidth(), getHeight(), getForeground());
         g2d.setPaint(paint);
-        g.fillOval(5, 5, getWidth() - 25, getHeight() - 10);
+        g.fillOval(5, 5, getWidth() - 75, getHeight() - 75);
 
     }
 
