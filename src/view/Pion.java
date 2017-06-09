@@ -5,6 +5,7 @@
  */
 package view;
 
+import PasDefaultPackage.TypeRole;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -18,16 +19,17 @@ import javax.swing.JPanel;
  */
 public class Pion extends JPanel {
 
-    private Couleur couleur;
+    private TypeRole role;
+    private Color couleur;
     private boolean monte;
 
-    public Pion(Color coul, boolean monte) {
+    public Pion(TypeRole role, Color couleur, boolean monte) {
         this.monte = monte;
+        this.role = role;
         this.couleur = couleur;
         setOpaque(false);
         // Plusieurs pion de différente couleur
-        setForeground(coul);
-
+        setForeground(couleur);
     }
 
     // Fais les pions (ou les montres du moins)
@@ -47,8 +49,8 @@ public class Pion extends JPanel {
 
     }
 
-    public Couleur getCouleur() {
-        return couleur;
+    public TypeRole getCouleur() {
+        return role;
     }
 
     public boolean isMonte() {

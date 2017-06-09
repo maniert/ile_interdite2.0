@@ -8,8 +8,6 @@ import PasDefaultPackage.TypeRole;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,7 +35,6 @@ public class VueAventurier {
     private final JButton btnTerminerTour;
     private final JTextField position;
     private JButton[] bton = new JButton[36];
-
 
     public VueAventurier(Grille g, Aventurier aJoueur, Color couleur) {
 
@@ -107,60 +104,48 @@ public class VueAventurier {
         this.mainAutreJoueur.add(new JButton("13"));
         this.mainAutreJoueur.add(new JButton("14"));
         this.mainAutreJoueur.add(new JButton("15"));
-        
-        Pion pExplo = new Pion(Color.GREEN, true);
-        Pion pNav = new Pion(Color.YELLOW, true);
-        Pion pPlong = new Pion(Color.BLACK, true);
-        Pion pInge = new Pion(Color.RED, true);
-        Pion pPilo = new Pion(Color.BLUE, true);
-        Pion pMess = new Pion(Color.ORANGE, true);
 
+        Pion pExplo = new Pion(TypeRole.explorateur, Color.GREEN, true);
+        Pion pNav = new Pion(TypeRole.navigateur, Color.YELLOW, true);
+        Pion pPlong = new Pion(TypeRole.plongeur, Color.BLACK, true);
+        Pion pInge = new Pion(TypeRole.ingénieur, Color.RED, true);
+        Pion pPilo = new Pion(TypeRole.pilote, Color.BLUE, true);
+        Pion pMess = new Pion(TypeRole.messager, Color.ORANGE, true);
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         for (int i = 0; i <= 35; i++) {
-            //this.plateau.add(new JButton(g.getTuiles().get(i-1).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(i-1)));
+            //this.plateau.add(new JButton(g.getTuiles().get(i).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(i)));
             bton[i] = new JButton();
             this.plateau.add(bton[i]);
             bton[i].setText(g.getTuiles().get(i).getNomTuile());
             bton[i].setBackground(CouleurTuile(g.getTuiles().get(i)));
 
-            
             for (int j = 0; j < g.getTuiles().get(i).getAventuriers().size(); j++) {
-                if (null != g.getTuiles().get(i).getAventuriers().get(i).getTypeRole())switch (g.getTuiles().get(i).getAventuriers().get(i).getTypeRole()) {
-                    case plongeur:
-                        bton[i].add(pPlong);
-                        //Afficher le bon pion sur la tuile
-                        break;
-                    case explorateur:
-                        bton[i].add(pExplo);
-                        break;
-                    case ingénieur:
-                        bton[i].add(pInge);
-                        break;
-                    case messager:
-                        bton[i].add(pMess);
-                        break;
-                    case navigateur:
-                        bton[i].add(pNav);
-                        break;
-                    case pilote:
-                        bton[i].add(pPilo);
-                        break;
-                    default:
-                        break;
+                if (0 != g.getTuiles().get(i).getAventuriers().size()) {
+                    switch (g.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
+                        case plongeur:
+                            bton[i].add(pPlong);    //Afficher le bon pion sur la tuile
+                            break;
+                        case explorateur:
+                            bton[i].add(pExplo);
+                            break;
+                        case ingénieur:
+                            bton[i].add(pInge);
+                            break;
+                        case messager:
+                            bton[i].add(pMess);
+                            break;
+                        case navigateur:
+                            bton[i].add(pNav);
+                            break;
+                        case pilote:
+                            bton[i].add(pPilo);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
-            
             /*
             switch (i) {
                 case 3:
@@ -274,10 +259,7 @@ public class VueAventurier {
                     this.plateau.add(new JButton(g.getTuiles().get(0).getNomTuile())).setBackground(Color.BLACK);
                     break;
             }
-                    */
-                    
-            
-
+             */
         }
 
         this.mainJoueur.add(new JButton(""));
