@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.MatteBorder;
 import sun.security.krb5.Config;
+import static javafx.scene.paint.Color.color;
 
 public class VueAventurier {
 
@@ -35,7 +36,7 @@ public class VueAventurier {
     private final JFrame window;
     private final JPanel panelAventurier;
     private final JPanel mainPanel;
-    private final JButton btnAller;
+    private final JButton btnDeplacer;
     private final JButton btnAssecher;
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
@@ -92,12 +93,12 @@ public class VueAventurier {
         this.mainJoueur.setOpaque(false);
         mainPanel.add(this.mainJoueur, BorderLayout.SOUTH);
 
-        this.btnAller = new JButton("Se Déplacer");
+        this.btnDeplacer = new JButton("Se Déplacer");
         this.btnAssecher = new JButton("Assecher");
         this.btnAutreAction = new JButton("Autre Action");
         this.btnTerminerTour = new JButton("Terminer Tour");
 
-        this.panelBoutons.add(btnAller);
+        this.panelBoutons.add(btnDeplacer);
         this.panelBoutons.add(btnAssecher);
         this.panelBoutons.add(btnAutreAction);
         this.panelBoutons.add(btnTerminerTour);
@@ -120,7 +121,8 @@ public class VueAventurier {
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setVisible(true);
         mainPanel.repaint();
-        btnAller.addMouseListener(new MouseListener() {
+        
+        btnDeplacer.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent me) {
                             aJoueur.setTuileAtteignable(g);
@@ -145,7 +147,34 @@ public class VueAventurier {
                         public void mouseExited(MouseEvent me) {
                         }
 
-                    });        
+                    });  
+        
+         btnAssecher.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent me) {
+                            aJoueur.setTuileAssechable(g);
+                            plateau.removeAll();
+                            white = true;
+                            peinture(g, aJoueur, couleur,white);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent me) {
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent me) {
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent me) {
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent me) {
+                        }
+
+                    });   
         
                      
         }
@@ -193,7 +222,7 @@ public class VueAventurier {
                     
                 }
             }
-           if(white && aJoueur.existedéjà(aJoueur.getTuileAtteignable(), g.getTuiles().get(i))){
+           if(white && aJoueur.existedéjà(aJoueur.getTuileAtteignable(), g.getTuiles().get(i))){ 
                     Tuile t = g.getTuiles().get(i);
                     bton[i].addMouseListener(new MouseListener() {
                         @Override
@@ -223,13 +252,43 @@ public class VueAventurier {
                         }
             
                     });
+        } else if(white && aJoueur.existedéjà(aJoueur.getTuileAssechable(), g.getTuiles().get(i))){ 
+                    Tuile t = g.getTuiles().get(i);
+                    bton[i].addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                        aJoueur.assecher(t);
+                        plateau.removeAll();
+                        boolean white = false;
+                        peinture(g, aJoueur, couleur, white);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+            
+                    });
         }
             
-        if(aJoueur.existedéjà((aJoueur.getTuileAtteignable()), g.getTuiles().get(i)) && white == true){
+        if(aJoueur.existedéjà((aJoueur.getTuileAtteignable()), g.getTuiles().get(i)) && white == true || aJoueur.existedéjà((aJoueur.getTuileAssechable()), g.getTuiles().get(i)) && white == true){
                     bton[i].setBackground(Color.WHITE);
                 }    
         }
-        
+      
     }
         
     public JButton getBtnAutreAction() {
@@ -241,7 +300,7 @@ public class VueAventurier {
     }
 
     public JButton getBtnAller() {
-        return btnAller;
+        return btnDeplacer;
     }
 
     public JButton getBtnAssecher() {

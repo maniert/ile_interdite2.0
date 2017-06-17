@@ -14,7 +14,7 @@ public class Explorateur extends Aventurier {
         getTuileAtteignable().clear();// vider l'arraylist avant de le remplir
         xPerso = this.getTuile().getX();//récupére les coordonnées
         yPerso = this.getTuile().getY();//x et y du joueur de ce tour
-        deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles  
+        casePossiblebasique(g, this.getTuileAtteignable()); //rentre les déplacements propre à tout les roles  
         getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso - 1));//HG
         getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso - 1));//HD
         getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso + 1));//BG
@@ -30,7 +30,7 @@ public class Explorateur extends Aventurier {
         xPerso = this.getTuile().getX();//récupére les coordonnées
         yPerso = this.getTuile().getY();//x et y du joueur de ce tour
         getTuileAssechable().clear(); // clear vide le vecteur
-        tuileAssechablebasique(g);
+        casePossiblebasique(g, this.getTuileAssechable());
         getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso - 1));//HG
         getTuileAtteignable().add(g.getLaTuile(xPerso + 1, yPerso - 1));//HD
         getTuileAtteignable().add(g.getLaTuile(xPerso - 1, yPerso + 1));//BG

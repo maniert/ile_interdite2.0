@@ -17,7 +17,6 @@ public class Contrôleur {
     private TasCartesTrésor cartesTresor;
     private TasCartesInnondation cartesInnondation;
 
-//blabla
     public static void main(String[] args) {
         Tuile t1 = new Tuile(0, "", 1, 1);
         t1.setEtat(Etat.vide);
@@ -197,13 +196,6 @@ public class Contrôleur {
         Tuile tDest = null;/*récupérer tuile au click
           fin loop*/
         a.deplacement(tDest);
-    }
-
-    public void assecher(Tuile tDest, Aventurier a) {
-        a.getTuile().getAventuriers().remove(a);
-        a.setT(tDest);
-        tDest.getAventuriers().add(a);
-
     }
 
     /**

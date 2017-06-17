@@ -25,7 +25,6 @@ public class Grille {
         int i = 0;
         while (i != 36) {
             if (x == getTuiles().get(i).getX(i) && y == getTuiles().get(i).getY(i)) {
-                i++;
                 return (getTuiles().get(i));
             } else {
                 i++;

@@ -16,7 +16,7 @@ public class Plongeur extends Aventurier {
 
     public void setTuileAtteignable(Grille g) {
         getTuileAtteignable().clear();// vider l'arraylist avant de le remplir
-        deplacementPossiblebasique(g); //rentre les déplacements propre à tout les role
+        casePossiblebasique(g, this.getTuileAtteignable()); //rentre les déplacements propre à tout les role
         int i = 0;
         ArrayList<Tuile> mem = null;
         while (i != this.getTuileAtteignable().size() + 1) {

@@ -16,7 +16,7 @@ public class Pilote extends Aventurier {
                 getTuileAtteignable().add(g.getTuiles().get(i)); // que l'on est pas à la tuile de l'aventurier
             }                                                      // on ajout aux tuiles atteingables
         } else {
-            deplacementPossiblebasique(g); //rentre les déplacements propre à tout les roles
+            casePossiblebasique(g, this.getTuileAtteignable()); //rentre les déplacements propre à tout les roles
         }
         filtrageDeplacementpossible(getTuileAtteignable(), g); //filtrage null+innondé,immergé 
 
