@@ -28,6 +28,9 @@ public class Aventurier {
 
     }
 
+    public Aventurier(){
+        
+    }
     /**
      *
      * @param tuile
@@ -216,6 +219,13 @@ public class Aventurier {
         this.setT(tDest);
         tDest.getAventuriers().add(this);
         this.tuilesAtteignable.clear();
+    }
+
+    /**
+     * @param nbPA the nbPA to set
+     */
+    public void setNbPA(int nbPA) {
+        this.nbPA = nbPA;
     }
 
     

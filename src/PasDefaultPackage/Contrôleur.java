@@ -17,6 +17,7 @@ public class Contrôleur {
     private TasCartesTrésor cartesTresor;
     private TasCartesInnondation cartesInnondation;
     private static boolean finPartie;
+    private static Aventurier joueurCourant;
     
     public static void main(String[] args) {
         //initialisation partie
@@ -26,24 +27,28 @@ public class Contrôleur {
         grille = new Grille();
         //lancement partie
         finPartie = false;
-        
-        
-
-       
-        
-
         //window.setVisible(true);
-        
+        VueAventurier window = new VueAventurier(grille, Color.blue);
+       
         if(!finPartie){
-             VueAventurier window = new VueAventurier(grille, grille.getTuiles().get(3).getAventuriers().get(0), Color.blue);
-                          
+            
+            grille.getJoueurCourant().setNbPA(1);
+            int i = 1;
+            
+            while ( i <= grille.getnbJ()) {
+                    int nbpaPast = 1;
+                    if(grille.getJoueurCourant().getNbPA() != nbpaPast){
+                    window.peinture(grille, grille.getJoueurCourant(), Color.blue, finPartie);
+                     
+                }
+                   
+            }
+                        
         } else {
             System.out.println("fin Partie!");
         }
         
-        
     }
-
     /**
      *
      * @param a

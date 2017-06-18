@@ -44,12 +44,12 @@ public class VueAventurier {
     private JButton[] bton = new JButton[36];
     private boolean white = false;
 
-    public VueAventurier(Grille g, Aventurier aJoueur, Color couleur) {
+    public VueAventurier(Grille g, Color couleur) {
 
         this.window = new JFrame();
         window.setSize(1080, 720);
 
-        window.setTitle(aJoueur.getNomJoueur());
+        window.setTitle(g.getJoueurCourant().getNomJoueur());
         mainPanel = new JPanel(new BorderLayout());
         this.window.add(mainPanel);
 
@@ -60,7 +60,7 @@ public class VueAventurier {
         // NORD : le titre = nom de l'aventurier + nom du joueur sur la couleurActive du pion
         this.panelAventurier = new JPanel();
         panelAventurier.setBackground(couleur);
-        panelAventurier.add(new JLabel(aJoueur.getTypeRole().toString(), CENTER));
+        panelAventurier.add(new JLabel(g.getJoueurCourant().getTypeRole().toString(), CENTER));
         mainPanel.add(panelAventurier, BorderLayout.NORTH);
 
         // =================================================================================
@@ -112,7 +112,7 @@ public class VueAventurier {
         this.mainAutreJoueur.add(new JButton("13"));
         this.mainAutreJoueur.add(new JButton("14"));
         this.mainAutreJoueur.add(new JButton("15"));
-        peinture(g, aJoueur, couleur,white);
+        peinture(g, g.getJoueurCourant(), couleur,white);
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
         this.mainJoueur.add(new JButton(""));
@@ -125,10 +125,10 @@ public class VueAventurier {
         btnDeplacer.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent me) {
-                            aJoueur.setTuileAtteignable(g);
+                            g.getJoueurCourant().setTuileAtteignable(g);
                             plateau.removeAll();
                             white = true;
-                            peinture(g, aJoueur, couleur,white);
+                            peinture(g, g.getJoueurCourant(), couleur,white);
                         }
 
                         @Override
@@ -152,10 +152,10 @@ public class VueAventurier {
          btnAssecher.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent me) {
-                            aJoueur.setTuileAssechable(g);
+                            g.getJoueurCourant().setTuileAssechable(g);
                             plateau.removeAll();
                             white = true;
-                            peinture(g, aJoueur, couleur,white);
+                            peinture(g, g.getJoueurCourant(), couleur,white);
                         }
 
                         @Override
@@ -176,10 +176,33 @@ public class VueAventurier {
 
                     });   
         
+         btnTerminerTour.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent me) {
+                            g.getJoueurCourant().setNbPA(0);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent me) {
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent me) {
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent me) {
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent me) {
+                        }
+
+                    });
                      
         }
         
-    public void peinture(Grille g, Aventurier aJoueur, Color couleur, boolean white){
+    public void peinture(Grille grille, Aventurier aJoueur, Color couleur, boolean white){
         
         Pion pExplo = new Pion(TypeRole.explorateur, Color.GREEN, true);
         Pion pNav = new Pion(TypeRole.navigateur, Color.YELLOW, true);
@@ -193,11 +216,11 @@ public class VueAventurier {
             //this.plateau.add(new JButton(g.getTuiles().get(i).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(i)));
             bton[i] = new JButton();
             this.plateau.add(bton[i]);
-            bton[i].setText(g.getTuiles().get(i).getNomTuile());
-            bton[i].setBackground(CouleurTuile(g.getTuiles().get(i)));
-            for (int j = 0; j < g.getTuiles().get(i).getAventuriers().size(); j++) {
-                if (0 != g.getTuiles().get(i).getAventuriers().size()) {
-                    switch (g.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
+            bton[i].setText(grille.getTuiles().get(i).getNomTuile());
+            bton[i].setBackground(CouleurTuile(grille.getTuiles().get(i)));
+            for (int j = 0; j < grille.getTuiles().get(i).getAventuriers().size(); j++) {
+                if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
+                    switch (grille.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
                         case plongeur:
                             bton[i].add(pPlong);    //Afficher le bon pion sur la tuile
                             break;
@@ -222,16 +245,26 @@ public class VueAventurier {
                     
                 }
             }
-           if(white && aJoueur.existedéjà(aJoueur.getTuileAtteignable(), g.getTuiles().get(i))){ 
-                    Tuile t = g.getTuiles().get(i);
+           if(white && aJoueur.existedéjà(aJoueur.getTuileAtteignable(), grille.getTuiles().get(i))){ 
+                    Tuile t = grille.getTuiles().get(i);
                     bton[i].addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                        aJoueur.deplacement(t);
-                        plateau.removeAll();
-                        boolean white = false;
-                        peinture(g, aJoueur, couleur, white);
+                        aJoueur.deplacement(t);//change la tuile du joueur et enleve le joueur de la tuile
+                        plateau.removeAll();//efface le plateau
+                        boolean white = false;//cache les possibilité de déplacement
+                        peinture(grille, grille.getJoueurCourant(), couleur, white);//réaffiche le plateau
+                        aJoueur.setNbPA(0);//retire un pa au joueur
+                        if (grille.getJoueurCourant().getNbPA() < 1){ // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
+                            if( grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()){//regarde son rang si il n'est pas dernier
+                                grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant())+1));// au tour du suivant
+                                grille.getJoueurCourant().setNbPA(1);//prépare les pa du joueur suivant 
+                            } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
+                                grille.setJoueurCourant(grille.getJoueurs().get(0));
+                                grille.getJoueurCourant().setNbPA(1);
+                            }
                         }
+                       }
 
                         @Override
                         public void mousePressed(MouseEvent e) {
@@ -252,15 +285,25 @@ public class VueAventurier {
                         }
             
                     });
-        } else if(white && aJoueur.existedéjà(aJoueur.getTuileAssechable(), g.getTuiles().get(i))){ 
-                    Tuile t = g.getTuiles().get(i);
+        } else if(white && aJoueur.existedéjà(aJoueur.getTuileAssechable(), grille.getTuiles().get(i))){ 
+                    Tuile t = grille.getTuiles().get(i);
                     bton[i].addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
                         aJoueur.assecher(t);
                         plateau.removeAll();
                         boolean white = false;
-                        peinture(g, aJoueur, couleur, white);
+                        peinture(grille, grille.getJoueurCourant(), couleur, white);
+                        aJoueur.setNbPA(0);//retire un pa au joueur
+                        if (grille.getJoueurCourant().getNbPA() < 1){ // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
+                            if( grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()){//regarde son rang si il n'est pas dernier
+                                grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant())+1));// au tour du suivant
+                                grille.getJoueurCourant().setNbPA(1);//prépare les pa du joueur suivant 
+                            } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
+                                grille.setJoueurCourant(grille.getJoueurs().get(0));
+                                grille.getJoueurCourant().setNbPA(1);
+                            }
+                        }
                         }
 
                         @Override
@@ -283,10 +326,11 @@ public class VueAventurier {
             
                     });
         }
-            
-        if(aJoueur.existedéjà((aJoueur.getTuileAtteignable()), g.getTuiles().get(i)) && white == true || aJoueur.existedéjà((aJoueur.getTuileAssechable()), g.getTuiles().get(i)) && white == true){
-                    bton[i].setBackground(Color.WHITE);
-                }    
+        if(white == true){
+            if(aJoueur.existedéjà((aJoueur.getTuileAtteignable()), grille.getTuiles().get(i)) && white == true || aJoueur.existedéjà((aJoueur.getTuileAssechable()), grille.getTuiles().get(i))){
+                        bton[i].setBackground(Color.WHITE);
+                    }    
+            }
         }
       
     }
