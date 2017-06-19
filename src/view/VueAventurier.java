@@ -131,7 +131,7 @@ public class VueAventurier {
                             System.out.println("il est vrai queeeee// ");
                             grille.getJoueurCourant().setTuileAtteignable(grille);
                             plateau.removeAll();
-                            white = true;
+                            white = true;                                                                       //A   COMPLETER
                             peinture(grille, grille.getJoueurCourant(), couleur, white);
                             grille.getJoueurCourant().setDeplacementSpePilote(false);
                         }
