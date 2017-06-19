@@ -22,11 +22,13 @@ public class Pion extends JPanel {
     private TypeRole role;
     private Color couleur;
     private boolean monte;
+    private int décalage;
 
-    public Pion(TypeRole role, Color couleur, boolean monte) {
+    public Pion(TypeRole role, Color couleur, boolean monte, int nbJSurTuile) {
         this.monte = monte;
         this.role = role;
         this.couleur = couleur;
+        this.décalage = nbJSurTuile;
         setOpaque(false);
         // Plusieurs pion de différente couleur
         setForeground(couleur);
@@ -45,7 +47,7 @@ public class Pion extends JPanel {
         }
         paint = new GradientPaint(0, 0, getBackground(), getWidth(), getHeight(), getForeground());
         g2d.setPaint(paint);
-        g.fillOval(5, 5, getWidth() - 75, getHeight() - 75);
+        g.fillOval(5 + 30 * décalage, 5, getWidth() - 75, getHeight() - 75);
 
     }
 
