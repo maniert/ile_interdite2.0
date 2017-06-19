@@ -110,17 +110,17 @@ public class Aventurier {
         int yPerso;
         xPerso = this.getTuile().getX();//récupére les coordonnées
         yPerso = this.getTuile().getY();//x et y du joueur de ce tour
-        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso, yPerso - 1))){
+        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso, yPerso - 1)) && g.getLaTuile(xPerso, yPerso - 1).getEtat() != Etat.vide){
             at.add(g.getLaTuile(xPerso, yPerso - 1));//haut
         }
-        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso, yPerso + 1))){
+        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso, yPerso + 1)) && g.getLaTuile(xPerso, yPerso + 1).getEtat() != Etat.vide){
             at.add(g.getLaTuile(xPerso, yPerso + 1));//bas
         }
         
-        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso - 1, yPerso))){
+        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso - 1, yPerso)) && g.getLaTuile(xPerso - 1, yPerso).getEtat() != Etat.vide){
             at.add(g.getLaTuile(xPerso - 1, yPerso));//gauche
         }
-        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso + 1, yPerso))){
+        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso + 1, yPerso)) && g.getLaTuile(xPerso + 1, yPerso).getEtat() != Etat.vide){
            at.add(g.getLaTuile(xPerso + 1, yPerso));//droite
         }
         
