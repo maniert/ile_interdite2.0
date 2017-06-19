@@ -124,6 +124,35 @@ public class VueAventurier {
                 plateau.removeAll();
                 white = false;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
+                if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote && grille.getJoueurCourant().isDeplacementSpePilote()) { // gestion du coup spécial du pilote
+                    btnAutreAction.addMouseListener(new MouseListener() {           //quand le pilote décide d'utiliser
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            System.out.println("il est vrai queeeee// ");
+                            grille.getJoueurCourant().setTuileAtteignable(grille);
+                            plateau.removeAll();
+                            white = true;
+                            peinture(grille, grille.getJoueurCourant(), couleur, white);
+                            grille.getJoueurCourant().setDeplacementSpePilote(false);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                        }
+                    });
+                }
                 grille.getJoueurCourant().setTuileAtteignable(grille);
                 plateau.removeAll();
                 white = true;
@@ -233,26 +262,32 @@ public class VueAventurier {
                 if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
                     switch (grille.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
                         case plongeur:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
                             Pion pPlong = new Pion(TypeRole.plongeur, Color.BLACK, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                             bton[i].add(pPlong);    //Afficher le bon pion sur la tuile
                             break;
                         case explorateur:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
                             Pion pExplo = new Pion(TypeRole.explorateur, Color.GREEN, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                             bton[i].add(pExplo);
                             break;
                         case ingénieur:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
                             Pion pInge = new Pion(TypeRole.ingénieur, Color.RED, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                             bton[i].add(pInge);
                             break;
                         case messager:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
                             Pion pMess = new Pion(TypeRole.messager, Color.ORANGE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                             bton[i].add(pMess);
                             break;
                         case navigateur:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
                             Pion pNav = new Pion(TypeRole.navigateur, Color.YELLOW, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                             bton[i].add(pNav);
                             break;
                         case pilote:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
                             Pion pPilo = new Pion(TypeRole.pilote, Color.BLUE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                             bton[i].add(pPilo);
                             break;
@@ -276,9 +311,15 @@ public class VueAventurier {
                             if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                                 grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
                                 grille.getJoueurCourant().setNbPA(1);//prépare les pa du joueur suivant 
-                            } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
+                                if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
+                                    grille.getJoueurCourant().setDeplacementSpePilote(false);           //redonner le déplacement spécial au joueur Pilote
+                                }
+                            } else {                                                                //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                                 grille.setJoueurCourant(grille.getJoueurs().get(0));
                                 grille.getJoueurCourant().setNbPA(1);
+                                if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
+                                    grille.getJoueurCourant().setDeplacementSpePilote(false);           //redonner le déplacement spécial au joueur Pilote
+                                }
                             }
                         }
                         window.setTitle(grille.getJoueurCourant().getNomJoueur());
@@ -349,6 +390,7 @@ public class VueAventurier {
                     bton[i].setBackground(Color.WHITE);
                 }
             }
+
         }
 
     }
