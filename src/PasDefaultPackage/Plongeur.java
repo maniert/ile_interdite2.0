@@ -35,7 +35,7 @@ public class Plongeur extends Aventurier {
             }
             while (tuilessouslocean != mem) {
                 
-                System.out.println("pomme2");
+                System.out.println("...");
                 mem = tuilessouslocean;
                 for (int j = 0; j < this.tuilessouslocean.size(); j++) {
                     System.out.println("poire");
