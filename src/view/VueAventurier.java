@@ -22,6 +22,20 @@ import javax.swing.border.MatteBorder;
 
 public class VueAventurier {
 
+    /**
+     * @return the nbmaxPa
+     */
+    public static int getNbmaxPa() {
+        return nbmaxPa;
+    }
+
+    /**
+     * @param aNbmaxPa the nbmaxPa to set
+     */
+    public static void setNbmaxPa(int aNbmaxPa) {
+        nbmaxPa = aNbmaxPa;
+    }
+
     private final JPanel panelBoutons;
 
     private JPanel mainAutreJoueur;
@@ -220,10 +234,10 @@ public class VueAventurier {
                 if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                     if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                         grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                        grille.getJoueurCourant().setNbPA(nbmaxPa);//prépare les pa du joueur suivant 
+                        grille.getJoueurCourant().setNbPA(getNbmaxPa());//prépare les pa du joueur suivant 
                     } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                         grille.setJoueurCourant(grille.getJoueurs().get(0));
-                        grille.getJoueurCourant().setNbPA(nbmaxPa);
+                        grille.getJoueurCourant().setNbPA(getNbmaxPa());
                     }
                 }
                 window.setTitle(grille.getJoueurCourant().getNomJoueur());
@@ -316,14 +330,14 @@ public class VueAventurier {
                         if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                             if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                                 grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                                grille.getJoueurCourant().setNbPA(nbmaxPa);//prépare les pa du joueur suivant 
+                                grille.getJoueurCourant().setNbPA(getNbmaxPa());//prépare les pa du joueur suivant 
                                 if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
                                     grille.getJoueurCourant().setHelicoDispo(true);  
                                     grille.getJoueurCourant().setDeplSpePilote(true);//redonner le déplacement spécial au joueur Pilote
                                 }
                             } else {                                                                //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                                 grille.setJoueurCourant(grille.getJoueurs().get(0));
-                                grille.getJoueurCourant().setNbPA(nbmaxPa);
+                                grille.getJoueurCourant().setNbPA(getNbmaxPa());
                                 if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
                                    grille.getJoueurCourant().setHelicoDispo(true);  
                                    grille.getJoueurCourant().setDeplSpePilote(true);       //redonner le déplacement spécial au joueur Pilote
@@ -365,16 +379,16 @@ public class VueAventurier {
                         if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                             if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                                 grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                                grille.getJoueurCourant().setNbPA(nbmaxPa);//prépare les pa du joueur suivant 
+                                grille.getJoueurCourant().setNbPA(getNbmaxPa());//prépare les pa du joueur suivant 
                                 grille.getJoueurCourant().setDeplSpePilote(true);
                             } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                                 grille.setJoueurCourant(grille.getJoueurs().get(0));
-                                grille.getJoueurCourant().setNbPA(nbmaxPa);
+                                grille.getJoueurCourant().setNbPA(getNbmaxPa());
                                 grille.getJoueurCourant().setDeplSpePilote(true);
                             }
                         }
                     }
-
+;
                     @Override
                     public void mousePressed(MouseEvent e) {
                     }

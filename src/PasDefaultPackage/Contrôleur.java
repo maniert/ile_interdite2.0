@@ -26,11 +26,11 @@ public class Contrôleur {
 //       
         if (!finPartie) {
 
-            grille.getJoueurCourant().setNbPA(1);
+            grille.getJoueurCourant().setNbPA(window.getNbmaxPa());
             int i = 1;
 
             while (i <= grille.getnbJ()) {
-                int nbpaPast = 1;
+                int nbpaPast = 2;
                 if (grille.getJoueurCourant().getNbPA() != nbpaPast) {
                     window.peinture(grille, grille.getJoueurCourant(), Color.blue, finPartie);
                 }
