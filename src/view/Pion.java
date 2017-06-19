@@ -47,7 +47,11 @@ public class Pion extends JPanel {
         }
         paint = new GradientPaint(0, 0, getBackground(), getWidth(), getHeight(), getForeground());
         g2d.setPaint(paint);
-        g.fillOval(5 + 30 * décalage, 5, getWidth() - 75, getHeight() - 75);
+        if (décalage >= 3) {
+            g.fillOval(5 + 30 * (décalage - 3), 5 + 60, getWidth() - 75, getHeight() - 75);     //une en dessous, alligné avec les autres 
+        } else {
+            g.fillOval(5 + 30 * décalage, 5, getWidth() - 75, getHeight() - 75);                //première ligne décalage en fonction de décalage
+        }
 
     }
 

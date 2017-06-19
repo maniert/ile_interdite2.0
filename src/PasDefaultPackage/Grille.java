@@ -8,7 +8,6 @@ import static PasDefaultPackage.TypeRole.pilote;
 import static PasDefaultPackage.TypeRole.plongeur;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.management.relation.Role;
 
 public class Grille {
 
@@ -17,13 +16,13 @@ public class Grille {
     private ArrayList<Tuile> tuiles;
     private HashMap<Integer, Aventurier> joueurs;
     private Aventurier joueurCourant;
+
     public Grille() {
         this.nbligne = 6;
         this.nbcolonne = 6;
         tuiles = new ArrayList<>();
         joueurs = new HashMap<>();
-        
-        
+
         Tuile t1 = new Tuile(0, "", 1, 1);
         t1.setEtat(Etat.vide);
         Tuile t2 = new Tuile(0, "", 2, 1);
@@ -80,7 +79,6 @@ public class Grille {
         t32.setEtat(Etat.vide);
         t35.setEtat(Etat.vide);
         t36.setEtat(Etat.vide);
-        
 
         this.getTuiles().add(t1);
         this.getTuiles().add(t2);
@@ -118,38 +116,41 @@ public class Grille {
         this.getTuiles().add(t34);
         this.getTuiles().add(t35);
         this.getTuiles().add(t36);
-        
+
         Aventurier av1 = new Ingenieur("le Prof", ingénieur, 0, this.getTuiles().get(3), null);//correspond à t4
         Aventurier av2 = new Plongeur("Thibaud", plongeur, 0, this.getTuiles().get(8), null);//correspond à t9
         Aventurier av3 = new Navigateur("Alexis", navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
         Aventurier av4 = new Messager("Mathilde", messager, 0, this.getTuiles().get(13), null);//correspond à t14
         Aventurier av5 = new Pilote("Sami", pilote, 0, this.getTuiles().get(15), null);//correspond à t16
         Aventurier av6 = new Explorateur("l'autre Prof", explorateur, 0, this.getTuiles().get(16), null);//correspond à t17
-        
+
         //à gerer dans le controleur via un attribut
         joueurs.put(1, av1);
         joueurs.put(2, av2);
         joueurs.put(3, av3);
+        joueurs.put(4, av4);
+        joueurs.put(5, av5);
         //
-        
+
         for (int i = 0; i <= joueurs.size(); i++) {
-            
-        if(joueurs.get(i) == av1){  
-        this.getTuiles().get(3).getAventuriers().add(av1);   
-        } else if(joueurs.get(i) == av2){
-        this.getTuiles().get(8).getAventuriers().add(av2);
-        } else if(joueurs.get(i) == av3){
-        this.getTuiles().get(9).getAventuriers().add(av3);
-        } else if(joueurs.get(i) == av4){
-        this.getTuiles().get(13).getAventuriers().add(av4);
-        } else if(joueurs.get(i) == av5){
-        this.getTuiles().get(15).getAventuriers().add(av5);
-        } else if(joueurs.get(i) == av6){
-        this.getTuiles().get(16).getAventuriers().add(av6);
+
+            if (joueurs.get(i) == av1) {
+                this.getTuiles().get(3).getAventuriers().add(av1);
+            } else if (joueurs.get(i) == av2) {
+                this.getTuiles().get(8).getAventuriers().add(av2);
+            } else if (joueurs.get(i) == av3) {
+                this.getTuiles().get(9).getAventuriers().add(av3);
+            } else if (joueurs.get(i) == av4) {
+                this.getTuiles().get(13).getAventuriers().add(av4);
+            } else if (joueurs.get(i) == av5) {
+                this.getTuiles().get(15).getAventuriers().add(av5);
+            } else if (joueurs.get(i) == av6) {
+                this.getTuiles().get(16).getAventuriers().add(av6);
+            }
         }
-    }
         joueurCourant = av1;
     }
+
     /**
      * @return the tuiles
      */
@@ -176,9 +177,8 @@ public class Grille {
     public void setTuiles(ArrayList<Tuile> tuiles) {
         this.tuiles = tuiles;
     }
-    
-    
-    public int getnbJ(){
+
+    public int getnbJ() {
         return getJoueurs().size();
     }
 
@@ -203,7 +203,7 @@ public class Grille {
         this.joueurCourant = joueurCourant;
     }
 
-    public int getRang(HashMap<Integer, Aventurier> h, Aventurier a){
+    public int getRang(HashMap<Integer, Aventurier> h, Aventurier a) {
         for (int i = 0; i < h.size(); i++) {
             if (h.get(i) == a) {
                 return i;
