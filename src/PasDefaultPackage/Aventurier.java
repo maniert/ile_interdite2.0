@@ -224,15 +224,30 @@ public class Aventurier {
         this.nbPA = nbPA;
     }
 
-    public void setDeplacementSpePilote(boolean b) {
-        System.out.println("Aventurier: nothing happened #setDeplacementSpePilote");
+    public void setHelicoDispo(boolean b) {
+        System.out.println("Aventurier: nothing happened #setHelicoDispo");
     }
 
     /**
      * @return the deplacementSpePilote
      */
-    public boolean isDeplacementSpePilote() {
-        System.out.println("Aventurier: nothing happened #isDeplacementSpePilote");
+    public boolean isHelicoDispo() {
+        System.out.println("Aventurier: nothing happened #isHelicoDispo");
         return false;
+    }
+    
+    /**
+     * @return the deplSpePilote
+     */
+    public boolean isDeplSpePilote() {
+            System.out.println("Aventurier: nothing happened #isDeplSpePilote");
+            return false;
+    }
+
+    /**
+     * @param deplSpePilote the deplSpePilote to set
+     */
+    public void setDeplSpePilote(boolean deplSpePilote) {
+        System.out.println("Aventurier: nothing happened #setDeplSpePilote");
     }
 }

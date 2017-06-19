@@ -120,11 +120,37 @@ public class VueAventurier {
         btnDeplacer.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
+                
+                grille.getJoueurCourant().setHelicoDispo(false);
                 grille.getJoueurCourant().getTuileAssechable().clear();
                 plateau.removeAll();
                 white = false;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
-                if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote && grille.getJoueurCourant().isDeplacementSpePilote()) { // gestion du coup spécial du pilote
+               
+                grille.getJoueurCourant().setTuileAtteignable(grille);
+                plateau.removeAll();
+                white = true;
+                peinture(grille, grille.getJoueurCourant(), couleur, white);
+                grille.getJoueurCourant().setHelicoDispo(true);
+                }
+                 @Override
+            public void mousePressed(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+            }
+
+        });
+             if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote && grille.getJoueurCourant().isDeplSpePilote()) { // gestion du coup spécial du pilote
                     btnAutreAction.addMouseListener(new MouseListener() {           //quand le pilote décide d'utiliser
                         @Override
                         public void mouseClicked(MouseEvent e) {
@@ -133,7 +159,8 @@ public class VueAventurier {
                             plateau.removeAll();
                             white = true;                                                                       //A   COMPLETER
                             peinture(grille, grille.getJoueurCourant(), couleur, white);
-                            grille.getJoueurCourant().setDeplacementSpePilote(false);
+                            grille.getJoueurCourant().setHelicoDispo(false);
+                            grille.getJoueurCourant().setDeplSpePilote(false);
                         }
 
                         @Override
@@ -153,29 +180,8 @@ public class VueAventurier {
                         }
                     });
                 }
-                grille.getJoueurCourant().setTuileAtteignable(grille);
-                plateau.removeAll();
-                white = true;
-                peinture(grille, grille.getJoueurCourant(), couleur, white);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-            }
-
-        });
+            
+           
 
         btnAssecher.addMouseListener(new MouseListener() {
             @Override
@@ -312,13 +318,15 @@ public class VueAventurier {
                                 grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
                                 grille.getJoueurCourant().setNbPA(1);//prépare les pa du joueur suivant 
                                 if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
-                                    grille.getJoueurCourant().setDeplacementSpePilote(false);           //redonner le déplacement spécial au joueur Pilote
+                                    grille.getJoueurCourant().setHelicoDispo(true);  
+                                    grille.getJoueurCourant().setDeplSpePilote(true);//redonner le déplacement spécial au joueur Pilote
                                 }
                             } else {                                                                //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                                 grille.setJoueurCourant(grille.getJoueurs().get(0));
                                 grille.getJoueurCourant().setNbPA(1);
                                 if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
-                                    grille.getJoueurCourant().setDeplacementSpePilote(false);           //redonner le déplacement spécial au joueur Pilote
+                                   grille.getJoueurCourant().setHelicoDispo(true);  
+                                   grille.getJoueurCourant().setDeplSpePilote(true);       //redonner le déplacement spécial au joueur Pilote
                                 }
                             }
                         }
@@ -358,9 +366,11 @@ public class VueAventurier {
                             if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                                 grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
                                 grille.getJoueurCourant().setNbPA(1);//prépare les pa du joueur suivant 
+                                grille.getJoueurCourant().setDeplSpePilote(true);
                             } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                                 grille.setJoueurCourant(grille.getJoueurs().get(0));
                                 grille.getJoueurCourant().setNbPA(1);
+                                grille.getJoueurCourant().setDeplSpePilote(true);
                             }
                         }
                     }
