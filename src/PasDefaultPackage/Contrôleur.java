@@ -1,12 +1,5 @@
 package PasDefaultPackage;
 
-
-import static PasDefaultPackage.TypeRole.explorateur;
-import static PasDefaultPackage.TypeRole.ingénieur;
-import static PasDefaultPackage.TypeRole.messager;
-import static PasDefaultPackage.TypeRole.navigateur;
-import static PasDefaultPackage.TypeRole.pilote;
-import static PasDefaultPackage.TypeRole.plongeur;
 import java.awt.Color;
 import java.util.*;
 import view.VueAventurier;
@@ -19,37 +12,37 @@ public class Contrôleur {
     private TasCartesInnondation cartesInnondation;
     private static boolean finPartie;
     private static Aventurier joueurCourant;
-    
+
     public static void main(String[] args) {
         //initialisation partie
         /*
         creer une autre vue
-        */
+         */
         grille = new Grille();
         //lancement partie
         finPartie = false;
         //window.setVisible(true);
         VueAventurier window = new VueAventurier(grille, Color.blue);
 //       
-        if(!finPartie){
-            
+        if (!finPartie) {
+
             grille.getJoueurCourant().setNbPA(1);
             int i = 1;
-            
-            while ( i <= grille.getnbJ()) {
-                    int nbpaPast = 1;
-                    if(grille.getJoueurCourant().getNbPA() != nbpaPast){
+
+            while (i <= grille.getnbJ()) {
+                int nbpaPast = 1;
+                if (grille.getJoueurCourant().getNbPA() != nbpaPast) {
                     window.peinture(grille, grille.getJoueurCourant(), Color.blue, finPartie);
-                     
                 }
-                   
+
             }
-                        
+
         } else {
             System.out.println("fin Partie!");
         }
-        
+
     }
+
     /**
      *
      * @param a
@@ -93,18 +86,15 @@ public class Contrôleur {
 
     }
 
-
     /**
      * @return the grille
      */
     public Grille getGrille() {
         return grille;
     }
-    
-    
-    
-    public void debutPartie(){
-        
+
+    public void debutPartie() {
+
     }
 
 }
