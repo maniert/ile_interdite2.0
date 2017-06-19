@@ -38,6 +38,7 @@ public class VueAventurier {
     private final JTextField position;
     private JButton[] bton = new JButton[36];
     private boolean white = false;
+    private static int nbmaxPa = 2;
 
     public VueAventurier(Grille grille, Color couleur) {
 
@@ -120,7 +121,6 @@ public class VueAventurier {
         btnDeplacer.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                
                 grille.getJoueurCourant().setHelicoDispo(false);
                 grille.getJoueurCourant().getTuileAssechable().clear();
                 plateau.removeAll();
@@ -150,19 +150,18 @@ public class VueAventurier {
             }
 
         });
-             if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote && grille.getJoueurCourant().isDeplSpePilote()) { // gestion du coup spécial du pilote
-                    btnAutreAction.addMouseListener(new MouseListener() {           //quand le pilote décide d'utiliser
+        
+             btnAutreAction.addMouseListener(new MouseListener() {           //quand le pilote décide d'utiliser
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            System.out.println("il est vrai queeeee// ");
+                            if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote && grille.getJoueurCourant().isDeplSpePilote()) { // gestion du coup spécial du pilote
                             grille.getJoueurCourant().setTuileAtteignable(grille);
                             plateau.removeAll();
                             white = true;                                                                       //A   COMPLETER
                             peinture(grille, grille.getJoueurCourant(), couleur, white);
                             grille.getJoueurCourant().setHelicoDispo(false);
-                            grille.getJoueurCourant().setDeplSpePilote(false);
+                            }
                         }
-
                         @Override
                         public void mousePressed(MouseEvent e) {
                         }
@@ -179,7 +178,7 @@ public class VueAventurier {
                         public void mouseExited(MouseEvent e) {
                         }
                     });
-                }
+                
             
            
 
@@ -221,10 +220,10 @@ public class VueAventurier {
                 if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                     if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                         grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                        grille.getJoueurCourant().setNbPA(1);//prépare les pa du joueur suivant 
+                        grille.getJoueurCourant().setNbPA(nbmaxPa);//prépare les pa du joueur suivant 
                     } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                         grille.setJoueurCourant(grille.getJoueurs().get(0));
-                        grille.getJoueurCourant().setNbPA(1);
+                        grille.getJoueurCourant().setNbPA(nbmaxPa);
                     }
                 }
                 window.setTitle(grille.getJoueurCourant().getNomJoueur());
@@ -303,6 +302,7 @@ public class VueAventurier {
 
                 }
             }
+            System.out.println(joueurCourant.getNbPA());
             if (white && joueurCourant.existedéjà(joueurCourant.getTuileAtteignable(), grille.getTuiles().get(i))) {
                 Tuile t = grille.getTuiles().get(i);
                 bton[i].addMouseListener(new MouseListener() {
@@ -312,18 +312,18 @@ public class VueAventurier {
                         plateau.removeAll();//efface le plateau
                         boolean white = false;//cache les possibilité de déplacement
                         peinture(grille, grille.getJoueurCourant(), couleur, white);//réaffiche le plateau
-                        joueurCourant.setNbPA(0);//retire un pa au joueur
+                        joueurCourant.setNbPA(joueurCourant.getNbPA() -1);//retire un pa au joueur
                         if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                             if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                                 grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                                grille.getJoueurCourant().setNbPA(1);//prépare les pa du joueur suivant 
+                                grille.getJoueurCourant().setNbPA(nbmaxPa);//prépare les pa du joueur suivant 
                                 if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
                                     grille.getJoueurCourant().setHelicoDispo(true);  
                                     grille.getJoueurCourant().setDeplSpePilote(true);//redonner le déplacement spécial au joueur Pilote
                                 }
                             } else {                                                                //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                                 grille.setJoueurCourant(grille.getJoueurs().get(0));
-                                grille.getJoueurCourant().setNbPA(1);
+                                grille.getJoueurCourant().setNbPA(nbmaxPa);
                                 if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
                                    grille.getJoueurCourant().setHelicoDispo(true);  
                                    grille.getJoueurCourant().setDeplSpePilote(true);       //redonner le déplacement spécial au joueur Pilote
@@ -361,15 +361,15 @@ public class VueAventurier {
                         plateau.removeAll();
                         boolean white = false;
                         peinture(grille, grille.getJoueurCourant(), couleur, white);
-                        joueurCourant.setNbPA(0);//retire un pa au joueur
+                        joueurCourant.setNbPA(joueurCourant.getNbPA() -1);//retire un pa au joueur
                         if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                             if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                                 grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                                grille.getJoueurCourant().setNbPA(1);//prépare les pa du joueur suivant 
+                                grille.getJoueurCourant().setNbPA(nbmaxPa);//prépare les pa du joueur suivant 
                                 grille.getJoueurCourant().setDeplSpePilote(true);
                             } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                                 grille.setJoueurCourant(grille.getJoueurs().get(0));
-                                grille.getJoueurCourant().setNbPA(1);
+                                grille.getJoueurCourant().setNbPA(nbmaxPa);
                                 grille.getJoueurCourant().setDeplSpePilote(true);
                             }
                         }

@@ -3,7 +3,7 @@ package PasDefaultPackage;
 import java.awt.Color;
 import java.util.*;
 import view.VueAventurier;
- 
+
 public class Contrôleur {
 
     private static Grille grille;
