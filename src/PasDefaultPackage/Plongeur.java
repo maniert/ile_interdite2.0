@@ -14,21 +14,33 @@ public class Plongeur extends Aventurier {
         this.tuilessouslocean = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param g
+     */
+    @Override
     public void setTuileAtteignable(Grille g) {
+        getTuilessouslocean().clear();
         getTuileAtteignable().clear();// vider l'arraylist avant de le remplir
-        deplacementPossiblebasique(g); //rentre les déplacements propre à tout les role
+        casePossiblebasique(g, this.getTuileAtteignable()); //rentre les déplacements propre à tout les role
         int i = 0;
         ArrayList<Tuile> mem = null;
-        while (i != this.getTuileAtteignable().size() + 1) {
+        while (i != this.getTuileAtteignable().size()) {
+            System.out.println("abricot");
             if (this.getTuileAtteignable().get(i).getEtat() == innondé || this.getTuileAtteignable().get(i).getEtat() == immergé) {
                 this.getTuilessouslocean().add(this.getTuileAtteignable().get(i));
+                i++;
             } else {
                 i++;
             }
             while (tuilessouslocean != mem) {
+                
+                System.out.println("pomme2");
                 mem = tuilessouslocean;
                 for (int j = 0; j < this.tuilessouslocean.size(); j++) {
+                    System.out.println("poire");
                     for (int k = 0; k < this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).size(); k++) {
+                        System.out.println("pèche");
                         if (!existedéjà(this.getTuileAtteignable(), this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).get(k))) {
                             this.getTuileAtteignable().add(this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).get(k));
                         } else if (!existedéjà(tuilessouslocean, this.tuilesAutour(innondé, this.tuilessouslocean.get(j), g).get(k))) {
@@ -56,14 +68,7 @@ public class Plongeur extends Aventurier {
         }
     }
 
-    public boolean existedéjà(ArrayList<Tuile> at, Tuile t) {
-        for (int i = 0; i < at.size(); i++) {
-            if (at.get(i) == t) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     public ArrayList<Tuile> tuilesAutour(Etat e, Tuile t, Grille g) {
         int x, y;

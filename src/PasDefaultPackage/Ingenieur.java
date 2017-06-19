@@ -9,9 +9,8 @@ public class Ingenieur extends Aventurier {
     }
 
     public void setTuileAssechable(Grille g) { // devra pouvoir selectionner 2 cases
-        int i = 0;
-        getTuileAssechable().clear();   
-        tuileAssechablebasique(g);
+        getTuileAssechable().clear();
+        casePossiblebasique(g, this.getTuileAtteignable());
         filtrageTuileAssechable(getTuileAssechable(), g); //filtrage null+innondé,immergé 
     }
 
