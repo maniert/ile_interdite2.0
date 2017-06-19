@@ -3,6 +3,7 @@ package PasDefaultPackage;
 import static PasDefaultPackage.Etat.immergé;
 import static PasDefaultPackage.Etat.innondé;
 import static PasDefaultPackage.Etat.sec;
+import static PasDefaultPackage.Etat.vide;
 import java.util.ArrayList;
 
 public class Plongeur extends Aventurier {
@@ -22,30 +23,32 @@ public class Plongeur extends Aventurier {
     public void setTuileAtteignable(Grille g) {
         getTuilessouslocean().clear();
         getTuileAtteignable().clear();// vider l'arraylist avant de le remplir
-        casePossiblebasique(g, this.getTuileAtteignable()); //rentre les déplacements propre à tout les role
-        int i = 0;
+        casePossiblebasique(g, this.getTuileAtteignable()); //rentre les déplacements propre à tout les roles
+        /*int i = 0;
         ArrayList<Tuile> mem = null;
-        while (i != this.getTuileAtteignable().size()) {
+        while (i < this.getTuileAtteignable().size()) {
             System.out.println("abricot");
-            if (this.getTuileAtteignable().get(i).getEtat() == innondé || this.getTuileAtteignable().get(i).getEtat() == immergé) {
-                this.getTuilessouslocean().add(this.getTuileAtteignable().get(i));
+            if (this.getTuileAtteignable().get(i).getEtat() == innondé || this.getTuileAtteignable().get(i).getEtat() == immergé) {//ajout la tuile numéro i a tuilesouslocean
+                this.tuilessouslocean.add(this.getTuileAtteignable().get(i));//si elle sont immergé ou innondé
+                System.out.println("framboise");
+                System.out.println(this.tuilessouslocean.size());
                 i++;
             } else {
                 i++;
             }
-            while (tuilessouslocean != mem) {
-                
-                System.out.println("...");
-                mem = tuilessouslocean;
+            while (this.tuilessouslocean != mem) {
+             
+                System.out.println("fraise");
+                System.out.println(this.tuilessouslocean.size());
                 for (int j = 0; j < this.tuilessouslocean.size(); j++) {
                     System.out.println("poire");
                     for (int k = 0; k < this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).size(); k++) {
                         System.out.println("pèche");
                         if (!existedéjà(this.getTuileAtteignable(), this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).get(k))) {
                             this.getTuileAtteignable().add(this.tuilesAutour(sec, this.tuilessouslocean.get(j), g).get(k));
-                        } else if (!existedéjà(tuilessouslocean, this.tuilesAutour(innondé, this.tuilessouslocean.get(j), g).get(k))) {
+                        } else if (!existedéjà(this.tuilessouslocean, this.tuilesAutour(innondé, this.tuilessouslocean.get(j), g).get(k))) {
                             this.tuilessouslocean.add(this.tuilesAutour(innondé, this.tuilessouslocean.get(j), g).get(k));
-                        } else if (!existedéjà(tuilessouslocean, this.tuilesAutour(immergé, this.tuilessouslocean.get(j), g).get(k))) {
+                        } else if (!existedéjà(this.tuilessouslocean, this.tuilesAutour(immergé, this.tuilessouslocean.get(j), g).get(k))) {
                             this.tuilessouslocean.add(this.tuilesAutour(immergé, this.tuilessouslocean.get(j), g).get(k));
                         }
                     }
@@ -54,13 +57,13 @@ public class Plongeur extends Aventurier {
 
         }
 
-        filtrageDeplacementPlongeur(getTuileAtteignable(), g); //filtrage null+innondé,immergé 
+        filtrageDeplacementPlongeur(getTuileAtteignable(), g); //filtrage null+innondé,immergé */
     }
 
     public void filtrageDeplacementPlongeur(ArrayList<Tuile> tuileAtteignable, Grille g) {
         int i = 0;
         while (i != this.getTuileAtteignable().size()) {
-            if (this.getTuileAtteignable().get(i) == null || this.getTuileAtteignable().get(i) == this.getTuile()) {
+            if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i) == this.getTuile()) {
                 this.getTuileAtteignable().remove(this.getTuileAtteignable().get(i));
             } else {
                 i++;
