@@ -1,6 +1,7 @@
 package PasDefaultPackage;
 
 import java.util.ArrayList;
+import view.Pion;
 
 public class Aventurier {
 
@@ -13,6 +14,7 @@ public class Aventurier {
     private ArrayList<Tuile> tuilesAtteignable;
     private ArrayList<Tuile> tuileAssechable;
     boolean deplacementSpePilote;
+  
 
     public Aventurier(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
         this.nomJoueur = nomJoueur;

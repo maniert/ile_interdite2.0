@@ -1,5 +1,6 @@
 package PasDefaultPackage;
 
+
 import static PasDefaultPackage.TypeRole.explorateur;
 import static PasDefaultPackage.TypeRole.ingénieur;
 import static PasDefaultPackage.TypeRole.messager;
@@ -105,8 +106,10 @@ public class Contrôleur {
         g.getTuiles().add(t35);
         g.getTuiles().add(t36);
 
-        Aventurier av1 = new Aventurier("le Prof", ingénieur, 0, t4, null);
-        t4.getAventuriers().add(av1);
+               
+           Aventurier av1 = new Aventurier("le Prof", ingénieur, 0, t4, null);
+        
+     t4.getAventuriers().add(av1);
         Aventurier av2 = new Aventurier("Thibaud", plongeur, 0, t9, null);
         t9.getAventuriers().add(av2);
         Aventurier av3 = new Aventurier("Alexis", navigateur, 0, t10, null);
@@ -118,10 +121,9 @@ public class Contrôleur {
         Aventurier av6 = new Aventurier("l'autre Prof", explorateur, 0, t17, null);
         t14.getAventuriers().add(av6);
 
-        VueAventurier window = new VueAventurier(g, av1, Color.blue);
         
         
-        
+         VueAventurier window = new VueAventurier(g, av1, Color.blue);
     
         
         
