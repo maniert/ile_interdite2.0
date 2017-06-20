@@ -117,7 +117,7 @@ public class VueAventurier {
         this.panelBoutons.add(btnActionSpecial);
         this.panelBoutons.add(btnDonnerTresor);
         this.panelBoutons.add(btnTerminerTour);
-
+            
         peinture(grille, grille.getJoueurCourant(), couleur, white);
 
         this.mainJoueur.add(new JButton(""));
@@ -222,6 +222,7 @@ public class VueAventurier {
         btnTerminerTour.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
+                grille.getJoueurCourant().setNbPA(0);
                 m.type = TypesMessages.FIN_TOUR;
                 o.traiterMessage(m);
                 window.setTitle(grille.getJoueurCourant().getNomJoueur());
@@ -258,47 +259,11 @@ public class VueAventurier {
             this.plateau.add(btnGrille[i]);
             btnGrille[i].setText(grille.getTuiles().get(i).getNomTuile());
             btnGrille[i].setBackground(CouleurTuile(grille.getTuiles().get(i)));
-
-            for (int j = 0; j < grille.getTuiles().get(i).getAventuriers().size(); j++) {
-                if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
-                    switch (grille.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
-                        case plongeur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pPlong = new Pion(TypeRole.plongeur, Color.BLACK, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pPlong);    //Afficher le bon pion sur la tuile
-                            break;
-                        case explorateur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pExplo = new Pion(TypeRole.explorateur, Color.GREEN, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pExplo);
-                            break;
-                        case ingénieur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pInge = new Pion(TypeRole.ingénieur, Color.RED, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pInge);
-                            break;
-                        case messager:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pMess = new Pion(TypeRole.messager, Color.ORANGE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pMess);
-                            break;
-                        case navigateur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pNav = new Pion(TypeRole.navigateur, Color.YELLOW, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pNav);
-                            break;
-                        case pilote:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pPilo = new Pion(TypeRole.pilote, Color.BLUE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pPilo);
-                            break;
-                        default:
-                            break;
-                    }
-
-                }
-            }
-            System.out.println(joueurCourant.getNbPA());
+            
+            creationPion(grille,i);
+            
+            
+            
             if (white && joueurCourant.existedéjà(joueurCourant.getTuileAtteignable(), grille.getTuiles().get(i))) {
                 Tuile t = grille.getTuiles().get(i);
                 btnGrille[i].addMouseListener(new MouseListener() {
@@ -417,5 +382,46 @@ public class VueAventurier {
             return Color.GRAY;
         }
     }
+    
+    public void creationPion(Grille grille, int i){
+            for (int j = 0; j < grille.getTuiles().get(i).getAventuriers().size(); j++) {
+                if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
+                    switch (grille.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
+                        case plongeur:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
+                            Pion pPlong = new Pion(TypeRole.plongeur, Color.BLACK, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                            btnGrille[i].add(pPlong);    //Afficher le bon pion sur la tuile
+                            break;
+                        case explorateur:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
+                            Pion pExplo = new Pion(TypeRole.explorateur, Color.GREEN, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                            btnGrille[i].add(pExplo);
+                            break;
+                        case ingénieur:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
+                            Pion pInge = new Pion(TypeRole.ingénieur, Color.RED, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                            btnGrille[i].add(pInge);
+                            break;
+                        case messager:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
+                            Pion pMess = new Pion(TypeRole.messager, Color.ORANGE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                            btnGrille[i].add(pMess);
+                            break;
+                        case navigateur:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
+                            Pion pNav = new Pion(TypeRole.navigateur, Color.YELLOW, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                            btnGrille[i].add(pNav);
+                            break;
+                        case pilote:
+                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
+                            Pion pPilo = new Pion(TypeRole.pilote, Color.BLUE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                            btnGrille[i].add(pPilo);
+                            break;
+                        default:
+                            break;
+                    }
 
-}
+                }
+            }
+        }
+    }

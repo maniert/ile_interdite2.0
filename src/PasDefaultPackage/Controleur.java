@@ -14,7 +14,7 @@ public class Controleur implements Observateur {
     private TasCartesTrésor cartesTresor;
     private TasCartesInnondation cartesInnondation;
     private static boolean finPartie;
-    private static int nbmaxPa = 2;
+    private static int nbmaxPa = 3;
 
     public Controleur() {
         //initialisation partie
@@ -26,14 +26,14 @@ public class Controleur implements Observateur {
         finPartie = false;
         //window.setVisible(true);
         VueAventurier window = new VueAventurier(grille, Color.blue, this);
-//       
+//
         if (!finPartie) {
 
             grille.getJoueurCourant().setNbPA(nbmaxPa);
             int i = 1;
 
             while (i <= grille.getnbJ()) {
-                int nbpaPast = 2;
+                int nbpaPast = nbmaxPa;
                 if (grille.getJoueurCourant().getNbPA() != nbpaPast) {
                     window.peinture(grille, grille.getJoueurCourant(), Color.blue, finPartie);
                 }
@@ -72,26 +72,22 @@ public class Controleur implements Observateur {
 
                 if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote && grille.getJoueurCourant().isDeplSpePilote()) { // gestion du coup spécial du pilote
                     grille.getJoueurCourant().setTuileAtteignable(grille);
-                    grille.getJoueurCourant().setHelicoDispo(false);
+                    grille.getJoueurCourant().setDeplSpePilote(false);
                 }
                 break;
             case FIN_TOUR:
-                grille.getJoueurCourant().setNbPA(0);
                 if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                     if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                         grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                        grille.getJoueurCourant().setNbPA(getNbmaxPa());//prépare les pa du joueur suivant 
-                        if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
-                            grille.getJoueurCourant().setHelicoDispo(true);
-                            grille.getJoueurCourant().setDeplSpePilote(true);//redonner le déplacement spécial au joueur Pilote
-                        }
+                        grille.getJoueurCourant().setNbPA(getNbmaxPa());//prépare les pa du joueur suivant
                     } else {                                                    //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                         grille.setJoueurCourant(grille.getJoueurs().get(0));
                         grille.getJoueurCourant().setNbPA(getNbmaxPa());
-                        if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
-                            grille.getJoueurCourant().setHelicoDispo(true);
-                            grille.getJoueurCourant().setDeplSpePilote(true);   //redonner le déplacement spécial au joueur Pilote
-                        }
+
+                    }
+                    if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
+                        grille.getJoueurCourant().setHelicoDispo(true);
+                        grille.getJoueurCourant().setDeplSpePilote(true);   //redonner le déplacement spécial au joueur Pilote
                     }
                 }
 
@@ -173,8 +169,8 @@ public class Controleur implements Observateur {
     /**
      * @param aNbmaxPa the nbmaxPa to set
      */
-    public static void setNbmaxPa(int aNbmaxPa) {
-        nbmaxPa = aNbmaxPa;
+    public static void setNbmaxPa(int nbmaxPa) {
+        nbmaxPa = nbmaxPa;
     }
 
 }
