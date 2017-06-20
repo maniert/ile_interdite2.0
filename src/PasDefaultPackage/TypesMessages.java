@@ -10,7 +10,15 @@ package PasDefaultPackage;
  * @author maniert
  */
 public enum TypesMessages {
-        Demarrer_Partie,
-        
+    DEMARRER_PARTIE,
+    DEMANDE_DEPLACEMENT,
+    DEMANDE_ASSECHEMENT,
+    DEPLACEMENT_SPE,
+    ASSECHEMENT_SPE,
+    FIN_PARTIE,
+    FIN_TOUR,
+    TIRER_CARTES_TRESOR,
+    DEPLACER,
+    ASSECHER;
 
 }

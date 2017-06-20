@@ -3,8 +3,11 @@ package view;
 import PasDefaultPackage.Aventurier;
 import PasDefaultPackage.Etat;
 import PasDefaultPackage.Grille;
+import PasDefaultPackage.Message;
+import PasDefaultPackage.Observateur;
 import PasDefaultPackage.Tuile;
 import PasDefaultPackage.TypeRole;
+import PasDefaultPackage.TypesMessages;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -22,7 +25,7 @@ import javax.swing.border.MatteBorder;
 
 public class VueAventurier {
 
-  
+    private Observateur o;
     private final JPanel panelBoutons;
     private final JPanel mainAutresJoueurs;
     private JPanel plateau;
@@ -41,10 +44,11 @@ public class VueAventurier {
     private JButton[] btnMainAutresJoueurs = new JButton[15];
     private JButton[] btnMainJoueur = new JButton[5];
     private boolean white = false;
-    private static int nbmaxPa = 2;
+    private Message m;
 
-    public VueAventurier(Grille grille, Color couleur) {
-
+    public VueAventurier(Grille grille, Color couleur, Observateur obs) {
+        m = new Message();
+        this.o = obs;
         this.window = new JFrame();
         window.setSize(1080, 720);
 
@@ -128,17 +132,14 @@ public class VueAventurier {
         btnDeplacer.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                grille.getJoueurCourant().setHelicoDispo(false);
-                grille.getJoueurCourant().getTuileAssechable().clear();
-                plateau.removeAll();
                 white = false;
-                peinture(grille, grille.getJoueurCourant(), couleur, white);
-
-                grille.getJoueurCourant().setTuileAtteignable(grille);
                 plateau.removeAll();
-                white = true;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
-                grille.getJoueurCourant().setHelicoDispo(true);
+                m.type = TypesMessages.DEMANDE_DEPLACEMENT;
+                o.traiterMessage(m);
+                white = true;
+                plateau.removeAll();
+                peinture(grille, grille.getJoueurCourant(), couleur, white);
             }
 
             @Override
@@ -158,49 +159,46 @@ public class VueAventurier {
             }
 
         });
-        
-             btnActionSpecial.addMouseListener(new MouseListener() {           //quand le pilote décide d'utiliser
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote && grille.getJoueurCourant().isDeplSpePilote()) { // gestion du coup spécial du pilote
-                            grille.getJoueurCourant().setTuileAtteignable(grille);
-                            plateau.removeAll();
-                            white = true;                                                                       //A   COMPLETER
-                            peinture(grille, grille.getJoueurCourant(), couleur, white);
-                            grille.getJoueurCourant().setHelicoDispo(false);
-                            }
-                        }
-                        @Override
-                        public void mousePressed(MouseEvent e) {
-                        }
 
-                        @Override
-                        public void mouseReleased(MouseEvent e) {
-                        }
+        btnActionSpecial.addMouseListener(new MouseListener() {           //quand le pilote décide d'utiliser
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                m.type = TypesMessages.DEPLACEMENT_SPE;
+                o.traiterMessage(m);
+                plateau.removeAll();
+                white = true;
+                peinture(grille, grille.getJoueurCourant(), couleur, white);
+            }
 
-                        @Override
-                        public void mouseEntered(MouseEvent e) {
-                        }
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
 
-                        @Override
-                        public void mouseExited(MouseEvent e) {
-                        }
-                    });
-                
-            
-           
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
 
         btnAssecher.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                grille.getJoueurCourant().getTuileAtteignable().clear();
                 plateau.removeAll();
                 white = false;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
-                grille.getJoueurCourant().setTuileAssechable(grille);
+                m.type = TypesMessages.DEMANDE_ASSECHEMENT;
+                o.traiterMessage(m);
                 plateau.removeAll();
                 white = true;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
+
             }
 
             @Override
@@ -224,19 +222,9 @@ public class VueAventurier {
         btnTerminerTour.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                grille.getJoueurCourant().setNbPA(0);
-                if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
-                    if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
-                        grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                        grille.getJoueurCourant().setNbPA(getNbmaxPa());//prépare les pa du joueur suivant 
-                    } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
-                        grille.setJoueurCourant(grille.getJoueurs().get(0));
-                        grille.getJoueurCourant().setNbPA(getNbmaxPa());
-                    }
-                }
+                m.type = TypesMessages.FIN_TOUR;
+                o.traiterMessage(m);
                 window.setTitle(grille.getJoueurCourant().getNomJoueur());
-                grille.getJoueurCourant().getTuileAssechable().clear();
-                grille.getJoueurCourant().getTuileAtteignable().clear();
                 plateau.removeAll();
                 white = false;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
@@ -316,28 +304,15 @@ public class VueAventurier {
                 btnGrille[i].addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        joueurCourant.deplacement(t);//change la tuile du joueur et enleve le joueur de la tuile
+
+                        joueurCourant.deplacement(t);
+                        m.type = TypesMessages.DEPLACER;
+                        o.traiterMessage(m);
                         plateau.removeAll();//efface le plateau
                         boolean white = false;//cache les possibilité de déplacement
                         peinture(grille, grille.getJoueurCourant(), couleur, white);//réaffiche le plateau
-                        joueurCourant.setNbPA(joueurCourant.getNbPA() -1);//retire un pa au joueur
-                        if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
-                            if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
-                                grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                                grille.getJoueurCourant().setNbPA(getNbmaxPa());//prépare les pa du joueur suivant 
-                                if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
-                                    grille.getJoueurCourant().setHelicoDispo(true);
-                                    grille.getJoueurCourant().setDeplSpePilote(true);//redonner le déplacement spécial au joueur Pilote
-                                }
-                            } else {                                                                //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
-                                grille.setJoueurCourant(grille.getJoueurs().get(0));
-                                grille.getJoueurCourant().setNbPA(getNbmaxPa());
-                                if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
-                                    grille.getJoueurCourant().setHelicoDispo(true);
-                                    grille.getJoueurCourant().setDeplSpePilote(true);       //redonner le déplacement spécial au joueur Pilote
-                                }
-                            }
-                        }
+                        m.type = TypesMessages.FIN_TOUR;
+                        o.traiterMessage(m);
                         window.setTitle(grille.getJoueurCourant().getNomJoueur());
                     }
 
@@ -366,23 +341,17 @@ public class VueAventurier {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         joueurCourant.assecher(t);
+                        m.type = TypesMessages.ASSECHER;
+                        o.traiterMessage(m);
                         plateau.removeAll();
                         boolean white = false;
                         peinture(grille, grille.getJoueurCourant(), couleur, white);
-                        joueurCourant.setNbPA(joueurCourant.getNbPA() -1);//retire un pa au joueur
-                        if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
-                            if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
-                                grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                                grille.getJoueurCourant().setNbPA(getNbmaxPa());//prépare les pa du joueur suivant 
-                                grille.getJoueurCourant().setDeplSpePilote(true);
-                            } else { //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
-                                grille.setJoueurCourant(grille.getJoueurs().get(0));
-                                grille.getJoueurCourant().setNbPA(getNbmaxPa());
-                                grille.getJoueurCourant().setDeplSpePilote(true);
-                            }
-                        }
+                        m.type = TypesMessages.FIN_TOUR;
+                        o.traiterMessage(m);
+                        window.setTitle(grille.getJoueurCourant().getNomJoueur());
                     }
-;
+
+                    ;
                     @Override
                     public void mousePressed(MouseEvent e) {
                     }
@@ -448,20 +417,5 @@ public class VueAventurier {
             return Color.GRAY;
         }
     }
-    
-      /**
-     * @return the nbmaxPa
-     */
-    public static int getNbmaxPa() {
-        return nbmaxPa;
-    }
-
-    /**
-     * @param aNbmaxPa the nbmaxPa to set
-     */
-    public static void setNbmaxPa(int aNbmaxPa) {
-        nbmaxPa = aNbmaxPa;
-    }
-
 
 }
