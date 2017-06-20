@@ -22,20 +22,7 @@ import javax.swing.border.MatteBorder;
 
 public class VueAventurier {
 
-    /**
-     * @return the nbmaxPa
-     */
-    public static int getNbmaxPa() {
-        return nbmaxPa;
-    }
-
-    /**
-     * @param aNbmaxPa the nbmaxPa to set
-     */
-    public static void setNbmaxPa(int aNbmaxPa) {
-        nbmaxPa = aNbmaxPa;
-    }
-
+  
     private final JPanel panelBoutons;
     private final JPanel mainAutresJoueurs;
     private JPanel plateau;
@@ -461,5 +448,20 @@ public class VueAventurier {
             return Color.GRAY;
         }
     }
+    
+      /**
+     * @return the nbmaxPa
+     */
+    public static int getNbmaxPa() {
+        return nbmaxPa;
+    }
+
+    /**
+     * @param aNbmaxPa the nbmaxPa to set
+     */
+    public static void setNbmaxPa(int aNbmaxPa) {
+        nbmaxPa = aNbmaxPa;
+    }
+
 
 }
