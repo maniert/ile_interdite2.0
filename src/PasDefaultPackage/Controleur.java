@@ -3,6 +3,7 @@ package PasDefaultPackage;
 import java.awt.Color;
 import java.util.*;
 import view.VueAventurier;
+import view.VueInscription;
 
 public class Controleur implements Observateur {
 
@@ -25,7 +26,7 @@ public class Controleur implements Observateur {
         //lancement partie
         finPartie = false;
         //window.setVisible(true);
-        VueAventurier window = new VueAventurier(grille, Color.blue, this);
+        VueAventurier window = new VueAventurier(grille, Color.white, this);
 //
         if (!finPartie) {
 
@@ -44,8 +45,8 @@ public class Controleur implements Observateur {
             System.out.println("fin Partie!");
         }
 
-    }
-
+     
+}
     @Override
     public void traiterMessage(Message msg) {
 
@@ -71,7 +72,7 @@ public class Controleur implements Observateur {
 
             case DEPLACEMENT_SPE:
 
-                if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote && grille.getJoueurCourant().isDeplSpePilote()) { // gestion du coup spécial du pilote
+                if (grille.getJoueurCourant().getTypeRole() == TypeRole.Pilote && grille.getJoueurCourant().isDeplSpePilote()) { // gestion du coup spécial du pilote
                     grille.getJoueurCourant().setTuileAtteignable(grille);
                     grille.getJoueurCourant().setDeplSpePilote(false);
                 }
@@ -86,7 +87,7 @@ public class Controleur implements Observateur {
                         grille.getJoueurCourant().setNbPA(getNbmaxPa());
 
                     }
-                    if (grille.getJoueurCourant().getTypeRole() == TypeRole.pilote) {
+                    if (grille.getJoueurCourant().getTypeRole() == TypeRole.Pilote) {
                         grille.getJoueurCourant().setHelicoDispo(true);
                         grille.getJoueurCourant().setDeplSpePilote(true);   //redonner le déplacement spécial au joueur Pilote
                     }
