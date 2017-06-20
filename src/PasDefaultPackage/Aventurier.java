@@ -7,7 +7,7 @@ public class Aventurier {
 
     private String nomJoueur;
     private TypeRole typeRole;
-    private int nbPA = 1;
+    private int nbPA = 2;
     private int idaventurier;
     private Tuile t;
     private ArrayList<Carte> main;

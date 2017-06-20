@@ -31,12 +31,13 @@ public class Plongeur extends Aventurier {
                 getTuilessouslocean().add(getTuileAtteignable().get(i));
             }
                 i++;
-            }    
+            }  
+        
             ArrayList<Tuile> mem = new ArrayList<>();
                 while (mem != this.getTuileAtteignable() ) {
                     mem = this.getTuileAtteignable();
                     int k = 0;
-                    while (k < getTuilessouslocean().size()-1) {
+                    while (k <= getTuilessouslocean().size()-1) {
                     for (int j = 0; j <= tuilesAutour(sec, getTuilessouslocean().get(k), grille).size()-1; j++) {
                        System.out.println("sec");
                         if (!existedéjà(getTuileAtteignable(), tuilesAutour(sec, getTuilessouslocean().get(k), grille).get(j)) && existedéjà(grille.getTuiles(), this.tuilesAutour(sec, this.tuilessouslocean.get(k), grille).get(j))) {
@@ -55,7 +56,7 @@ public class Plongeur extends Aventurier {
                             getTuilessouslocean().add(this.tuilesAutour(immergé, this.tuilessouslocean.get(k), grille).get(j));
                         }
                     }
-                    
+                    k++;
                 }
                 filtrageDeplacementPlongeur(getTuileAtteignable(), grille); //filtrage null+innondé,immergé
             }
