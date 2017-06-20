@@ -3,7 +3,6 @@ package PasDefaultPackage;
 import java.awt.Color;
 import java.util.*;
 import view.VueAventurier;
-import view.VueInscription;
 
 public class Controleur implements Observateur {
 
@@ -45,8 +44,8 @@ public class Controleur implements Observateur {
             System.out.println("fin Partie!");
         }
 
-     
-}
+    }
+
     @Override
     public void traiterMessage(Message msg) {
 
@@ -102,7 +101,7 @@ public class Controleur implements Observateur {
                 break;
 
             case ASSECHER:
-                if (grille.getJoueurCourant().getTypeRole() == TypeRole.ingénieur) {
+                if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
                     ((Ingenieur) grille.getJoueurCourant()).getAssechInge().add(msg.getIndiceTuile());
                     if (grille.getJoueurCourant().getIngeasseche() == 0) {
                         grille.getJoueurCourant().setIngeasseche(grille.getJoueurCourant().getIngeasseche() + 1);

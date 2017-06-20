@@ -1,21 +1,12 @@
 package PasDefaultPackage;
 
-<<<<<<< HEAD
-import static PasDefaultPackage.TypeRole.explorateur;
-import static PasDefaultPackage.TypeRole.ingénieur;
-import static PasDefaultPackage.TypeRole.messager;
-import static PasDefaultPackage.TypeRole.pilote;
-import static PasDefaultPackage.TypeRole.plongeur;
-=======
->>>>>>> master
-import java.util.ArrayList;
-import java.util.HashMap;
-import static PasDefaultPackage.TypeRole.Pilote;
-import static PasDefaultPackage.TypeRole.Plongeur;
 import static PasDefaultPackage.TypeRole.Explorateur;
 import static PasDefaultPackage.TypeRole.Ingénieur;
 import static PasDefaultPackage.TypeRole.Messager;
-import static PasDefaultPackage.TypeRole.Navigateur;
+import static PasDefaultPackage.TypeRole.Pilote;
+import static PasDefaultPackage.TypeRole.Plongeur;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Grille {
 
@@ -135,23 +126,12 @@ public class Grille {
         this.getTuiles().add(t35);
         this.getTuiles().add(t36);
 
-<<<<<<< HEAD
-        Aventurier av1 = new Ingenieur("le Prof", ingénieur, 0, this.getTuiles().get(3), null);//correspond à t4
-        Aventurier av2 = new Plongeur("Thibaud", plongeur, 0, this.getTuiles().get(3), null);//correspond à t9
-        // Aventurier av3 = new Navigateur("Alexis", navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
-        Aventurier av4 = new Messager("Mathilde", messager, 0, this.getTuiles().get(13), null);//correspond à t14
-        Aventurier av5 = new Pilote("Sami", pilote, 0, this.getTuiles().get(15), null);//correspond à t16
-        Aventurier av6 = new Explorateur("l'autre Prof", explorateur, 0, this.getTuiles().get(16), null);//correspond à t17
-=======
         Aventurier av1 = new Ingenieur("le Prof", Ingénieur, 0, this.getTuiles().get(3), null);//correspond à t4
         Aventurier av2 = new Plongeur("Thibaud", Plongeur, 0, this.getTuiles().get(8), null);//correspond à t9
-        Aventurier av3 = new Navigateur("Alexis", Navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
+        // Aventurier av3 = new Navigateur("Alexis", Navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
         Aventurier av4 = new Messager("Mathilde", Messager, 0, this.getTuiles().get(13), null);//correspond à t14
         Aventurier av5 = new Pilote("Sami", Pilote, 0, this.getTuiles().get(15), null);//correspond à t16
         Aventurier av6 = new Explorateur("l'autre Prof", Explorateur, 0, this.getTuiles().get(16), null);//correspond à t17
->>>>>>> master
-
-        //à gerer dans le controleur via un attribut
         joueurs.put(1, av1);
         joueurs.put(2, av2);
         //  joueurs.put(3, av3);

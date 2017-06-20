@@ -6,8 +6,8 @@ import PasDefaultPackage.Grille;
 import PasDefaultPackage.Message;
 import PasDefaultPackage.Observateur;
 import PasDefaultPackage.Tuile;
-import PasDefaultPackage.TypeRole;
 import PasDefaultPackage.TypeFigurine;
+import PasDefaultPackage.TypeRole;
 import PasDefaultPackage.TypesMessages;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -46,7 +46,7 @@ public class VueAventurier {
     private JButton[] btnMainJoueur = new JButton[5];
     private boolean white = false;
     private Message m;
-    private JLabel jl ;
+    private JLabel jl;
 
     public VueAventurier(Grille grille, Color couleur, Observateur obs) {
         m = new Message();
@@ -64,7 +64,7 @@ public class VueAventurier {
         // =================================================================================
         // NORD : le titre = nom de l'aventurier + nom du joueur sur la couleurActive du pion
         this.panelAventurier = new JPanel();
-        mainPanel.add(panelAventurier, BorderLayout.NORTH); 
+        mainPanel.add(panelAventurier, BorderLayout.NORTH);
 
         // =================================================================================
         // CENTRE : 1 ligne pour position courante
@@ -117,11 +117,8 @@ public class VueAventurier {
         this.panelBoutons.add(btnActionSpecial);
         this.panelBoutons.add(btnDonnerTresor);
         this.panelBoutons.add(btnTerminerTour);
-<<<<<<< HEAD
-=======
+
         jl = new JLabel(grille.getJoueurCourant().getTypeRole().toString(), CENTER);
-       
->>>>>>> master
 
         peinture(grille, grille.getJoueurCourant(), couleur, white);
 
@@ -258,38 +255,25 @@ public class VueAventurier {
     }
 
     public void peinture(Grille grille, Aventurier joueurCourant, Color couleur, boolean white) {
-<<<<<<< HEAD
+
         Tuile premiereTuile;
-=======
-         
         panelAventurier.remove(jl);
         jl = new JLabel(grille.getJoueurCourant().getTypeRole().toString(), CENTER);
         jl.setForeground(Color.white);
         panelAventurier.add(jl);
 
-        
         panelAventurier.setBackground(donnerCouleur(grille.getJoueurCourant()));
->>>>>>> master
         for (int i = 0; i <= 35; i++) {
             //this.plateau.add(new JButton(g.getTuiles().get(indiceTuile).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(indiceTuile)));
             btnGrille[i] = new JButton();
             this.plateau.add(btnGrille[i]);
             btnGrille[i].setText(grille.getTuiles().get(i).getNomTuile());
             btnGrille[i].setBackground(CouleurTuile(grille.getTuiles().get(i)));
-<<<<<<< HEAD
 
             creationPion(grille, i);
 
-=======
-            
-            creationPion(grille,i);
             creationTuileTresor(grille, i);
-            
-            
-            
-            
-            
->>>>>>> master
+
             if (white && joueurCourant.existedéjà(joueurCourant.getTuileAtteignable(), grille.getTuiles().get(i))) {
                 Tuile t = grille.getTuiles().get(i);
                 btnGrille[i].addMouseListener(new MouseListener() {
@@ -328,7 +312,7 @@ public class VueAventurier {
                 });
             } else if (white && joueurCourant.existedéjà(joueurCourant.getTuileAssechable(), grille.getTuiles().get(i))) {
                 Tuile t = grille.getTuiles().get(i);
-                if (grille.getJoueurCourant().getTypeRole() == TypeRole.ingénieur) {
+                if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
                     m.setIndiceTuile(i);
                     m.type = TypesMessages.ASSECHER;
                     o.traiterMessage(m);
@@ -337,7 +321,7 @@ public class VueAventurier {
                 btnGrille[i].addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (grille.getJoueurCourant().getTypeRole() == TypeRole.ingénieur) {
+                        if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
                             t.setEtat(Etat.selectionné);
                             plateau.removeAll();
                             boolean white = true;
@@ -402,10 +386,6 @@ public class VueAventurier {
 
         }
 
-        
-        
-        
-
     }
 
     public JButton getBtnAutreAction() {
@@ -448,82 +428,41 @@ public class VueAventurier {
             return Color.BLACK;
         }
     }
-<<<<<<< HEAD
-=======
-    
-    public void creationPion(Grille grille, int i){
-        
-            for (int j = 0; j < grille.getTuiles().get(i).getAventuriers().size(); j++) {
-                if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
-                    switch (grille.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
-                        
-                        case Plongeur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pPlong = new Pion(TypeRole.Plongeur, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)),  grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pPlong);    //Afficher le bon pion sur la tuile
-                            break;
-                        case Explorateur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pExplo = new Pion(TypeRole.Explorateur, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)), grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pExplo);
-                            break;
-                        case Ingénieur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pInge = new Pion(TypeRole.Ingénieur, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)), grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pInge);
-                            break;
-                        case Messager:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pMess = new Pion(TypeRole.Messager, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)),  grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pMess);
-                            break;
-                        case Navigateur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pNav = new Pion(TypeRole.Navigateur,donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)), grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pNav);
-                            break;
-                        case Pilote:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pPilo = new Pion(TypeRole.Pilote, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)),  grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pPilo);
-                            break;
-                        default:
-                            break;
-                    }
->>>>>>> master
 
     public void creationPion(Grille grille, int i) {
+
         for (int j = 0; j < grille.getTuiles().get(i).getAventuriers().size(); j++) {
             if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
                 switch (grille.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
-                    case plongeur:
+
+                    case Plongeur:
                         //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
-                        Pion pPlong = new Pion(TypeRole.plongeur, Color.BLACK, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        Pion pPlong = new Pion(TypeRole.Plongeur, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)), grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                         btnGrille[i].add(pPlong);    //Afficher le bon pion sur la tuile
                         break;
-                    case explorateur:
+                    case Explorateur:
                         //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
-                        Pion pExplo = new Pion(TypeRole.explorateur, Color.GREEN, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        Pion pExplo = new Pion(TypeRole.Explorateur, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)), grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                         btnGrille[i].add(pExplo);
                         break;
-                    case ingénieur:
+                    case Ingénieur:
                         //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
-                        Pion pInge = new Pion(TypeRole.ingénieur, Color.RED, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        Pion pInge = new Pion(TypeRole.Ingénieur, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)), grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                         btnGrille[i].add(pInge);
                         break;
-                    case messager:
+                    case Messager:
                         //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
-                        Pion pMess = new Pion(TypeRole.messager, Color.ORANGE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        Pion pMess = new Pion(TypeRole.Messager, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)), grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                         btnGrille[i].add(pMess);
                         break;
-                    case navigateur:
+                    case Navigateur:
                         //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
-                        Pion pNav = new Pion(TypeRole.navigateur, Color.YELLOW, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        Pion pNav = new Pion(TypeRole.Navigateur, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)), grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                         btnGrille[i].add(pNav);
                         break;
-                    case pilote:
+                    case Pilote:
                         //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
-                        Pion pPilo = new Pion(TypeRole.pilote, Color.BLUE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        Pion pPilo = new Pion(TypeRole.Pilote, donnerCouleur(grille.getTuiles().get(i).getAventuriers().get(j)), grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
                         btnGrille[i].add(pPilo);
                         break;
                     default:
@@ -531,48 +470,48 @@ public class VueAventurier {
                 }
 
             }
+
         }
-    
-        public void creationTuileTresor(Grille grille, int i) {
-            System.out.println(i);
-            switch (grille.getTuiles().get(i).getFigure()) {
-            case la_Pierre_sacrée :
+    }
+
+    public void creationTuileTresor(Grille grille, int i) {
+        System.out.println(i);
+        switch (grille.getTuiles().get(i).getFigure()) {
+            case la_Pierre_sacrée:
                 Tresor tsacrée = new Tresor(TypeFigurine.la_Pierre_sacrée, Color.GRAY);
-                btnGrille[i].add(tsacrée);     
+                btnGrille[i].add(tsacrée);
                 break;
-            case la_Statue_du_Zéphyr :
+            case la_Statue_du_Zéphyr:
                 Tresor tzeph = new Tresor(TypeFigurine.la_Statue_du_Zéphyr, Color.orange);
-                btnGrille[i].add(tzeph);   
+                btnGrille[i].add(tzeph);
                 break;
-	case le_Calice_de_londe :
+            case le_Calice_de_londe:
                 Tresor tlonde = new Tresor(TypeFigurine.le_Calice_de_londe, Color.blue);
-                btnGrille[i].add(tlonde);   
-            break;
-        case le_Cristal_Ardent :
-            Tresor tcrist = new Tresor(TypeFigurine.le_Cristal_Ardent, Color.RED);
-                btnGrille[i].add(tcrist);   
-            break;
+                btnGrille[i].add(tlonde);
+                break;
+            case le_Cristal_Ardent:
+                Tresor tcrist = new Tresor(TypeFigurine.le_Cristal_Ardent, Color.RED);
+                btnGrille[i].add(tcrist);
+                break;
         }
-        } 
-        
-        
-        public Color donnerCouleur(Aventurier a){
-            switch (a.getTypeRole()){
-                case Explorateur:
-                    return Color.GREEN;
-                case Pilote:
-                    return Color.BLUE;
-                case Plongeur:
-                    return Color.BLACK;
-                case Navigateur:
-                    return Color.pink;
-                case Messager:
-                    return Color.ORANGE;
-                case Ingénieur:
-                    return Color.RED;
-            }
-            return Color.cyan;
-                    
+    }
+
+    public Color donnerCouleur(Aventurier a) {
+        switch (a.getTypeRole()) {
+            case Explorateur:
+                return Color.GREEN;
+            case Pilote:
+                return Color.BLUE;
+            case Plongeur:
+                return Color.BLACK;
+            case Navigateur:
+                return Color.pink;
+            case Messager:
+                return Color.ORANGE;
+            case Ingénieur:
+                return Color.RED;
         }
+        return Color.cyan;
+
     }
 }
