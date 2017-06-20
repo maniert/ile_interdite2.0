@@ -1,10 +1,11 @@
 package PasDefaultPackage;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 import java.awt.Color;
 import java.util.*;
 import view.VueAventurier;
 
-public class Contrôleur {
+public class Contrôleur implements Observateur {
 
     private static Grille grille;
     private Collection<Aventurier> aventuriers;
@@ -40,6 +41,11 @@ public class Contrôleur {
         } else {
             System.out.println("fin Partie!");
         }
+
+    }
+
+    @Override
+    public void traiterMessage(Message msg) {
 
     }
 
