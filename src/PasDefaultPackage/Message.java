@@ -12,7 +12,7 @@ package PasDefaultPackage;
 public class Message {
 
     public TypesMessages type;  // type de message
-    public String joueur;  // Champ utilisé pour le message DEMARRER_PARTIE
-    public int no_case;       // Champ utilisé pour le message JOUER_COUP
+    public String joueur;  // Champ utilisé pour le message Demarrer_Partie
+    public int no_case;       // Champ utilisé pour le message Jouer coup
 
 }

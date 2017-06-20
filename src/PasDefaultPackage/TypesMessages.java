@@ -9,6 +9,8 @@ package PasDefaultPackage;
  *
  * @author maniert
  */
-class TypesMessages {
+public enum TypesMessages {
+        Demarrer_Partie,
+        
 
 }

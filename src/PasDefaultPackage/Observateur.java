@@ -5,7 +5,6 @@
  */
 package PasDefaultPackage;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 
 /**
  *

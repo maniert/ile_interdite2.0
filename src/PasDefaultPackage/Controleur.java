@@ -1,12 +1,15 @@
 package PasDefaultPackage;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 import java.awt.Color;
 import java.util.*;
 import view.VueAventurier;
 
-public class Contrôleur implements Observateur {
-
+public class Controleur implements Observateur {
+    private VueAventurier vueAventurier;
+    private Aventurier aventurier;
+    
+    
+    
     private static Grille grille;
     private Collection<Aventurier> aventuriers;
     private TasCartesTrésor cartesTresor;
@@ -14,7 +17,8 @@ public class Contrôleur implements Observateur {
     private static boolean finPartie;
     private static Aventurier joueurCourant;
 
-    public static void main(String[] args) {
+    
+    public Controleur() {
         //initialisation partie
         /*
         creer une autre vue
@@ -46,7 +50,7 @@ public class Contrôleur implements Observateur {
 
     @Override
     public void traiterMessage(Message msg) {
-
+        case Demarrer_Partie : 
     }
 
     /**
@@ -101,6 +105,6 @@ public class Contrôleur implements Observateur {
 
     public void debutPartie() {
 
+    
     }
-
 }
