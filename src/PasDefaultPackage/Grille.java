@@ -1,13 +1,13 @@
 package PasDefaultPackage;
 
-import static PasDefaultPackage.TypeRole.explorateur;
-import static PasDefaultPackage.TypeRole.ingénieur;
-import static PasDefaultPackage.TypeRole.messager;
-import static PasDefaultPackage.TypeRole.navigateur;
-import static PasDefaultPackage.TypeRole.pilote;
-import static PasDefaultPackage.TypeRole.plongeur;
 import java.util.ArrayList;
 import java.util.HashMap;
+import static PasDefaultPackage.TypeRole.Pilote;
+import static PasDefaultPackage.TypeRole.Plongeur;
+import static PasDefaultPackage.TypeRole.Explorateur;
+import static PasDefaultPackage.TypeRole.Ingénieur;
+import static PasDefaultPackage.TypeRole.Messager;
+import static PasDefaultPackage.TypeRole.Navigateur;
 
 public class Grille {
 
@@ -36,18 +36,21 @@ public class Grille {
         Tuile t7 = new Tuile(0, "", 1, 2);
         t7.setEtat(Etat.vide);
         Tuile t8 = new Tuile(0, "La Caverne Des Ombres", 2, 2);
+        t8.setFigure(TypeFigurine.le_Cristal_Ardent);
         Tuile t9 = new Tuile(0, "La porte De Fer", 3, 2);
         Tuile t10 = new Tuile(0, "La porte D'or", 4, 2);
         Tuile t11 = new Tuile(0, "Les Falaises De L'Oubli", 5, 2);
         Tuile t12 = new Tuile(0, "", 6, 2);
         t12.setEtat(Etat.vide);
         Tuile t13 = new Tuile(0, "Le Palais De Corail", 1, 3);
+        t13.setFigure(TypeFigurine.le_Calice_de_londe);
         Tuile t14 = new Tuile(0, "La porte D'Argent", 2, 3);
         Tuile t15 = new Tuile(0, "Les Dunes De L'Illusion", 3, 3);
         t15.setEtat(Etat.immergé);
         Tuile t16 = new Tuile(0, "Héliport", 4, 3);
         Tuile t17 = new Tuile(0, "La Porte De Cuivre", 5, 3);
         Tuile t18 = new Tuile(0, "Le Jardin des Hurlements", 6, 3);
+        t18.setFigure(TypeFigurine.la_Statue_du_Zéphyr);
         Tuile t19 = new Tuile(0, "La Foret Pourpre", 1, 4);
         Tuile t20 = new Tuile(0, "Le Lagon Perdu", 2, 4);
         t20.setEtat(Etat.innondé);
@@ -58,19 +61,24 @@ public class Grille {
         Tuile t23 = new Tuile(0, "Le Rocher Fantôme", 5, 4);
         t23.setEtat(Etat.immergé);
         Tuile t24 = new Tuile(0, "La Caserne Du Brasier", 6, 4);
+        t24.setFigure(TypeFigurine.le_Cristal_Ardent);
         t24.setEtat(Etat.innondé);
         Tuile t25 = new Tuile(0, "", 1, 5);
         t25.setEtat(Etat.vide);
         Tuile t26 = new Tuile(0, "Le Temple Du Soleil", 2, 5);
         Tuile t27 = new Tuile(0, "Le Temple De La Lune", 3, 5);
+        t26.setFigure(TypeFigurine.la_Pierre_sacrée);
         t27.setEtat(Etat.immergé);
+        t27.setFigure(TypeFigurine.la_Pierre_sacrée);
         Tuile t28 = new Tuile(0, "Le Palais Des Marées", 4, 5);
+        t28.setFigure(TypeFigurine.le_Calice_de_londe);
         Tuile t29 = new Tuile(0, "Le Val Du Crépuscule", 5, 5);
         Tuile t30 = new Tuile(0, "", 6, 5);
         Tuile t31 = new Tuile(0, "", 1, 6);
         Tuile t32 = new Tuile(0, "", 2, 6);
         Tuile t33 = new Tuile(0, "La Tour Du Guet", 3, 6);
         Tuile t34 = new Tuile(0, "Le Jardin Des Murmures", 4, 6);
+        t34.setFigure(TypeFigurine.la_Statue_du_Zéphyr);
         t34.setEtat(Etat.innondé);
         Tuile t35 = new Tuile(0, "", 5, 6);
         Tuile t36 = new Tuile(0, "", 6, 6);
@@ -117,12 +125,12 @@ public class Grille {
         this.getTuiles().add(t35);
         this.getTuiles().add(t36);
 
-        Aventurier av1 = new Ingenieur("le Prof", ingénieur, 0, this.getTuiles().get(3), null);//correspond à t4
-        Aventurier av2 = new Plongeur("Thibaud", plongeur, 0, this.getTuiles().get(8), null);//correspond à t9
-        Aventurier av3 = new Navigateur("Alexis", navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
-        Aventurier av4 = new Messager("Mathilde", messager, 0, this.getTuiles().get(13), null);//correspond à t14
-        Aventurier av5 = new Pilote("Sami", pilote, 0, this.getTuiles().get(15), null);//correspond à t16
-        Aventurier av6 = new Explorateur("l'autre Prof", explorateur, 0, this.getTuiles().get(16), null);//correspond à t17
+        Aventurier av1 = new Ingenieur("le Prof", Ingénieur, 0, this.getTuiles().get(3), null);//correspond à t4
+        Aventurier av2 = new Plongeur("Thibaud", Plongeur, 0, this.getTuiles().get(8), null);//correspond à t9
+        Aventurier av3 = new Navigateur("Alexis", Navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
+        Aventurier av4 = new Messager("Mathilde", Messager, 0, this.getTuiles().get(13), null);//correspond à t14
+        Aventurier av5 = new Pilote("Sami", Pilote, 0, this.getTuiles().get(15), null);//correspond à t16
+        Aventurier av6 = new Explorateur("l'autre Prof", Explorateur, 0, this.getTuiles().get(16), null);//correspond à t17
 
         //à gerer dans le controleur via un attribut
         joueurs.put(1, av1);

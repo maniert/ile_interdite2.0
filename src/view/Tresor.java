@@ -22,14 +22,10 @@ public class Tresor extends JPanel {
 
     private TypeFigurine tresor;
     private Color couleur;
-    private boolean monte;
-    private int décalage;
 
-    public Tresor(TypeFigurine tresor, Color couleur, boolean monte, int nbJSurTuile) {
-        this.monte = monte;
+    public Tresor(TypeFigurine tresor, Color couleur) {
         this.tresor = tresor;
         this.couleur = couleur;
-        this.décalage = nbJSurTuile;
         setOpaque(false);
         // Plusieurs pion de différente couleur
         setForeground(couleur);
@@ -46,23 +42,19 @@ public class Tresor extends JPanel {
             System.out.println("Oups");
             return;
         }
-        paint = new GradientPaint(0, 0, getBackground(), getWidth(), getHeight(), getForeground());
+        paint = new GradientPaint(0, 0, getForeground(), getWidth(), getHeight(), getBackground());
         g2d.setPaint(paint);
-            g.fillOval(5 + 30 * (décalage - 6), 5 + 60, getWidth() - 75, getHeight() - 75);     //une en dessous, alligné avec les autres 
+            g.fillOval( 65, 65, getWidth() - 70, getHeight() - 70);     //une en dessous, alligné avec les autres 
+            g.setColor(Color.BLACK);
+            g.drawOval(65, 65, getWidth() - 70, getHeight() - 70);
+            
+            
        
 
     }
 
     public TypeFigurine getCouleur() {
         return tresor;
-    }
-
-    public boolean isMonte() {
-        return monte;
-    }
-
-    public void setMonte(boolean monte) {
-        this.monte = monte;
     }
 
 }
