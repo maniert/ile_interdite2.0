@@ -3,6 +3,7 @@ package PasDefaultPackage;
 import java.awt.Color;
 import java.util.*;
 import view.VueAventurier;
+import view.VueInscription;
 
 public class Controleur implements Observateur {
     private VueAventurier vueAventurier;
@@ -27,8 +28,12 @@ public class Controleur implements Observateur {
         //lancement partie
         finPartie = false;
         //window.setVisible(true);
-        VueAventurier window = new VueAventurier(grille, Color.blue);
+        VueInscription window = new VueInscription();
+        window.afficher();
+        
+      //  System.out.println("Pomme");
 //       
+/*
         if (!finPartie) {
 
             grille.getJoueurCourant().setNbPA(window.getNbmaxPa());
@@ -46,11 +51,10 @@ public class Controleur implements Observateur {
             System.out.println("fin Partie!");
         }
 
-    }
-
+     */
+}
     @Override
     public void traiterMessage(Message msg) {
-        case Demarrer_Partie : 
     }
 
     /**

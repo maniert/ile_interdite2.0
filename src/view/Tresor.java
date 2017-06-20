@@ -1,0 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package view;
+
+import PasDefaultPackage.TypeFigurine;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Paint;
+import javax.swing.JPanel;
+/**
+ *
+ * @author Princesse Mathilde
+ */
+public class Tresor extends JPanel {
+    
+
+
+    private TypeFigurine tresor;
+    private Color couleur;
+    private boolean monte;
+    private int décalage;
+
+    public Tresor(TypeFigurine tresor, Color couleur, boolean monte, int nbJSurTuile) {
+        this.monte = monte;
+        this.tresor = tresor;
+        this.couleur = couleur;
+        this.décalage = nbJSurTuile;
+        setOpaque(false);
+        // Plusieurs pion de différente couleur
+        setForeground(couleur);
+    }
+
+    // Fais les pions (ou les montres du moins)
+    @Override
+    public void paintComponent(Graphics g) {
+        Paint paint;
+        Graphics2D g2d;
+        if (g instanceof Graphics2D) {
+            g2d = (Graphics2D) g;
+        } else {
+            System.out.println("Oups");
+            return;
+        }
+        paint = new GradientPaint(0, 0, getBackground(), getWidth(), getHeight(), getForeground());
+        g2d.setPaint(paint);
+            g.fillOval(5 + 30 * (décalage - 6), 5 + 60, getWidth() - 75, getHeight() - 75);     //une en dessous, alligné avec les autres 
+       
+
+    }
+
+    public TypeFigurine getCouleur() {
+        return tresor;
+    }
+
+    public boolean isMonte() {
+        return monte;
+    }
+
+    public void setMonte(boolean monte) {
+        this.monte = monte;
+    }
+
+}
+

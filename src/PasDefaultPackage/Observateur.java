@@ -10,7 +10,7 @@ package PasDefaultPackage;
  *
  * @author maniert
  */
-interface Observateur {
+public interface Observateur {
 
     public void traiterMessage(Message msg);
 }
