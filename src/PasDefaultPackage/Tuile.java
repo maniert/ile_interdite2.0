@@ -20,6 +20,10 @@ public class Tuile {
         this.aventuriers = new ArrayList<Aventurier>();
     }
 
+    public Tuile() {
+
+    }
+
     public Etat getEtat() {
         return etat;
     }

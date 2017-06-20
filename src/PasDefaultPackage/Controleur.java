@@ -48,8 +48,6 @@ public class Controleur implements Observateur {
 
     @Override
     public void traiterMessage(Message msg) {
-        String joueur;
-        int no_joueur = 0, suivant;
 
         switch (msg.type) {
             case DEMARRER_PARTIE:
@@ -57,15 +55,18 @@ public class Controleur implements Observateur {
                 break;
 
             case DEMANDE_DEPLACEMENT:
-                grille.getJoueurCourant().setHelicoDispo(false);
                 grille.getJoueurCourant().getTuileAssechable().clear();
+                grille.getJoueurCourant().getTuileAtteignable().clear();
+                grille.getJoueurCourant().setHelicoDispo(false);
                 grille.getJoueurCourant().setTuileAtteignable(grille);
                 grille.getJoueurCourant().setHelicoDispo(true);
                 break;
 
             case DEMANDE_ASSECHEMENT:
                 grille.getJoueurCourant().getTuileAtteignable().clear();
+                grille.getJoueurCourant().getTuileAssechable().clear();
                 grille.getJoueurCourant().setTuileAssechable(grille);
+
                 break;
 
             case DEPLACEMENT_SPE:
@@ -100,8 +101,23 @@ public class Controleur implements Observateur {
                 break;
 
             case ASSECHER:
-                grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
+                if (grille.getJoueurCourant().getTypeRole() == TypeRole.ingénieur) {
+                    ((Ingenieur) grille.getJoueurCourant()).getAssechInge().add(msg.getIndiceTuile());
+                    if (grille.getJoueurCourant().getIngeasseche() == 0) {
+                        grille.getJoueurCourant().setIngeasseche(grille.getJoueurCourant().getIngeasseche() + 1);
+                    } else if (grille.getJoueurCourant().getIngeasseche() == 1) {
+                        ((Ingenieur) grille.getJoueurCourant()).setNbPA(grille.getJoueurCourant().getNbPA() - 1);
+                        ((Ingenieur) grille.getJoueurCourant()).assecherInge(grille);
+                        ((Ingenieur) grille.getJoueurCourant()).getAssechInge().clear();
+                        grille.getJoueurCourant().setIngeasseche(0);
+
+                    }
+                } else {
+                    grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
+                }
+
                 break;
+
         }
     }
 
@@ -133,7 +149,7 @@ public class Controleur implements Observateur {
      * @param aventurier
      * @param carte
      */
-    public void defausserCarteTresorJoueur(Aventurier aventurier, Ctrésor carte) {
+    public void defausserCarteTresorJoueur(Aventurier aventurier, Carte carte) {
         // TODO - implement Contrôleur.defausserCarteTresorJoueur
 
     }

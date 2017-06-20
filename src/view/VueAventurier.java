@@ -79,7 +79,7 @@ public class VueAventurier {
         panelCentre.add(position);
 
         // =================================================================================
-        // Est : Les boutons assècher ect 
+        // Est : Les boutons assècher ect
         this.panelBoutons = new JPanel(new GridLayout(5, 1));
         this.panelBoutons.setOpaque(false);
         mainPanel.add(this.panelBoutons, BorderLayout.EAST);
@@ -117,7 +117,7 @@ public class VueAventurier {
         this.panelBoutons.add(btnActionSpecial);
         this.panelBoutons.add(btnDonnerTresor);
         this.panelBoutons.add(btnTerminerTour);
-            
+
         peinture(grille, grille.getJoueurCourant(), couleur, white);
 
         this.mainJoueur.add(new JButton(""));
@@ -132,13 +132,13 @@ public class VueAventurier {
         btnDeplacer.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                white = false;
                 plateau.removeAll();
+                white = false;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
                 m.type = TypesMessages.DEMANDE_DEPLACEMENT;
                 o.traiterMessage(m);
-                white = true;
                 plateau.removeAll();
+                white = true;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
             }
 
@@ -163,6 +163,7 @@ public class VueAventurier {
         btnActionSpecial.addMouseListener(new MouseListener() {           //quand le pilote décide d'utiliser
             @Override
             public void mouseClicked(MouseEvent e) {
+                grille.getJoueurCourant().getTuileAtteignable().clear();
                 m.type = TypesMessages.DEPLACEMENT_SPE;
                 o.traiterMessage(m);
                 plateau.removeAll();
@@ -252,18 +253,16 @@ public class VueAventurier {
     }
 
     public void peinture(Grille grille, Aventurier joueurCourant, Color couleur, boolean white) {
-
+        Tuile premiereTuile;
         for (int i = 0; i <= 35; i++) {
-            //this.plateau.add(new JButton(g.getTuiles().get(i).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(i)));
+            //this.plateau.add(new JButton(g.getTuiles().get(indiceTuile).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(indiceTuile)));
             btnGrille[i] = new JButton();
             this.plateau.add(btnGrille[i]);
             btnGrille[i].setText(grille.getTuiles().get(i).getNomTuile());
             btnGrille[i].setBackground(CouleurTuile(grille.getTuiles().get(i)));
-            
-            creationPion(grille,i);
-            
-            
-            
+
+            creationPion(grille, i);
+
             if (white && joueurCourant.existedéjà(joueurCourant.getTuileAtteignable(), grille.getTuiles().get(i))) {
                 Tuile t = grille.getTuiles().get(i);
                 btnGrille[i].addMouseListener(new MouseListener() {
@@ -302,36 +301,63 @@ public class VueAventurier {
                 });
             } else if (white && joueurCourant.existedéjà(joueurCourant.getTuileAssechable(), grille.getTuiles().get(i))) {
                 Tuile t = grille.getTuiles().get(i);
+                if (grille.getJoueurCourant().getTypeRole() == TypeRole.ingénieur) {
+                    m.setIndiceTuile(i);
+                    m.type = TypesMessages.ASSECHER;
+                    o.traiterMessage(m);
+                }
+
                 btnGrille[i].addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        joueurCourant.assecher(t);
-                        m.type = TypesMessages.ASSECHER;
+                        if (grille.getJoueurCourant().getTypeRole() == TypeRole.ingénieur) {
+                            t.setEtat(Etat.selectionné);
+                            plateau.removeAll();
+                            boolean white = true;
+                            peinture(grille, grille.getJoueurCourant(), couleur, white);
+                        } else {
+                            joueurCourant.assecher(t);
+                            m.type = TypesMessages.ASSECHER;
+                            o.traiterMessage(m);
+                            plateau.removeAll();
+                            boolean white = false;
+                            peinture(grille, grille.getJoueurCourant(), couleur, white);
+                        }
+                        m.type = TypesMessages.FIN_TOUR;
                         o.traiterMessage(m);
-                        plateau.removeAll();
-                        boolean white = false;
-                        peinture(grille, grille.getJoueurCourant(), couleur, white);
+                        window.setTitle(grille.getJoueurCourant().getNomJoueur());
+                        if (grille.getJoueurCourant().getIngeasseche() == 1) {
+                            m.type = TypesMessages.ASSECHER;
+                            o.traiterMessage(m);
+                            plateau.removeAll();
+                            boolean white = false;
+                            peinture(grille, grille.getJoueurCourant(), couleur, white);
+                        }
                         m.type = TypesMessages.FIN_TOUR;
                         o.traiterMessage(m);
                         window.setTitle(grille.getJoueurCourant().getNomJoueur());
                     }
 
                     ;
-                    @Override
-                    public void mousePressed(MouseEvent e) {
+                        @Override
+                    public void mousePressed(MouseEvent e
+                    ) {
                     }
 
                     @Override
-                    public void mouseReleased(MouseEvent e) {
+                    public void mouseReleased(MouseEvent e
+                    ) {
                     }
 
                     @Override
-                    public void mouseEntered(MouseEvent e) {
+                    public void mouseEntered(MouseEvent e
+                    ) {
 
                     }
 
                     @Override
-                    public void mouseExited(MouseEvent e) {
+                    public void mouseExited(MouseEvent e
+                    ) {
 
                     }
 
@@ -341,6 +367,10 @@ public class VueAventurier {
                 if (joueurCourant.existedéjà((joueurCourant.getTuileAtteignable()), grille.getTuiles().get(i)) && white == true || joueurCourant.existedéjà((joueurCourant.getTuileAssechable()), grille.getTuiles().get(i))) {
                     btnGrille[i].setBackground(Color.WHITE);
                 }
+                if (grille.getTuiles().get(i).getEtat() == Etat.selectionné) {
+                    grille.getTuiles().get(i).setEtat(Etat.sec);
+                }
+
             }
 
         }
@@ -367,7 +397,7 @@ public class VueAventurier {
         return btnTerminerTour;
     }
 
-    //Mettre tuile sur l'interface selon son état donner une couleur et regarder son nom + Coordonées 
+    //Mettre tuile sur l'interface selon son état donner une couleur et regarder son nom + Coordonées
     public String affichageTuile(Tuile t) {
         //chercher la tuile et l'afficher
         return t.getNomTuile();
@@ -378,50 +408,55 @@ public class VueAventurier {
             return Color.yellow;
         } else if (t.getEtat() == Etat.innondé) {
             return Color.CYAN;
-        } else {
+        } else if (t.getEtat() == Etat.selectionné) {
+            return Color.LIGHT_GRAY;
+
+        } else if (t.getEtat() == Etat.immergé) {
             return Color.GRAY;
+        } else {
+            return Color.BLACK;
         }
     }
-    
-    public void creationPion(Grille grille, int i){
-            for (int j = 0; j < grille.getTuiles().get(i).getAventuriers().size(); j++) {
-                if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
-                    switch (grille.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
-                        case plongeur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pPlong = new Pion(TypeRole.plongeur, Color.BLACK, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pPlong);    //Afficher le bon pion sur la tuile
-                            break;
-                        case explorateur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pExplo = new Pion(TypeRole.explorateur, Color.GREEN, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pExplo);
-                            break;
-                        case ingénieur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pInge = new Pion(TypeRole.ingénieur, Color.RED, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pInge);
-                            break;
-                        case messager:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pMess = new Pion(TypeRole.messager, Color.ORANGE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pMess);
-                            break;
-                        case navigateur:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pNav = new Pion(TypeRole.navigateur, Color.YELLOW, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pNav);
-                            break;
-                        case pilote:
-                            //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage 
-                            Pion pPilo = new Pion(TypeRole.pilote, Color.BLUE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
-                            btnGrille[i].add(pPilo);
-                            break;
-                        default:
-                            break;
-                    }
 
+    public void creationPion(Grille grille, int i) {
+        for (int j = 0; j < grille.getTuiles().get(i).getAventuriers().size(); j++) {
+            if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
+                switch (grille.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
+                    case plongeur:
+                        //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
+                        Pion pPlong = new Pion(TypeRole.plongeur, Color.BLACK, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        btnGrille[i].add(pPlong);    //Afficher le bon pion sur la tuile
+                        break;
+                    case explorateur:
+                        //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
+                        Pion pExplo = new Pion(TypeRole.explorateur, Color.GREEN, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        btnGrille[i].add(pExplo);
+                        break;
+                    case ingénieur:
+                        //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
+                        Pion pInge = new Pion(TypeRole.ingénieur, Color.RED, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        btnGrille[i].add(pInge);
+                        break;
+                    case messager:
+                        //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
+                        Pion pMess = new Pion(TypeRole.messager, Color.ORANGE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        btnGrille[i].add(pMess);
+                        break;
+                    case navigateur:
+                        //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
+                        Pion pNav = new Pion(TypeRole.navigateur, Color.YELLOW, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        btnGrille[i].add(pNav);
+                        break;
+                    case pilote:
+                        //création des pions en tenant en compte du rang dans la tuile, pour effectuer un décalage
+                        Pion pPilo = new Pion(TypeRole.pilote, Color.BLUE, true, grille.getTuiles().get(i).getAventuriers().indexOf(grille.getTuiles().get(i).getAventuriers().get(j)));
+                        btnGrille[i].add(pPilo);
+                        break;
+                    default:
+                        break;
                 }
+
             }
         }
     }
+}

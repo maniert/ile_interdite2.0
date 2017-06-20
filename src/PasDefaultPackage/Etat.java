@@ -1,9 +1,10 @@
 package PasDefaultPackage;
 
 public enum Etat {
-	sec,
-	innondé,
-	immergé,
-        vide;
+    sec,
+    innondé,
+    immergé,
+    vide,
+    selectionné;
 
 }

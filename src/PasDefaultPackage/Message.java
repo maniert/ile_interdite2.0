@@ -13,4 +13,20 @@ public class Message {
 
     public TypesMessages type;  // type de message
     public Tuile t;
+    public int indiceTuile;
+
+    /**
+     * @return the indiceTuile
+     */
+    public int getIndiceTuile() {
+        return indiceTuile;
+    }
+
+    /**
+     * @param assechingeFrstTuile the indiceTuile to set
+     */
+    public void setIndiceTuile(int i) {
+        this.indiceTuile = i;
+    }
+
 }

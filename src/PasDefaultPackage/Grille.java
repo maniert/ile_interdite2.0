@@ -3,7 +3,6 @@ package PasDefaultPackage;
 import static PasDefaultPackage.TypeRole.explorateur;
 import static PasDefaultPackage.TypeRole.ingénieur;
 import static PasDefaultPackage.TypeRole.messager;
-import static PasDefaultPackage.TypeRole.navigateur;
 import static PasDefaultPackage.TypeRole.pilote;
 import static PasDefaultPackage.TypeRole.plongeur;
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ public class Grille {
         Tuile t2 = new Tuile(0, "", 2, 1);
         t2.setEtat(Etat.vide);
         Tuile t3 = new Tuile(0, "Le Pont Des Abimes", 3, 1);
+        t3.setEtat(Etat.innondé);
         Tuile t4 = new Tuile(0, "La porte De Bronze", 4, 1);
         Tuile t5 = new Tuile(0, "", 5, 1);
         t5.setEtat(Etat.vide);
@@ -38,6 +38,7 @@ public class Grille {
         Tuile t8 = new Tuile(0, "La Caverne Des Ombres", 2, 2);
         Tuile t9 = new Tuile(0, "La porte De Fer", 3, 2);
         Tuile t10 = new Tuile(0, "La porte D'or", 4, 2);
+        t10.setEtat(Etat.innondé);
         Tuile t11 = new Tuile(0, "Les Falaises De L'Oubli", 5, 2);
         Tuile t12 = new Tuile(0, "", 6, 2);
         t12.setEtat(Etat.vide);
@@ -118,8 +119,8 @@ public class Grille {
         this.getTuiles().add(t36);
 
         Aventurier av1 = new Ingenieur("le Prof", ingénieur, 0, this.getTuiles().get(3), null);//correspond à t4
-        Aventurier av2 = new Plongeur("Thibaud", plongeur, 0, this.getTuiles().get(8), null);//correspond à t9
-        Aventurier av3 = new Navigateur("Alexis", navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
+        Aventurier av2 = new Plongeur("Thibaud", plongeur, 0, this.getTuiles().get(3), null);//correspond à t9
+        // Aventurier av3 = new Navigateur("Alexis", navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
         Aventurier av4 = new Messager("Mathilde", messager, 0, this.getTuiles().get(13), null);//correspond à t14
         Aventurier av5 = new Pilote("Sami", pilote, 0, this.getTuiles().get(15), null);//correspond à t16
         Aventurier av6 = new Explorateur("l'autre Prof", explorateur, 0, this.getTuiles().get(16), null);//correspond à t17
@@ -127,9 +128,9 @@ public class Grille {
         //à gerer dans le controleur via un attribut
         joueurs.put(1, av1);
         joueurs.put(2, av2);
-        joueurs.put(3, av3);
-        joueurs.put(4, av4);
-        joueurs.put(5, av5);
+        //  joueurs.put(3, av3);
+        joueurs.put(3, av4);
+        joueurs.put(4, av6);
         //
 
         for (int i = 0; i <= joueurs.size(); i++) {
@@ -138,8 +139,8 @@ public class Grille {
                 this.getTuiles().get(3).getAventuriers().add(av1);
             } else if (joueurs.get(i) == av2) {
                 this.getTuiles().get(8).getAventuriers().add(av2);
-            } else if (joueurs.get(i) == av3) {
-                this.getTuiles().get(9).getAventuriers().add(av3);
+                // } else if (joueurs.get(i) == av3) {
+                //    this.getTuiles().get(9).getAventuriers().add(av3);
             } else if (joueurs.get(i) == av4) {
                 this.getTuiles().get(13).getAventuriers().add(av4);
             } else if (joueurs.get(i) == av5) {
@@ -148,7 +149,7 @@ public class Grille {
                 this.getTuiles().get(16).getAventuriers().add(av6);
             }
         }
-        joueurCourant = av1;
+        joueurCourant = joueurs.get(1);
     }
 
     /**

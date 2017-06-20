@@ -4,22 +4,16 @@ import java.util.*;
 
 public class TasCartesInnondation {
 
-	Collection<Innondation> cartesInnondationsEnJeu;
-	Collection<Innondation> cartesInnondationsDefausse;
+    ArrayList<Innondation> cartesInnondationsEnJeu;
+    ArrayList<Innondation> cartesInnondationsDefausse;
 
-	public void mélangerCarteInnondationDéfausse() {
-		// TODO - implement TasCartesInnondation.mélangerCarteInnondationDéfausse
-		throw new UnsupportedOperationException();
-	}
+    public void mélangerCarteInnondationDéfausse() {
+    }
 
-	public void deplacerCartesDefausseSurCartesEnJeu() {
-		// TODO - implement TasCartesInnondation.deplacerCartesDefausseSurCartesEnJeu
-		throw new UnsupportedOperationException();
-	}
+    public void deplacerCartesDefausseSurCartesEnJeu() {
+    }
 
-	public void piocherCarteInnondation() {
-		// TODO - implement TasCartesInnondation.piocherCarteInnondation
-		throw new UnsupportedOperationException();
-	}
+    public void piocherCarteInnondation() {
+    }
 
 }

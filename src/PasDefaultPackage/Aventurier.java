@@ -50,7 +50,7 @@ public class Aventurier {
      *
      * @param carteTresor
      */
-    public void donnerCarte(Ctrésor carteTresor) {
+    public void donnerCarte() {
         // TODO - implement Aventurier.donnerCarte
         throw new UnsupportedOperationException();
     }
@@ -69,7 +69,7 @@ public class Aventurier {
      *
      * @param carteTresor
      */
-    public void defausserCarteTresor(Ctrésor carteTresor) {
+    public void defausserCarteTresor() {
         // TODO - implement Aventurier.defausserCarteTresor
         throw new UnsupportedOperationException();
     }
@@ -105,18 +105,18 @@ public class Aventurier {
         int yPerso;
         xPerso = this.getTuile().getX();//récupére les coordonnées
         yPerso = this.getTuile().getY();//x et y du joueur de ce tour
-        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso, yPerso - 1)) && g.getLaTuile(xPerso, yPerso - 1).getEtat() != Etat.vide){
+        if (this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso, yPerso - 1)) && g.getLaTuile(xPerso, yPerso - 1).getEtat() != Etat.vide) {
             at.add(g.getLaTuile(xPerso, yPerso - 1));//haut
         }
-        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso, yPerso + 1)) && g.getLaTuile(xPerso, yPerso + 1).getEtat() != Etat.vide){
+        if (this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso, yPerso + 1)) && g.getLaTuile(xPerso, yPerso + 1).getEtat() != Etat.vide) {
             at.add(g.getLaTuile(xPerso, yPerso + 1));//bas
         }
-        
-        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso - 1, yPerso)) && g.getLaTuile(xPerso - 1, yPerso).getEtat() != Etat.vide){
+
+        if (this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso - 1, yPerso)) && g.getLaTuile(xPerso - 1, yPerso).getEtat() != Etat.vide) {
             at.add(g.getLaTuile(xPerso - 1, yPerso));//gauche
         }
-        if(this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso + 1, yPerso)) && g.getLaTuile(xPerso + 1, yPerso).getEtat() != Etat.vide){
-           at.add(g.getLaTuile(xPerso + 1, yPerso));//droite
+        if (this.existedéjà(g.getTuiles(), g.getLaTuile(xPerso + 1, yPerso)) && g.getLaTuile(xPerso + 1, yPerso).getEtat() != Etat.vide) {
+            at.add(g.getLaTuile(xPerso + 1, yPerso));//droite
         }
 
     }
@@ -126,7 +126,7 @@ public class Aventurier {
     public void setTuileAtteignable(Grille g) {
         getTuileAtteignable().clear();// vider l'arraylist avant de le remplir
         casePossiblebasique(g, tuilesAtteignable); //rentre les déplacements propre à tout les roles
-        filtrageDeplacementpossible(getTuileAtteignable(), g); //filtrage null+innondé,immergé   
+        filtrageDeplacementpossible(getTuileAtteignable(), g); //filtrage null+innondé,immergé
     }
 
     public ArrayList<Tuile> getTuileAtteignable() {
@@ -136,7 +136,7 @@ public class Aventurier {
     public void filtrageDeplacementpossible(ArrayList<Tuile> tuileAtteignable, Grille g) {
         int i = 0;
         while (i != this.getTuileAtteignable().size()) {
-            if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i).getEtat() == Etat.immergé || this.getTuileAtteignable().get(i).getEtat() == Etat.innondé || this.getTuileAtteignable().get(i) == t) {
+            if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i) == this.getTuile() || this.getTuileAtteignable().get(i).getEtat() == Etat.innondé || this.getTuileAtteignable().get(i).getEtat() == Etat.immergé) {
                 this.getTuileAtteignable().remove(this.getTuileAtteignable().get(i));
             } else {
                 i++;
@@ -155,13 +155,14 @@ public class Aventurier {
     public void setTuileAssechable(Grille g) {
         getTuileAssechable().clear();
         casePossiblebasique(g, tuilesAssechable);
-        filtrageTuileAssechable(tuilesAssechable, g); //filtrage null+innondé,immergé 
+        filtrageTuileAssechable(tuilesAssechable, g); //filtrage null+innondé,immergé
+        System.out.println(tuilesAssechable.size());
     }
 
     public void filtrageTuileAssechable(ArrayList<Tuile> tuileAssechable, Grille g) {
         int i = 0;
         while (i != this.getTuileAssechable().size()) {
-            if (this.getTuileAssechable().get(i).getEtat() == Etat.vide || this.getTuileAssechable().get(i).getEtat() == Etat.sec || this.getTuileAssechable().get(i).getEtat() == Etat.immergé) {
+            if (this.getTuileAssechable().get(i).getEtat() == Etat.selectionné || this.getTuileAssechable().get(i).getEtat() == Etat.vide || this.getTuileAssechable().get(i).getEtat() == Etat.sec || this.getTuileAssechable().get(i).getEtat() == Etat.immergé) {
                 this.getTuileAssechable().remove(this.getTuileAssechable().get(i));
             } else {
                 i++;
@@ -235,13 +236,13 @@ public class Aventurier {
         System.out.println("Aventurier: nothing happened #isHelicoDispo");
         return false;
     }
-    
+
     /**
      * @return the deplSpePilote
      */
     public boolean isDeplSpePilote() {
-            System.out.println("Aventurier: nothing happened #isDeplSpePilote");
-            return false;
+        System.out.println("Aventurier: nothing happened #isDeplSpePilote");
+        return false;
     }
 
     /**
@@ -249,5 +250,25 @@ public class Aventurier {
      */
     public void setDeplSpePilote(boolean deplSpePilote) {
         System.out.println("Aventurier: nothing happened #setDeplSpePilote");
+    }
+
+    /**
+     * @return the assechInge
+     */
+    public ArrayList<Integer> getAssechInge() {
+        return null;
+    }
+
+    /**
+     * @param assechInge the assechInge to set
+     */
+    public void setAssechInge(ArrayList<Integer> assechInge) {
+    }
+
+    public int getIngeasseche() {
+        return 0;
+    }
+
+    public void setIngeasseche(int ingeasseche) {
     }
 }
