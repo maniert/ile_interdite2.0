@@ -28,6 +28,8 @@ public class Aventurier {
     public Aventurier() {
 
     }
+    
+    
 
     /**
      *

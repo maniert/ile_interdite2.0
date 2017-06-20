@@ -21,11 +21,9 @@ public class Pion extends JPanel {
 
     private TypeRole role;
     private Color couleur;
-    private boolean monte;
     private int décalage;
 
-    public Pion(TypeRole role, Color couleur, boolean monte, int nbJSurTuile) {
-        this.monte = monte;
+    public Pion(TypeRole role, Color couleur, int nbJSurTuile) {
         this.role = role;
         this.couleur = couleur;
         this.décalage = nbJSurTuile;
@@ -45,7 +43,7 @@ public class Pion extends JPanel {
             System.out.println("Error");
             return;
         }
-        paint = new GradientPaint(0, 0, getBackground(), getWidth(), getHeight(), getForeground());
+        paint = new GradientPaint(0, 0, getForeground(), getWidth(), getHeight(), getForeground());
         g2d.setPaint(paint);
         if (décalage >= 3) {
             g.fillOval(5 + 30 * (décalage - 3), 5 + 60, getWidth() - 75, getHeight() - 75);     //une en dessous, alligné avec les autres 
@@ -59,12 +57,6 @@ public class Pion extends JPanel {
         return role;
     }
 
-    public boolean isMonte() {
-        return monte;
-    }
-
-    public void setMonte(boolean monte) {
-        this.monte = monte;
-    }
+  
 
 }
