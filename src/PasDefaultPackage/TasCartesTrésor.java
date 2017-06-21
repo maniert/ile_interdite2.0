@@ -52,10 +52,12 @@ public class TasCartesTrésor {
         for (int i = 0; i < nbcMde; i++) {
             cartesTresorEnJeu.add(cmde);
         }
-
+        Collections.shuffle(cartesTresorEnJeu);
     }
 
-    public void tirerCarte() {
+    public void tirerCarteJoueurCourant(Grille grille) {
+        grille.getJoueurCourant().getMain().add(cartesTresorEnJeu.get(0));
+        cartesTresorEnJeu.remove(0);
     }
 
     /**
@@ -63,6 +65,7 @@ public class TasCartesTrésor {
      * @param t
      */
     public void defausserCarte(Carte c) {
+
     }
 
     /**
