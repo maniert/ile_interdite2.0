@@ -6,7 +6,7 @@ import PasDefaultPackage.Grille;
 import PasDefaultPackage.Message;
 import PasDefaultPackage.Observateur;
 import PasDefaultPackage.Tuile;
-import PasDefaultPackage.TypeFigurine;
+import PasDefaultPackage.TypeCarte;
 import PasDefaultPackage.TypeRole;
 import PasDefaultPackage.TypesMessages;
 import java.awt.BorderLayout;
@@ -463,19 +463,19 @@ public class VueAventurier {
     public void creationTuileTresor(Grille grille, int i) {
         switch (grille.getTuiles().get(i).getFigure()) {
             case la_Pierre_sacrée:
-                Tresor tsacrée = new Tresor(TypeFigurine.la_Pierre_sacrée, Color.GRAY);
+                Tresor tsacrée = new Tresor(TypeCarte.la_Pierre_sacrée, Color.GRAY);
                 btnGrille[i].add(tsacrée);
                 break;
             case la_Statue_du_Zéphyr:
-                Tresor tzeph = new Tresor(TypeFigurine.la_Statue_du_Zéphyr, Color.orange);
+                Tresor tzeph = new Tresor(TypeCarte.la_Statue_du_Zéphyr, Color.orange);
                 btnGrille[i].add(tzeph);
                 break;
             case le_Calice_de_londe:
-                Tresor tlonde = new Tresor(TypeFigurine.le_Calice_de_londe, Color.blue);
+                Tresor tlonde = new Tresor(TypeCarte.le_Calice_de_londe, Color.blue);
                 btnGrille[i].add(tlonde);
                 break;
             case le_Cristal_Ardent:
-                Tresor tcrist = new Tresor(TypeFigurine.le_Cristal_Ardent, Color.RED);
+                Tresor tcrist = new Tresor(TypeCarte.le_Cristal_Ardent, Color.RED);
                 btnGrille[i].add(tcrist);
                 break;
         }

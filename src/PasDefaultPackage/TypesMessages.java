@@ -19,6 +19,7 @@ public enum TypesMessages {
     FIN_TOUR,
     TIRER_CARTES_TRESOR,
     DEPLACER,
+    PIOCHER_CARTE_TRESOR,
     ASSECHER,
     ASSECHINGE;
 

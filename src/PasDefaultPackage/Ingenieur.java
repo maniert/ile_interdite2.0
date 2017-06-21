@@ -1,4 +1,4 @@
- package PasDefaultPackage;
+package PasDefaultPackage;
 
 import java.util.ArrayList;
 
@@ -7,11 +7,11 @@ public class Ingenieur extends Aventurier {
     private ArrayList<Integer> assechInge;
     private int nbTuileAssech;
 
-    public Ingenieur(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
-        super(nomJoueur, typeRole, idaventurier, t, main);
+    public Ingenieur(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t) {
+        super(nomJoueur, typeRole, idaventurier, t);
         assechInge = new ArrayList<>();
     }
-    
+
     /**
      *
      * @param grille

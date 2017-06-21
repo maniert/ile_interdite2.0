@@ -1,11 +1,9 @@
 package PasDefaultPackage;
 
-import java.util.ArrayList;
-
 public class Explorateur extends Aventurier {
 
-    public Explorateur(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
-        super(nomJoueur, typeRole, idaventurier, t, main);
+    public Explorateur(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t) {
+        super(nomJoueur, typeRole, idaventurier, t);
     }
 
     public void setTuileAtteignable(Grille g) {

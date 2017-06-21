@@ -29,7 +29,7 @@ public class Aventurier {
     private ArrayList<Tuile> tuilesAssechable;
     private static int nbmaxPa = 3;
 
-    public Aventurier(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
+    public Aventurier(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t) {
         this.nomJoueur = nomJoueur;
         this.typeRole = typeRole;
         this.idaventurier = idaventurier;
@@ -37,6 +37,7 @@ public class Aventurier {
         this.main = main;
         this.tuilesAtteignable = new ArrayList<Tuile>();
         this.tuilesAssechable = new ArrayList<Tuile>();
+        this.main = new ArrayList<>();
 
     }
 
@@ -56,7 +57,7 @@ public class Aventurier {
      *
      * @param typefigurine
      */
-    public void gagnerFigurine(TypeFigurine typefigurine) {
+    public void gagnerFigurine(TypeCarte typefigurine) {
         // TODO - implement Aventurier.gagnerFigurine
         throw new UnsupportedOperationException();
     }

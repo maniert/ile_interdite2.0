@@ -5,7 +5,7 @@
  */
 package view;
 
-import PasDefaultPackage.TypeFigurine;
+import PasDefaultPackage.TypeCarte;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -20,10 +20,10 @@ public class Tresor extends JPanel {
     
 
 
-    private TypeFigurine tresor;
+    private TypeCarte tresor;
     private Color couleur;
 
-    public Tresor(TypeFigurine tresor, Color couleur) {
+    public Tresor(TypeCarte tresor, Color couleur) {
         this.tresor = tresor;
         this.couleur = couleur;
         setOpaque(false);
@@ -53,7 +53,7 @@ public class Tresor extends JPanel {
 
     }
 
-    public TypeFigurine getCouleur() {
+    public TypeCarte getCouleur() {
         return tresor;
     }
 

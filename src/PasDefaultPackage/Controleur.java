@@ -33,13 +33,14 @@ public class Controleur implements Observateur {
 
     public Controleur() {
         grille = new Grille();
-        av1 = new Ingenieur("le Prof", Ingénieur, 0, grille.getTuiles().get(3), null);//correspond à t4
-        av2 = new Plongeur("Thibaud", Plongeur, 0, grille.getTuiles().get(8), null);//correspond à t9
-        av3 = new Navigateur("Alexis", Navigateur, 0, grille.getTuiles().get(9), null);//correspond à t10
-        av4 = new Messager("Mathilde", Messager, 0, grille.getTuiles().get(13), null);//correspond à t14
-        av5 = new Pilote("ami", Pilote, 0, grille.getTuiles().get(15), null);//correspond à t16
-        av6 = new Explorateur("l'autre Prof", Explorateur, 0, grille.getTuiles().get(16), null);//correspond à t17
-
+        av1 = new Ingenieur("le Prof", Ingénieur, 0, grille.getTuiles().get(3));//correspond à t4
+        av2 = new Plongeur("Thibaud", Plongeur, 0, grille.getTuiles().get(8));//correspond à t9
+        av3 = new Navigateur("Alexis", Navigateur, 0, grille.getTuiles().get(9));//correspond à t10
+        av4 = new Messager("Mathilde", Messager, 0, grille.getTuiles().get(13));//correspond à t14
+        av5 = new Pilote("ami", Pilote, 0, grille.getTuiles().get(15));//correspond à t16
+        av6 = new Explorateur("l'autre Prof", Explorateur, 0, grille.getTuiles().get(16));//correspond à t17
+        cartesInnondation = new TasCartesInnondation(grille);
+        cartesTresor = new TasCartesTrésor();
         VueInscription window = new VueInscription(this);
         window.afficher();
 
@@ -93,7 +94,11 @@ public class Controleur implements Observateur {
                 }
                 break;
             case FIN_TOUR:
+
                 if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
+                    //CONDITION si nombre de points de tirage > 0 OU (prévoir un bouton qui set à 0 les pointdt pour finir tour completement)
+                    cartesTresor.tirerCarteJoueurCourant(grille);
+
                     if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                         grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
                         grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbmaxPa());//prépare les pa du joueur suivant
@@ -108,6 +113,7 @@ public class Controleur implements Observateur {
                     } else if (grille.getJoueurCourant().getTypeRole() == TypeRole.Navigateur) {
                         grille.getJoueurCourant().setNbPA(nbmaxPa + 1);
                     }
+
                 }
 
                 grille.getJoueurCourant().getTuileAssechable().clear();
@@ -116,6 +122,10 @@ public class Controleur implements Observateur {
 
             case DEPLACER:
                 grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
+                break;
+
+            case PIOCHER_CARTE_TRESOR:
+                cartesTresor.tirerCarteJoueurCourant(grille);
                 break;
 
             case ASSECHER:

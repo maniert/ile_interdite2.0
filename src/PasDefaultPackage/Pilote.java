@@ -1,13 +1,12 @@
 package PasDefaultPackage;
 
-import java.util.ArrayList;
-
 public class Pilote extends Aventurier {
 
     private boolean helicoDispo;
     private boolean deplSpePilote;
-    public Pilote(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
-        super(nomJoueur, typeRole, idaventurier, t, main);
+
+    public Pilote(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t) {
+        super(nomJoueur, typeRole, idaventurier, t);
         this.helicoDispo = true;
         this.deplSpePilote = true;
     }
@@ -17,14 +16,14 @@ public class Pilote extends Aventurier {
         int i = 0;
         getTuileAtteignable().clear();// vider l'arraylist avant de le remplir
         if (isHelicoDispo()) {
-            while (i != 36) {       // tant que l'on a pas parcouru tout 
+            while (i != 36) {       // tant que l'on a pas parcouru tout
                 getTuileAtteignable().add(g.getTuiles().get(i)); // que l'on est pas à la tuile de l'aventurie
                 i++;
             }                                                      // on ajout aux tuiles atteingables
         } else {
             casePossiblebasique(g, this.getTuileAtteignable()); //rentre les déplacements propre à tout les roles
         }
-        filtrageDeplacementpossible(getTuileAtteignable(), g); //filtrage null+innondé+immergé+case du joueur 
+        filtrageDeplacementpossible(getTuileAtteignable(), g); //filtrage null+innondé+immergé+case du joueur
     }
 
     /**

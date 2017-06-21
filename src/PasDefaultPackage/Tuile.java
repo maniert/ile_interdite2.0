@@ -8,14 +8,14 @@ public class Tuile {
     /**
      * @return the figure
      */
-    public TypeFigurine getFigure() {
+    public TypeCarte getFigure() {
         return figure;
     }
 
     /**
      * @param figure the figure to set
      */
-    public void setFigure(TypeFigurine figure) {
+    public void setFigure(TypeCarte figure) {
         this.figure = figure;
     }
 
@@ -40,7 +40,7 @@ public class Tuile {
     private Etat etat;
     private ArrayList<Aventurier> aventuriers;
     private ArrayList<TypeRole> tresor;
-    private TypeFigurine figure;
+    private TypeCarte figure;
 
     public Tuile(int idTuile, String nomTuile, int x, int y) {
         this.idTuile = idTuile;
@@ -48,7 +48,7 @@ public class Tuile {
         this.x = x;
         this.y = y;
         this.etat = Etat.sec;
-        this.figure = TypeFigurine.vide;
+        this.figure = TypeCarte.vide;
         this.aventuriers = new ArrayList<Aventurier>();
     }
 
