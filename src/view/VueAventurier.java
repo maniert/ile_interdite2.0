@@ -196,8 +196,16 @@ public class VueAventurier {
                 plateau.removeAll();
                 white = false;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
-                m.type = TypesMessages.DEMANDE_ASSECHEMENT;
+                if (grille.getTuiles().get(m.getIndiceTuile()).getEtat() == Etat.innondé && grille.getJoueurCourant().getAssechInge().size() == 2) {
+                    grille.getTuiles().get(grille.getJoueurCourant().getAssechInge().get(0)).setEtat(Etat.selectionné);
+                    grille.getTuiles().get(grille.getJoueurCourant().getAssechInge().get(1)).setEtat(Etat.selectionné);
+                    grille.getJoueurCourant().getAssechInge().clear();
+                    grille.getJoueurCourant().assecherInge(grille);
+                    } else {
+                    m.type = TypesMessages.DEMANDE_ASSECHEMENT;
                 o.traiterMessage(m);
+                }
+                
                 plateau.removeAll();
                 white = true;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
@@ -230,7 +238,7 @@ public class VueAventurier {
                 o.traiterMessage(m);
                 window.setTitle(grille.getJoueurCourant().getNomJoueur());
                 plateau.removeAll();
-                white = false;
+                white = false;    
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
             }
 
@@ -255,6 +263,7 @@ public class VueAventurier {
     }
 
     public void peinture(Grille grille, Aventurier joueurCourant, Color couleur, boolean white) {
+        
 
         Tuile premiereTuile;
         panelAventurier.remove(jl);
@@ -314,39 +323,20 @@ public class VueAventurier {
                 Tuile t = grille.getTuiles().get(i);
                 if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
                     m.setIndiceTuile(i);
-                    m.type = TypesMessages.ASSECHER;
-                    o.traiterMessage(m);
                 }
-
+                
                 btnGrille[i].addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
-                            t.setEtat(Etat.selectionné);
-                            plateau.removeAll();
-                            boolean white = true;
-                            peinture(grille, grille.getJoueurCourant(), couleur, white);
-                        } else {
+                       
                             joueurCourant.assecher(t);
                             m.type = TypesMessages.ASSECHER;
                             o.traiterMessage(m);
-                            plateau.removeAll();
-                            boolean white = false;
-                            peinture(grille, grille.getJoueurCourant(), couleur, white);
-                        }
-                        m.type = TypesMessages.FIN_TOUR;
-                        o.traiterMessage(m);
-                        window.setTitle(grille.getJoueurCourant().getNomJoueur());
-                        if (grille.getJoueurCourant().getIngeasseche() == 1) {
-                            m.type = TypesMessages.ASSECHER;
+                            m.type = TypesMessages.FIN_TOUR;
                             o.traiterMessage(m);
-                            plateau.removeAll();
-                            boolean white = false;
-                            peinture(grille, grille.getJoueurCourant(), couleur, white);
-                        }
-                        m.type = TypesMessages.FIN_TOUR;
-                        o.traiterMessage(m);
-                        window.setTitle(grille.getJoueurCourant().getNomJoueur());
+                            window.setTitle(grille.getJoueurCourant().getNomJoueur());
+                            plateau.removeAll();//efface le plateau
+                            peinture(grille, grille.getJoueurCourant(), couleur,false);//réaffiche le plateau
                     }
 
                     ;
@@ -374,12 +364,10 @@ public class VueAventurier {
 
                 });
             }
+           
             if (white == true) {
                 if (joueurCourant.existedéjà((joueurCourant.getTuileAtteignable()), grille.getTuiles().get(i)) && white == true || joueurCourant.existedéjà((joueurCourant.getTuileAssechable()), grille.getTuiles().get(i))) {
                     btnGrille[i].setBackground(Color.WHITE);
-                }
-                if (grille.getTuiles().get(i).getEtat() == Etat.selectionné) {
-                    grille.getTuiles().get(i).setEtat(Etat.sec);
                 }
 
             }
@@ -387,6 +375,9 @@ public class VueAventurier {
         }
 
     }
+
+
+
 
     public JButton getBtnAutreAction() {
         return btnActionSpecial;

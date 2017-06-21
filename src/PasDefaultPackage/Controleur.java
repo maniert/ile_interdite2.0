@@ -128,15 +128,17 @@ public class Controleur implements Observateur {
                 if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                     if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                         grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                        grille.getJoueurCourant().setNbPA(getNbmaxPa());//prépare les pa du joueur suivant
+                        grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbmaxPa());//prépare les pa du joueur suivant
                     } else {                                                    //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
                         grille.setJoueurCourant(grille.getJoueurs().get(0));
-                        grille.getJoueurCourant().setNbPA(getNbmaxPa());
+                        grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbmaxPa());
 
                     }
                     if (grille.getJoueurCourant().getTypeRole() == TypeRole.Pilote) {
                         grille.getJoueurCourant().setHelicoDispo(true);
                         grille.getJoueurCourant().setDeplSpePilote(true);   //redonner le déplacement spécial au joueur Pilote
+                    } else if (grille.getJoueurCourant().getTypeRole() == TypeRole.Navigateur) {
+                        grille.getJoueurCourant().setNbPA(nbmaxPa + 1);
                     }
                 }
 
@@ -149,19 +151,15 @@ public class Controleur implements Observateur {
                 break;
 
             case ASSECHER:
-                if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
-                    ((Ingenieur) grille.getJoueurCourant()).getAssechInge().add(msg.getIndiceTuile());
-                    if (grille.getJoueurCourant().getIngeasseche() == 0) {
-                        grille.getJoueurCourant().setIngeasseche(grille.getJoueurCourant().getIngeasseche() + 1);
-                    } else if (grille.getJoueurCourant().getIngeasseche() == 1) {
-                        ((Ingenieur) grille.getJoueurCourant()).setNbPA(grille.getJoueurCourant().getNbPA() - 1);
-                        ((Ingenieur) grille.getJoueurCourant()).assecherInge(grille);
-                        ((Ingenieur) grille.getJoueurCourant()).getAssechInge().clear();
-                        grille.getJoueurCourant().setIngeasseche(0);
-
-                    }
-                } else {
+                if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur && grille.getJoueurCourant().getNbTuileAssech() == 0) {
+                    grille.getJoueurCourant().setNbTuileAssech(1);
                     grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
+                } else {
+                    if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
+                        grille.getJoueurCourant().setNbTuileAssech(0);
+                    } else {
+                         grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
+                    }
                 }
 
                 break;
@@ -221,20 +219,6 @@ public class Controleur implements Observateur {
 
     public void debutPartie() {
 
-    }
-
-    /**
-     * @return the nbmaxPa
-     */
-    public static int getNbmaxPa() {
-        return nbmaxPa;
-    }
-
-    /**
-     * @param aNbmaxPa the nbmaxPa to set
-     */
-    public static void setNbmaxPa(int nbmaxPa) {
-        nbmaxPa = nbmaxPa;
     }
     
     public Aventurier getAvi(int i){

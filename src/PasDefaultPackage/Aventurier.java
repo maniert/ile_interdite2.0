@@ -5,6 +5,20 @@ import java.util.ArrayList;
 
 public class Aventurier {
 
+    /**
+     * @return the nbmaxPa
+     */
+    public static int getNbmaxPa() {
+        return nbmaxPa;
+    }
+
+    /**
+     * @param aNbmaxPa the nbmaxPa to set
+     */
+    public static void setNbmaxPa(int aNbmaxPa) {
+        nbmaxPa = aNbmaxPa;
+    }
+
     private String nomJoueur;
     private TypeRole typeRole;
     private int nbPA = 2;
@@ -13,6 +27,7 @@ public class Aventurier {
     private ArrayList<Carte> main;
     private ArrayList<Tuile> tuilesAtteignable;
     private ArrayList<Tuile> tuilesAssechable;
+    private static int nbmaxPa = 3;
 
     public Aventurier(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
         this.nomJoueur = nomJoueur;
@@ -28,8 +43,6 @@ public class Aventurier {
     public Aventurier() {
 
     }
-    
-    
 
     /**
      *
@@ -138,7 +151,7 @@ public class Aventurier {
     public void filtrageDeplacementpossible(ArrayList<Tuile> tuileAtteignable, Grille g) {
         int i = 0;
         while (i != this.getTuileAtteignable().size()) {
-            if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i) == this.getTuile() || this.getTuileAtteignable().get(i).getEtat() == Etat.innondé || this.getTuileAtteignable().get(i).getEtat() == Etat.immergé) {
+            if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i) == this.getTuile() || this.getTuileAtteignable().get(i).getEtat() == Etat.immergé) {
                 this.getTuileAtteignable().remove(this.getTuileAtteignable().get(i));
             } else {
                 i++;
@@ -267,10 +280,18 @@ public class Aventurier {
     public void setAssechInge(ArrayList<Integer> assechInge) {
     }
 
-    public int getIngeasseche() {
+    public void assecherInge(Grille grille) {
+
+    }
+
+    public int getNbTuileAssech() {
         return 0;
     }
 
-    public void setIngeasseche(int ingeasseche) {
+    /**
+     * @param ingeasseche the nbTuileAssech to set
+     */
+    public void setNbTuileAssech(int ingeasseche) {
     }
+
 }

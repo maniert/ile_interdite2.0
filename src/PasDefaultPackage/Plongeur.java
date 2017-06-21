@@ -48,6 +48,7 @@ public class Plongeur extends Aventurier {
                     System.out.println("inondé");
                     if (!existedéjà(getTuilessouslocean(), tuilesAutour(innondé, getTuilessouslocean().get(k), grille).get(j)) && existedéjà(grille.getTuiles(), this.tuilesAutour(innondé, this.tuilessouslocean.get(k), grille).get(j))) {
                         getTuilessouslocean().add(this.tuilesAutour(innondé, this.tuilessouslocean.get(k), grille).get(j));
+                        getTuileAtteignable().add(this.tuilesAutour(innondé, this.tuilessouslocean.get(k), grille).get(j));
                     }
                 }
                 for (int j = 0; j <= tuilesAutour(immergé, getTuilessouslocean().get(k), grille).size() - 1; j++) {
@@ -66,7 +67,7 @@ public class Plongeur extends Aventurier {
     public void filtrageDeplacementPlongeur(ArrayList<Tuile> tuileAtteignable, Grille g) {
         int i = 0;
         while (i != this.getTuileAtteignable().size()) {
-            if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i) == this.getTuile() || this.getTuileAtteignable().get(i).getEtat() == Etat.innondé || this.getTuileAtteignable().get(i).getEtat() == Etat.immergé) {
+            if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i) == this.getTuile() || this.getTuileAtteignable().get(i).getEtat() == Etat.immergé) {
                 this.getTuileAtteignable().remove(this.getTuileAtteignable().get(i));
             } else {
                 i++;
