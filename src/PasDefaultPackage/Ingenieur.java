@@ -5,15 +5,20 @@ import java.util.ArrayList;
 public class Ingenieur extends Aventurier {
 
     private ArrayList<Integer> assechInge;
-    private int ingeasseche;
+    private int nbTuileAssech;
 
     public Ingenieur(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
         super(nomJoueur, typeRole, idaventurier, t, main);
         assechInge = new ArrayList<>();
     }
-
+    
+    /**
+     *
+     * @param grille
+     */
+    @Override
     public void assecherInge(Grille grille) {
-        for (int i = 0; i <= grille.getTuiles().size() - 1; i++) {
+        for (int i = 0; i <= grille.getJoueurCourant().getAssechInge().size() - 1; i++) {
             if (grille.getTuiles().get(i).getEtat() == Etat.selectionné) {
                 grille.getTuiles().get(i).setEtat(Etat.sec);
             }
@@ -35,17 +40,19 @@ public class Ingenieur extends Aventurier {
     }
 
     /**
-     * @return the ingeasseche
+     * @return the nbTuileAssech
      */
-    public int getIngeasseche() {
-        return ingeasseche;
+    @Override
+    public int getNbTuileAssech() {
+        return nbTuileAssech;
     }
 
     /**
-     * @param ingeasseche the ingeasseche to set
+     * @param ingeasseche the nbTuileAssech to set
      */
-    public void setIngeasseche(int ingeasseche) {
-        this.ingeasseche = ingeasseche;
+    @Override
+    public void setNbTuileAssech(int ingeasseche) {
+        this.nbTuileAssech = ingeasseche;
     }
 
 }

@@ -196,8 +196,16 @@ public class VueAventurier {
                 plateau.removeAll();
                 white = false;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
-                m.type = TypesMessages.DEMANDE_ASSECHEMENT;
+                if (grille.getTuiles().get(m.getIndiceTuile()).getEtat() == Etat.innondé && grille.getJoueurCourant().getAssechInge().size() == 2) {
+                    grille.getTuiles().get(grille.getJoueurCourant().getAssechInge().get(0)).setEtat(Etat.selectionné);
+                    grille.getTuiles().get(grille.getJoueurCourant().getAssechInge().get(1)).setEtat(Etat.selectionné);
+                    grille.getJoueurCourant().getAssechInge().clear();
+                    grille.getJoueurCourant().assecherInge(grille);
+                    } else {
+                    m.type = TypesMessages.DEMANDE_ASSECHEMENT;
                 o.traiterMessage(m);
+                }
+                
                 plateau.removeAll();
                 white = true;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
@@ -320,20 +328,15 @@ public class VueAventurier {
                 btnGrille[i].addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
-                            m.type = TypesMessages.ASSECHER;
-                            o.traiterMessage(m);
-                        } else {
+                       
                             joueurCourant.assecher(t);
                             m.type = TypesMessages.ASSECHER;
                             o.traiterMessage(m);
                             m.type = TypesMessages.FIN_TOUR;
                             o.traiterMessage(m);
                             window.setTitle(grille.getJoueurCourant().getNomJoueur());
-                        }
-                             plateau.removeAll();
-                             boolean white = false;
-                            peinture(grille, grille.getJoueurCourant(), couleur, false);
+                            plateau.removeAll();//efface le plateau
+                            peinture(grille, grille.getJoueurCourant(), couleur,false);//réaffiche le plateau
                     }
 
                     ;
@@ -361,13 +364,7 @@ public class VueAventurier {
 
                 });
             }
-            if(grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur && grille.getTuiles().get(i).getEtat() == Etat.selectionné){
-                grille.getTuiles().get(i).setEtat(Etat.sec);
-                plateau.removeAll();
-                white = false;
-                peinture(grille, grille.getJoueurCourant(), couleur, white);
-                                
-            }
+           
             if (white == true) {
                 if (joueurCourant.existedéjà((joueurCourant.getTuileAtteignable()), grille.getTuiles().get(i)) && white == true || joueurCourant.existedéjà((joueurCourant.getTuileAssechable()), grille.getTuiles().get(i))) {
                     btnGrille[i].setBackground(Color.WHITE);
