@@ -24,13 +24,13 @@ public class TasCartesInnondation {
     Carte c22 = new CInnondation(0, "Le Marais Brumeux");
     Carte c23 = new CInnondation(0, "Observatoire");
     Carte c24 = new CInnondation(0, "Le Rocher Fantôme");
-    Carte c25 = new CInnondation(0, "L");
-    Carte c26 = new CInnondation(0, "L");
-    Carte c27 = new CInnondation(0, "L");
-    Carte c28 = new CInnondation(0, "L");
-    Carte c29 = new CInnondation(0, "L");
-    Carte c33 = new CInnondation(0, "L");
-    Carte c34 = new CInnondation(0, "L");
+    Carte c25 = new CInnondation(0, "La Caserne Du Brasier");
+    Carte c26 = new CInnondation(0, "Le Temple Du Soleil");
+    Carte c27 = new CInnondation(0, "Le Temple De La Lune");
+    Carte c28 = new CInnondation(0, "Le Palais Des Marées");
+    Carte c29 = new CInnondation(0, "Le Val Du Crepuscule");
+    Carte c33 = new CInnondation(0, "La Tour Du Guet");
+    Carte c34 = new CInnondation(0, "Le Jardin Des Murmures");
 
     public void mélangerCarteInnondationDéfausse() {
     }

@@ -126,7 +126,7 @@ public class Grille {
         this.getTuiles().add(t33);
         this.getTuiles().add(t34);
         this.getTuiles().add(t35);
-        this.getTuiles().add(t36);
+        this.getTuiles().add(t36); 
 
      /*   Aventurier av1 = new Ingenieur("le Prof", Ingénieur, 0, this.getTuiles().get(3), null);//correspond à t4
         Aventurier av2 = new Plongeur("Thibaud", Plongeur, 0, this.getTuiles().get(8), null);//correspond à t9

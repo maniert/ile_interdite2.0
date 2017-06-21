@@ -164,7 +164,7 @@ public class VueInscription {
 
     public void afficher() {
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        window.setSize(800, 150);
+        window.setSize(1000, 150);
         window.setVisible(true);
     }
 
