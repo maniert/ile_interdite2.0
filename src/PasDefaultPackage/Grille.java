@@ -15,6 +15,7 @@ public class Grille {
     private ArrayList<Tuile> tuiles;
     private HashMap<Integer, Aventurier> joueurs;
     private Aventurier joueurCourant;
+    
 
     public Grille() {
         this.nbligne = 6;
@@ -126,36 +127,7 @@ public class Grille {
         this.getTuiles().add(t35);
         this.getTuiles().add(t36);
 
-        Aventurier av1 = new Ingenieur("le Prof", Ingénieur, 0, this.getTuiles().get(3), null);//correspond à t4
-        Aventurier av2 = new Plongeur("Thibaud", Plongeur, 0, this.getTuiles().get(8), null);//correspond à t9
-        // Aventurier av3 = new Navigateur("Alexis", Navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
-        Aventurier av4 = new Messager("Mathilde", Messager, 0, this.getTuiles().get(13), null);//correspond à t14
-        Aventurier av5 = new Pilote("Sami", Pilote, 0, this.getTuiles().get(15), null);//correspond à t16
-        Aventurier av6 = new Explorateur("l'autre Prof", Explorateur, 0, this.getTuiles().get(16), null);//correspond à t17
-        joueurs.put(1, av1);
-        joueurs.put(2, av2);
-        //  joueurs.put(3, av3);
-        joueurs.put(3, av4);
-        joueurs.put(4, av6);
-        //
 
-        for (int i = 0; i <= joueurs.size(); i++) {
-
-            if (joueurs.get(i) == av1) {
-                this.getTuiles().get(3).getAventuriers().add(av1);
-            } else if (joueurs.get(i) == av2) {
-                this.getTuiles().get(8).getAventuriers().add(av2);
-                // } else if (joueurs.get(i) == av3) {
-                //    this.getTuiles().get(9).getAventuriers().add(av3);
-            } else if (joueurs.get(i) == av4) {
-                this.getTuiles().get(13).getAventuriers().add(av4);
-            } else if (joueurs.get(i) == av5) {
-                this.getTuiles().get(15).getAventuriers().add(av5);
-            } else if (joueurs.get(i) == av6) {
-                this.getTuiles().get(16).getAventuriers().add(av6);
-            }
-        }
-        joueurCourant = joueurs.get(1);
     }
 
     /**

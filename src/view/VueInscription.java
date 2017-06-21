@@ -5,11 +5,15 @@
  */
 package view;
 
+import PasDefaultPackage.Message;
 import PasDefaultPackage.Observateur;
+import PasDefaultPackage.TypesMessages;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -28,63 +32,80 @@ public class VueInscription {
 
     private JFrame window;
     private JPanel mainPanel;
-    
+
     // nb Joueur
-    private JRadioButton nbJoueur, nbJoueur2, nbJoueur3, nbJoueur4;
-            
+    private JRadioButton rnbJoueur2, rnbJoueur3, rnbJoueur4;
+
     // nom
-    private JTextField nom;
-    private JLabel nomLabel;
+    private JTextField nom, nom2, nom3, nom4;
+    private JLabel nomLabel, nomLabel2, nomLabel3, nomLabel4;
 
     // 
     private JRadioButton level, levelNovice, levelNormal, levelElite, levelLegendaire;
 
     private Observateur observateur;
+    private Message m;
 
-    public VueInscription() {
+    public VueInscription(Observateur o) {
         this.window = new JFrame();
-      
-        
+        this.observateur = o;
+        m = new Message();
+
         window.setTitle("Demarrage partie");
         mainPanel = new JPanel(new BorderLayout());
-        
+
         mainPanel.setBackground(new Color(230, 0, 155));
-        mainPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 2));     
-        
+        mainPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 2));
+
         // nb Joueur
         JPanel nbJoueurPan = new JPanel();
         nbJoueurPan.setBackground(Color.white);
         nbJoueurPan.setBorder(BorderFactory.createTitledBorder("Nombre de joueur"));
-        nbJoueurPan.setPreferredSize(new Dimension(300,100));
-        nbJoueur2 = new JRadioButton("2");
-        nbJoueur2.setSelected(true);
-        nbJoueur3 = new JRadioButton("3");
-        nbJoueur4 = new JRadioButton("4");
+        nbJoueurPan.setPreferredSize(new Dimension(300, 100));
+        rnbJoueur2 = new JRadioButton("2");
+        rnbJoueur2.setSelected(true);
+        rnbJoueur3 = new JRadioButton("3");
+        rnbJoueur4 = new JRadioButton("4");
         ButtonGroup btnGrJoueur = new ButtonGroup();
-        btnGrJoueur.add(nbJoueur2);
-        btnGrJoueur.add(nbJoueur3);
-        btnGrJoueur.add(nbJoueur4);
-        nbJoueurPan.add(nbJoueur2);
-        nbJoueurPan.add(nbJoueur3);
-        nbJoueurPan.add(nbJoueur4);
-        
+        btnGrJoueur.add(rnbJoueur2);
+        btnGrJoueur.add(rnbJoueur3);
+        btnGrJoueur.add(rnbJoueur4);
+        nbJoueurPan.add(rnbJoueur2);
+        nbJoueurPan.add(rnbJoueur3);
+        nbJoueurPan.add(rnbJoueur4);
+
         // Pour chaque joueur il doit y avoir un nomLabel
         // nom Joueur
         JPanel nomPan = new JPanel();
         nomPan.setBackground(Color.white);
-        nomPan.setPreferredSize(new Dimension(300, 100));
+        nomPan.setPreferredSize(new Dimension(500, 100));
         nom = new JTextField();
         nom.setPreferredSize(new Dimension(100, 25));
+        nom2 = new JTextField();
+        nom2.setPreferredSize(new Dimension(100, 25));
+        nom3 = new JTextField();
+        nom3.setPreferredSize(new Dimension(100, 25));
+        nom4 = new JTextField();
+        nom4.setPreferredSize(new Dimension(100, 25));
         nomPan.setBorder(BorderFactory.createTitledBorder("Nom du Joueur"));
-        nomLabel = new JLabel("Saisir un nom : ");
+        nomLabel = new JLabel("Saisir nom Joueur 1 : ");
+        nomLabel2 = new JLabel("Saisir nom Joueur 2 : ");
+        nomLabel3 = new JLabel("Saisir nom Joueur 3 : ");
+        nomLabel4 = new JLabel("Saisir nom Joueur 4 : ");
         nomPan.add(nomLabel);
         nomPan.add(nom);
+        nomPan.add(nomLabel2);
+        nomPan.add(nom2);
+        nomPan.add(nomLabel3);
+        nomPan.add(nom3);
+        nomPan.add(nomLabel4);
+        nomPan.add(nom4);
 
         // level 
         JPanel levelPan = new JPanel();
         levelPan.setBackground(Color.white);
         levelPan.setBorder(BorderFactory.createTitledBorder("Niveau de difficulté"));
-        levelPan.setPreferredSize(new Dimension(300,100));
+        levelPan.setPreferredSize(new Dimension(300, 100));
         levelNovice = new JRadioButton("Novice");
         levelNovice.setSelected(true);
         levelNormal = new JRadioButton("Normal");
@@ -95,28 +116,68 @@ public class VueInscription {
         btnGrLevel.add(levelNormal);
         btnGrLevel.add(levelElite);
         btnGrLevel.add(levelLegendaire);
-        levelPan.add(levelNovice); 
+        levelPan.add(levelNovice);
         levelPan.add(levelNormal);
         levelPan.add(levelElite);
         levelPan.add(levelLegendaire);
-        
-        
+
         JPanel centre = new JPanel();
         centre.add(nbJoueurPan);
         centre.add(nomPan);
         centre.add(levelPan);
-        
+
+        //Lance Partie quand on clique dessus
         JButton btnStartGame = new JButton("A l'Aventure !");
-        
+        btnStartGame.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                m.type = TypesMessages.DEMARRER_PARTIE;
+                m.nbj = getnbJoueurs();
+                observateur.traiterMessage(m); 
+            }
+
+            @Override
+
+            public void mousePressed(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+            }
+        });
+
         mainPanel.add(centre, BorderLayout.CENTER);
         mainPanel.add(btnStartGame, BorderLayout.SOUTH);
         this.window.add(mainPanel);
-    
-     
+
     }
-     public void afficher() {
+
+    public void afficher() {
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         window.setSize(800, 150);
-        window.setVisible(true);                        
+        window.setVisible(true);
+    }
+
+    public int getnbJoueurs() {
+        if (rnbJoueur2.isSelected()) {
+            return 2;
+        }
+        else if (rnbJoueur3.isSelected()) {
+            return 3;
+        }
+        else if (rnbJoueur4.isSelected()) {
+            return 4;
+        } else {
+            return 0;
+        }
+        
     }
 }

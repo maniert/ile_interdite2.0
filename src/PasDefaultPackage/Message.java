@@ -14,6 +14,7 @@ public class Message {
     public TypesMessages type;  // type de message
     public Tuile t;
     public int indiceTuile;
+    public int nbj;
 
     /**
      * @return the indiceTuile
