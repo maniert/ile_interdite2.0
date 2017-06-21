@@ -4,11 +4,11 @@ import static PasDefaultPackage.Etat.innondé;
 import static PasDefaultPackage.Etat.sec;
 import static PasDefaultPackage.Etat.immergé;
 
-public class Innondation extends Carte {
+public class CInnondation extends Carte {
 
     Tuile tuile;
 
-    public Innondation(int numID, String nomCarte) {
+    public CInnondation(int numID, String nomCarte) {
         super(numID, nomCarte);
     }    
         

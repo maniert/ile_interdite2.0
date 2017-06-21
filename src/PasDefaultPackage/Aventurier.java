@@ -28,7 +28,7 @@ public class Aventurier {
     private ArrayList<Tuile> tuilesAtteignable;
     private ArrayList<Tuile> tuilesAssechable;
     private static int nbmaxPa = 3;
-    
+
     public Aventurier(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t, ArrayList<Carte> main) {
         this.nomJoueur = nomJoueur;
         this.typeRole = typeRole;
@@ -43,8 +43,6 @@ public class Aventurier {
     public Aventurier() {
 
     }
-    
-    
 
     /**
      *
@@ -153,7 +151,7 @@ public class Aventurier {
     public void filtrageDeplacementpossible(ArrayList<Tuile> tuileAtteignable, Grille g) {
         int i = 0;
         while (i != this.getTuileAtteignable().size()) {
-            if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i) == this.getTuile() || this.getTuileAtteignable().get(i).getEtat() == Etat.innondé || this.getTuileAtteignable().get(i).getEtat() == Etat.immergé) {
+            if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i) == this.getTuile() || this.getTuileAtteignable().get(i).getEtat() == Etat.immergé) {
                 this.getTuileAtteignable().remove(this.getTuileAtteignable().get(i));
             } else {
                 i++;
@@ -281,12 +279,12 @@ public class Aventurier {
      */
     public void setAssechInge(ArrayList<Integer> assechInge) {
     }
-    
-     public void assecherInge(Grille grille) {
-       
+
+    public void assecherInge(Grille grille) {
+
     }
-     
-     public int getNbTuileAssech() {
+
+    public int getNbTuileAssech() {
         return 0;
     }
 

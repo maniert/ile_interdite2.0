@@ -131,12 +131,12 @@ public class Grille {
         Aventurier av2 = new Plongeur("Thibaud", Plongeur, 0, this.getTuiles().get(8), null);//correspond à t9
         Aventurier av3 = new Navigateur("Alexis", Navigateur, 0, this.getTuiles().get(9), null);//correspond à t10
         Aventurier av4 = new Messager("Mathilde", Messager, 0, this.getTuiles().get(13), null);//correspond à t14
-        Aventurier av5 = new Pilote("Sami", Pilote, 0, this.getTuiles().get(15), null);//correspond à t16
+        Aventurier av5 = new Pilote("ami", Pilote, 0, this.getTuiles().get(15), null);//correspond à t16
         Aventurier av6 = new Explorateur("l'autre Prof", Explorateur, 0, this.getTuiles().get(16), null);//correspond à t17
         joueurs.put(1, av1);
         joueurs.put(2, av2);
-        joueurs.put(3, av3);
-       // joueurs.put(3, av4);
+        joueurs.put(3, av5);
+        // joueurs.put(3, av5);
         joueurs.put(4, av6);
         //
 
