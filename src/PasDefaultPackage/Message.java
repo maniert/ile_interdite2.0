@@ -5,6 +5,8 @@
  */
 package PasDefaultPackage;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author maniert
@@ -15,6 +17,11 @@ public class Message {
     public Tuile t;
     public int indiceTuile;
     private int nbj;
+    private ArrayList<String> nomsJoueurs;
+
+    public Message() {
+        nomsJoueurs = new ArrayList<>();
+    }
 
     /**
      * @return the indiceTuile
@@ -44,4 +51,10 @@ public class Message {
         this.nbj = nbj;
     }
 
+    /**
+     * @return the nomsJoueursBase
+     */
+    public ArrayList<String> getNomsJoueurs() {
+        return nomsJoueurs;
+    }
 }

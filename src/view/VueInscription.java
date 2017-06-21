@@ -8,7 +8,6 @@ package view;
 import PasDefaultPackage.Message;
 import PasDefaultPackage.Observateur;
 import PasDefaultPackage.TypesMessages;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,7 +16,6 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,10 +35,10 @@ public class VueInscription {
     private JRadioButton rnbJoueur2, rnbJoueur3, rnbJoueur4;
 
     // nom
-    private JTextField nom, nom2, nom3, nom4;
+    private JTextField nom1, nom2, nom3, nom4;
     private JLabel nomLabel, nomLabel2, nomLabel3, nomLabel4;
 
-    // 
+    //
     private JRadioButton level, levelNovice, levelNormal, levelElite, levelLegendaire;
 
     private Observateur observateur;
@@ -79,8 +77,8 @@ public class VueInscription {
         JPanel nomPan = new JPanel();
         nomPan.setBackground(Color.white);
         nomPan.setPreferredSize(new Dimension(500, 100));
-        nom = new JTextField();
-        nom.setPreferredSize(new Dimension(100, 25));
+        nom1 = new JTextField();
+        nom1.setPreferredSize(new Dimension(100, 25));
         nom2 = new JTextField();
         nom2.setPreferredSize(new Dimension(100, 25));
         nom3 = new JTextField();
@@ -93,7 +91,7 @@ public class VueInscription {
         nomLabel3 = new JLabel("Saisir nom Joueur 3 : ");
         nomLabel4 = new JLabel("Saisir nom Joueur 4 : ");
         nomPan.add(nomLabel);
-        nomPan.add(nom);
+        nomPan.add(nom1);
         nomPan.add(nomLabel2);
         nomPan.add(nom2);
         nomPan.add(nomLabel3);
@@ -101,7 +99,7 @@ public class VueInscription {
         nomPan.add(nomLabel4);
         nomPan.add(nom4);
 
-        // level 
+        // level
         JPanel levelPan = new JPanel();
         levelPan.setBackground(Color.white);
         levelPan.setBorder(BorderFactory.createTitledBorder("Niveau de difficulté"));
@@ -131,9 +129,15 @@ public class VueInscription {
         btnStartGame.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
+
                 m.type = TypesMessages.DEMARRER_PARTIE;
                 m.setNbj(getnbJoueurs());
-                observateur.traiterMessage(m); 
+                m.getNomsJoueurs().add(nom1.getText());
+                m.getNomsJoueurs().add(nom2.getText());
+                m.getNomsJoueurs().add(nom3.getText());
+                m.getNomsJoueurs().add(nom4.getText());
+                observateur.traiterMessage(m);
+
             }
 
             @Override
@@ -153,7 +157,6 @@ public class VueInscription {
             public void mouseExited(MouseEvent me) {
             }
 
-            
         });
 
         mainPanel.add(centre, BorderLayout.CENTER);
@@ -164,22 +167,20 @@ public class VueInscription {
 
     public void afficher() {
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        window.setSize(1000, 150);
+        window.setSize(800, 420);
         window.setVisible(true);
     }
 
     public int getnbJoueurs() {
         if (rnbJoueur2.isSelected()) {
             return 2;
-        }
-        else if (rnbJoueur3.isSelected()) {
+        } else if (rnbJoueur3.isSelected()) {
             return 3;
-        }
-        else if (rnbJoueur4.isSelected()) {
+        } else if (rnbJoueur4.isSelected()) {
             return 4;
         } else {
             return 2;
         }
-        
+
     }
 }
