@@ -75,14 +75,16 @@ public class Controleur implements Observateur {
 
         switch (msg.type) {
             case DEMARRER_PARTIE:
-                ArrayList<Aventurier> ttAv = new ArrayList<>();
-        
+        ArrayList<Aventurier> ttAv = new ArrayList<>();
         ttAv.add(av1); ttAv.add(av2); ttAv.add(av3); ttAv.add(av4); ttAv.add(av5); ttAv.add(av6);
         
         Collections.shuffle(ttAv);
         
-        for (int i = 0; i < msg.nbj; i++) {
-            grille.getJoueurs().put(i+1, ttAv.get(i));
+        for (int i = 0; i < msg.getNbj(); i++) {
+            System.out.println("/n" + msg.getNbj());
+            grille.getJoueurs().put(i, ttAv.get(i));
+            grille.getJoueurs().get(i).getTuile().getAventuriers().add(getAvi(i));
+            System.out.println(msg.getNbj());
         }
         
        
@@ -94,12 +96,9 @@ public class Controleur implements Observateur {
         //grille.getJoueurs().put(6, av6);
         //
 
-        for (int i = 0; i < grille.getJoueurs().size()-1; i++) {
-            grille.getJoueurs().get(i).getTuile().getAventuriers().add(getAvi(i));
-        }
         
         grille.setJoueurCourant(grille.getJoueurs().get(1));
-        VueAventurier window = new VueAventurier(grille, Color.white, this);
+        vueAventurier = new VueAventurier(grille, Color.white, this);
 
                 break;
 
@@ -240,17 +239,17 @@ public class Controleur implements Observateur {
     
     public Aventurier getAvi(int i){
         switch (i){
-            case 1:
+            case 0:
                 return av1;
-            case 2:
+            case 1:
                 return av2;
-            case 3:
+            case 2:
                 return av3;
-            case 4:
+            case 3:
                 return av4;
-            case 5:
+            case 4:
                 return av5;
-            case 6:
+            case 5:
                 return av6;
         }
         return null;

@@ -132,7 +132,7 @@ public class VueInscription {
             @Override
             public void mouseClicked(MouseEvent me) {
                 m.type = TypesMessages.DEMARRER_PARTIE;
-                m.nbj = getnbJoueurs();
+                m.setNbj(getnbJoueurs());
                 observateur.traiterMessage(m); 
             }
 
@@ -152,6 +152,8 @@ public class VueInscription {
             @Override
             public void mouseExited(MouseEvent me) {
             }
+
+            
         });
 
         mainPanel.add(centre, BorderLayout.CENTER);
@@ -176,7 +178,7 @@ public class VueInscription {
         else if (rnbJoueur4.isSelected()) {
             return 4;
         } else {
-            return 0;
+            return 2;
         }
         
     }

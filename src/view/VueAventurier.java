@@ -433,6 +433,10 @@ public class VueAventurier {
 
         for (int j = 0; j < grille.getTuiles().get(i).getAventuriers().size(); j++) {
             if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
+                System.out.println(grille.getTuiles().get(i).getAventuriers().size());
+                System.out.println(i);
+
+
                 switch (grille.getTuiles().get(i).getAventuriers().get(j).getTypeRole()) {
 
                     case Plongeur:
@@ -475,7 +479,6 @@ public class VueAventurier {
     }
 
     public void creationTuileTresor(Grille grille, int i) {
-        System.out.println(i);
         switch (grille.getTuiles().get(i).getFigure()) {
             case la_Pierre_sacrée:
                 Tresor tsacrée = new Tresor(TypeFigurine.la_Pierre_sacrée, Color.GRAY);

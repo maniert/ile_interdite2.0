@@ -14,7 +14,7 @@ public class Message {
     public TypesMessages type;  // type de message
     public Tuile t;
     public int indiceTuile;
-    public int nbj;
+    private int nbj;
 
     /**
      * @return the indiceTuile
@@ -28,6 +28,20 @@ public class Message {
      */
     public void setIndiceTuile(int i) {
         this.indiceTuile = i;
+    }
+
+    /**
+     * @return the nbj
+     */
+    public int getNbj() {
+        return nbj;
+    }
+
+    /**
+     * @param nbj the nbj to set
+     */
+    public void setNbj(int nbj) {
+        this.nbj = nbj;
     }
 
 }
