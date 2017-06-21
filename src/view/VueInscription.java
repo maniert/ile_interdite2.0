@@ -15,12 +15,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import util.Parameters;
 
 /**
  *
@@ -30,7 +32,9 @@ public class VueInscription {
 
     private JFrame window;
     private JPanel mainPanel;
-
+     
+    private JLabel icon;
+    
     // nb Joueur
     private JRadioButton rnbJoueur2, rnbJoueur3, rnbJoueur4;
 
@@ -48,13 +52,25 @@ public class VueInscription {
         this.window = new JFrame();
         this.observateur = o;
         m = new Message();
-
+          
         window.setTitle("Demarrage partie");
+         window.setBackground(Color.yellow);
         mainPanel = new JPanel(new BorderLayout());
 
-        mainPanel.setBackground(new Color(230, 0, 155));
-        mainPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 2));
+        
+        mainPanel.setBackground(Color.PINK);        
+        mainPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 5));
+        
+        
+        
+        //image
+            icon = new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\ile.png"));
+            JPanel panIcon = new JPanel();
+            panIcon.setBackground(Color.white);
+            panIcon.setLayout(new BorderLayout());
+            panIcon.add(icon);
 
+        
         // nb Joueur
         JPanel nbJoueurPan = new JPanel();
         nbJoueurPan.setBackground(Color.white);
@@ -160,9 +176,9 @@ public class VueInscription {
         });
 
         mainPanel.add(centre, BorderLayout.CENTER);
-        mainPanel.add(btnStartGame, BorderLayout.SOUTH);
+        levelPan.add(btnStartGame, BorderLayout.SOUTH);
+        mainPanel.add(panIcon, BorderLayout.WEST);
         this.window.add(mainPanel);
-
     }
 
     public void afficher() {
