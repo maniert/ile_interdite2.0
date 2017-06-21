@@ -414,7 +414,7 @@ public class VueAventurier {
 
     public void creationPion(Grille grille, int i) {
 
-        for (int j = 0; j < grille.getTuiles().get(i).getAventuriers().size(); j++) {
+        for (int j = 0; j <= grille.getTuiles().get(i).getAventuriers().size() - 1; j++) {
             if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
                 System.out.println(grille.getTuiles().get(i).getAventuriers().size());
                 System.out.println(i);

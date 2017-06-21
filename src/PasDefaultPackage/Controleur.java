@@ -39,33 +39,9 @@ public class Controleur implements Observateur {
         av4 = new Messager("Mathilde", Messager, 0, grille.getTuiles().get(13), null);//correspond à t14
         av5 = new Pilote("ami", Pilote, 0, grille.getTuiles().get(15), null);//correspond à t16
         av6 = new Explorateur("l'autre Prof", Explorateur, 0, grille.getTuiles().get(16), null);//correspond à t17
-        //initialisation partie
-        /*
-        creer une autre vue
-         */
-        //lancement partie
-        //finPartie = false;
-        //window.setVisible(true);
 
         VueInscription window = new VueInscription(this);
         window.afficher();
-//
-        /* if (!finPartie) {
-
-            grille.getJoueurCourant().setNbPA(nbmaxPa);
-            int i = 1;
-
-            while (i <= grille.getnbJ()) {
-                int nbpaPast = nbmaxPa;
-                if (grille.getJoueurCourant().getNbPA() != nbpaPast) {
-                    window.peinture(grille, grille.getJoueurCourant(), Color.blue, finPartie);
-                }
-
-            }
-
-        } else {
-            System.out.println("fin Partie!");
-        } */
 
     }
 
@@ -85,17 +61,10 @@ public class Controleur implements Observateur {
                 Collections.shuffle(ttAv);
                 for (int i = 0; i < msg.getNbj(); i++) { // parcours les aventuriers
                     grille.getJoueurs().put(i + 1, ttAv.get(i)); //ajoute l'aventurier i au hashmap
-                    grille.getJoueurs().get(i + 1).getTuile().getAventuriers().add(getAvi(i + 1)); // Ajoute l'aventurier à la sa tuile
+                    grille.getJoueurs().get(i + 1).getTuile().getAventuriers().add(ttAv.get(i)); // Ajoute l'aventurier à la sa tuile
                     grille.getJoueurs().get(i + 1).setNomJoueur(msg.getNomsJoueurs().get(i));   //
                 }
 
-                //grille.getJoueurs().put(1, av1);
-                //grille.getJoueurs().put(2, av2);
-                //grille.getJoueurs().put(3, av3);
-                //grille.getJoueurs().put(4, av4);
-                //grille.getJoueurs().put(5, av5);
-                //grille.getJoueurs().put(6, av6);
-                //
                 grille.setJoueurCourant(grille.getJoueurs().get(1));
                 vueAventurier = new VueAventurier(grille, Color.white, this);
 
@@ -216,24 +185,6 @@ public class Controleur implements Observateur {
 
     public void debutPartie() {
 
-    }
-
-    public Aventurier getAvi(int i) {
-        switch (i) {
-            case 1:
-                return av1;
-            case 2:
-                return av2;
-            case 3:
-                return av3;
-            case 4:
-                return av4;
-            case 5:
-                return av5;
-            case 6:
-                return av6;
-        }
-        return null;
     }
 
 }
