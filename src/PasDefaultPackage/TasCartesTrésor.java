@@ -14,6 +14,34 @@ public class TasCartesTrésor {
     private ArrayList<Carte> cartesTresorEnJeu;
     private ArrayList<Carte> cartesTresorDefausse;
 
+    public TasCartesTrésor() {
+        cartesFigurineEnJeu = new ArrayList<>();
+        cartesSpecialesEnJeu = new ArrayList<>();
+        cartesMonteeDesEauxEnJeu = new ArrayList<>(); 
+        cartesFigurineDefausse = new ArrayList<>();
+        cartesSpecialesDefausse = new ArrayList<>();
+        cartesMonteeDesEauxEnJeuDefausse = new ArrayList<>();
+        
+        
+        cartesTresorEnJeu = new ArrayList<>();
+        cartesTresorDefausse = new ArrayList<>();
+        
+        Carte cf1 = new CFigurine(0, "", TypeFigurine.vide);
+        
+        Carte cs1 = new CSpéciale(0, "", TypeSpeciale.sacDeSable);
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+
     public void tirerCarte() {
     }
 

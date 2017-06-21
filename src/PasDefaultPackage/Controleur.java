@@ -109,8 +109,9 @@ public class Controleur implements Observateur {
                 } else {
                     if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
                         grille.getJoueurCourant().setNbTuileAssech(0);
+                    } else {
+                         grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
                     }
-                    grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
                 }
 
                 break;
