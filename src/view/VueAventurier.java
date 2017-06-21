@@ -35,7 +35,7 @@ public class VueAventurier {
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
     private final JTextField position;
-
+    
     public VueAventurier(Grille g, Aventurier aJoueur, Color couleur) {
 
         this.window = new JFrame();
@@ -117,7 +117,7 @@ public class VueAventurier {
                     TPontAbimes.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            
+                           
                         }
 
                         @Override

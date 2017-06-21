@@ -125,8 +125,7 @@ public class Contrôleur {
      * @param a
      */
     public void jouerTour(Aventurier a) {
-        // TODO - implement Contrôleur.jouerTour
-        throw new UnsupportedOperationException();
+        
     }
 
     /**
@@ -163,9 +162,9 @@ public class Contrôleur {
         throw new UnsupportedOperationException();
     }
 
-    public void demandeDeplacement(Aventurier a) {//tuile de destination + aventurier concerné
+    public void demandeDeplacement(Aventurier a, Grille g) {//tuile de destination + aventurier concerné
         boolean enAttenteDAppuie = true;
-
+        a.setTuileAtteignable(g);
         a.getTuileAtteignable();
         /*AFFICHAGE MATHILDE*/
  /*debut loop EN ATTENTE DE detection click sur bouton possible
