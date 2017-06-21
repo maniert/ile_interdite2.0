@@ -15,6 +15,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.MatteBorder;
+import util.Parameters;
 
 public class VueAventurier {
 
@@ -120,15 +122,19 @@ public class VueAventurier {
         jl = new JLabel(grille.getJoueurCourant().getTypeRole().toString(), CENTER);
 
         peinture(grille, grille.getJoueurCourant(), couleur, white);
-
-        this.mainJoueur.add(new JButton(""));
-        this.mainJoueur.add(new JButton(""));
-        this.mainJoueur.add(new JButton(""));
-        this.mainJoueur.add(new JButton(""));
+        
+        JPanel joueurPan = new JPanel();
+         joueurPan.setBackground(Color.white);
+        joueurPan.setBorder(BorderFactory.createTitledBorder(grille.getJoueurs().toString()));
+        
+       
         //ferme la fenêtre correctement.
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setVisible(true);
         mainPanel.repaint();
+        
+        
+        
 
         btnDeplacer.addMouseListener(new MouseListener() {
             @Override
