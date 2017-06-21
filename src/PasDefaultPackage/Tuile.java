@@ -1,8 +1,37 @@
 package PasDefaultPackage;
 
+import static PasDefaultPackage.Etat.vide;
 import java.util.ArrayList;
 
 public class Tuile {
+
+    /**
+     * @return the figure
+     */
+    public TypeFigurine getFigure() {
+        return figure;
+    }
+
+    /**
+     * @param figure the figure to set
+     */
+    public void setFigure(TypeFigurine figure) {
+        this.figure = figure;
+    }
+
+    /**
+     * @return the tresor
+     */
+    public ArrayList<TypeRole> getTresor() {
+        return tresor;
+    }
+
+    /**
+     * @param tresor the tresor to set
+     */
+    public void setTresor(ArrayList<TypeRole> tresor) {
+        this.tresor = tresor;
+    }
 
     private int idTuile;
     private String nomTuile;
@@ -10,6 +39,8 @@ public class Tuile {
     private int y;
     private Etat etat;
     private ArrayList<Aventurier> aventuriers;
+    private ArrayList<TypeRole> tresor;
+    private TypeFigurine figure;
 
     public Tuile(int idTuile, String nomTuile, int x, int y) {
         this.idTuile = idTuile;
@@ -17,7 +48,12 @@ public class Tuile {
         this.x = x;
         this.y = y;
         this.etat = Etat.sec;
+        this.figure = TypeFigurine.vide;
         this.aventuriers = new ArrayList<Aventurier>();
+    }
+
+    public Tuile() {
+
     }
 
     public Etat getEtat() {

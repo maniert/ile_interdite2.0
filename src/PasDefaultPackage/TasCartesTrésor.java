@@ -4,45 +4,37 @@ import java.util.*;
 
 public class TasCartesTrésor {
 
-	Collection<CFigurine> cartesFigurineEnJeu;
-	Collection<CSpéciale> cartesSpecialesEnJeu;
-	Collection<CMonteeDesEaux> cartesMontéeDesEauxEnJeu;
-	Collection<CFigurine> cartesFigurineDéfausse;
-	Collection<CSpéciale> cartesSpécialesDéfausse;
-	Collection<Ctrésor> cartesTresorEnJeu;
-	Collection<Ctrésor> cartesTresorDefausse;
+    private ArrayList<CFigurine> cartesFigurineEnJeu;
+    private ArrayList<CSpéciale> cartesSpecialesEnJeu;
+    private ArrayList<CMonteeDesEaux> cartesMonteeDesEauxEnJeu;
+    private ArrayList<CFigurine> cartesFigurineDefausse;
+    private ArrayList<CSpéciale> cartesSpecialesDefausse;
+    private ArrayList<CMonteeDesEaux> cartesMonteeDesEauxEnJeuDefausse;
 
-	public void tirerCarte() {
-		// TODO - implement TasCartesTrésor.tirerCarte
-		throw new UnsupportedOperationException();
-	}
+    private ArrayList<Carte> cartesTresorEnJeu;
+    private ArrayList<Carte> cartesTresorDefausse;
 
-	/**
-	 * 
-	 * @param t
-	 */
-	public void defausserCarte(Ctrésor t) {
-		// TODO - implement TasCartesTrésor.defausserCarte
-		throw new UnsupportedOperationException();
-	}
+    public void tirerCarte() {
+    }
 
-	/**
-	 * 
-	 * @param t
-	 */
-	public void removeCarte(Ctrésor t) {
-		// TODO - implement TasCartesTrésor.removeCarte
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param t
+     */
+    public void defausserCarte(Carte c) {
+    }
 
-	public void melangerCarteTresorDefausse() {
-		// TODO - implement TasCartesTrésor.melangerCarteTresorDefausse
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param t
+     */
+    public void removeCarte(Carte c) {
+    }
 
-	public void deplacerCartesDefausseVersCartesEnJeu() {
-		// TODO - implement TasCartesTrésor.deplacerCartesDefausseVersCartesEnJeu
-		throw new UnsupportedOperationException();
-	}
+    public void melangerCarteTresorDefausse() {
+    }
+
+    public void deplacerCartesDefausseVersCartesEnJeu() {
+    }
 
 }

@@ -4,17 +4,17 @@ import java.util.*;
 
 public class TasCartesInnondation {
 
-	Collection<Innondation> cartesInnondationsEnJeu;
-	Collection<Innondation> cartesInnondationsDefausse;
+    ArrayList<Innondation> cartesInnondationsEnJeu;
+    ArrayList<Innondation> cartesInnondationsDefausse;
 
         
-	public void mélangerCarteInnondationDéfausse() {		
-	}
-
-	public void deplacerCartesDefausseSurCartesEnJeu() {
-	}
-
-	public void piocherCarteInnondation() {
-	}
+    public void mélangerCarteInnondationDéfausse() {		
+    }
+    
+    public void deplacerCartesDefausseSurCartesEnJeu() {
+    }
+    
+    public void piocherCarteInnondation() {
+    }
 
 }

@@ -6,9 +6,11 @@ import static PasDefaultPackage.Etat.immergé;
 
 public class Innondation extends Carte {
 
-	Tuile tuile;
+    Tuile tuile;
 
-        
+    public Innondation(int numID, String nomCarte) {
+        super(numID, nomCarte);
+    }    
         
         public void changeEtat(Tuile t){
             if (t.getEtat() == sec){
@@ -19,3 +21,7 @@ public class Innondation extends Carte {
             }
         }
 }
+
+    
+
+
