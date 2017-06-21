@@ -21,7 +21,7 @@ public class Aventurier {
 
     private String nomJoueur;
     private TypeRole typeRole;
-    private int nbPA = 2;
+    private int nbPA = nbmaxPa;
     private int idaventurier;
     private Tuile t;
     private ArrayList<Carte> main;
@@ -150,7 +150,7 @@ public class Aventurier {
 
     public void filtrageDeplacementpossible(ArrayList<Tuile> tuileAtteignable, Grille g) {
         int i = 0;
-        while (i != this.getTuileAtteignable().size()) {
+        while (i <= this.getTuileAtteignable().size() - 1) {
             if (this.getTuileAtteignable().get(i).getEtat() == Etat.vide || this.getTuileAtteignable().get(i) == this.getTuile() || this.getTuileAtteignable().get(i).getEtat() == Etat.immergé) {
                 this.getTuileAtteignable().remove(this.getTuileAtteignable().get(i));
             } else {

@@ -14,7 +14,7 @@ import view.VueInscription;
 public class Controleur implements Observateur {
 
     private VueAventurier vueAventurier;
-    VueInscription windowI ;
+    VueInscription windowI;
     private Aventurier aventurier;
 
     private static Grille grille;
@@ -24,20 +24,20 @@ public class Controleur implements Observateur {
     private static boolean finPartie;
     private static int nbmaxPa = 3;
     private int nbj;
-    private Aventurier av1 ;
-    private Aventurier av2 ;
-    private Aventurier av3 ;
-    private Aventurier av4 ;
-    private Aventurier av5 ;
-    private Aventurier av6 ;
-    
+    private Aventurier av1;
+    private Aventurier av2;
+    private Aventurier av3;
+    private Aventurier av4;
+    private Aventurier av5;
+    private Aventurier av6;
+
     public Controleur() {
         grille = new Grille();
         av1 = new Ingenieur("le Prof", Ingénieur, 0, grille.getTuiles().get(3), null);//correspond à t4
         av2 = new Plongeur("Thibaud", Plongeur, 0, grille.getTuiles().get(8), null);//correspond à t9
         av3 = new Navigateur("Alexis", Navigateur, 0, grille.getTuiles().get(9), null);//correspond à t10
         av4 = new Messager("Mathilde", Messager, 0, grille.getTuiles().get(13), null);//correspond à t14
-        av5 = new Pilote("Sami", Pilote, 0, grille.getTuiles().get(15), null);//correspond à t16
+        av5 = new Pilote("ami", Pilote, 0, grille.getTuiles().get(15), null);//correspond à t16
         av6 = new Explorateur("l'autre Prof", Explorateur, 0, grille.getTuiles().get(16), null);//correspond à t17
         //initialisation partie
         /*
@@ -46,11 +46,11 @@ public class Controleur implements Observateur {
         //lancement partie
         //finPartie = false;
         //window.setVisible(true);
-        
+
         VueInscription window = new VueInscription(this);
         window.afficher();
 //
-       /* if (!finPartie) {
+        /* if (!finPartie) {
 
             grille.getJoueurCourant().setNbPA(nbmaxPa);
             int i = 1;
@@ -67,38 +67,37 @@ public class Controleur implements Observateur {
             System.out.println("fin Partie!");
         } */
 
-
-    } 
+    }
 
     @Override
     public void traiterMessage(Message msg) {
 
         switch (msg.type) {
             case DEMARRER_PARTIE:
-        ArrayList<Aventurier> ttAv = new ArrayList<>();
-        ttAv.add(av1); ttAv.add(av2); ttAv.add(av3); ttAv.add(av4); ttAv.add(av5); ttAv.add(av6);
-        
-        Collections.shuffle(ttAv);
-        
-        for (int i = 0; i < msg.getNbj(); i++) {
-            System.out.println("/n" + msg.getNbj());
-            grille.getJoueurs().put(i, ttAv.get(i));
-            grille.getJoueurs().get(i).getTuile().getAventuriers().add(getAvi(i));
-            System.out.println(msg.getNbj());
-        }
-        
-       
-        //grille.getJoueurs().put(1, av1);
-        //grille.getJoueurs().put(2, av2);
-        //grille.getJoueurs().put(3, av3);
-        //grille.getJoueurs().put(4, av4);
-        //grille.getJoueurs().put(5, av5);
-        //grille.getJoueurs().put(6, av6);
-        //
+                ArrayList<Aventurier> ttAv = new ArrayList<>();
+                ttAv.add(av1);
+                ttAv.add(av2);
+                ttAv.add(av3);
+                ttAv.add(av4);
+                ttAv.add(av5);
+                ttAv.add(av6);
 
-        
-        grille.setJoueurCourant(grille.getJoueurs().get(1));
-        vueAventurier = new VueAventurier(grille, Color.white, this);
+                Collections.shuffle(ttAv);
+                for (int i = 0; i < msg.getNbj(); i++) { // parcours les aventuriers
+                    grille.getJoueurs().put(i + 1, ttAv.get(i)); //ajoute l'aventurier i au hashmap
+                    grille.getJoueurs().get(i + 1).getTuile().getAventuriers().add(getAvi(i + 1)); // Ajoute l'aventurier à la sa tuile
+                    grille.getJoueurs().get(i + 1).setNomJoueur(msg.getNomsJoueurs().get(i));   //
+                }
+
+                //grille.getJoueurs().put(1, av1);
+                //grille.getJoueurs().put(2, av2);
+                //grille.getJoueurs().put(3, av3);
+                //grille.getJoueurs().put(4, av4);
+                //grille.getJoueurs().put(5, av5);
+                //grille.getJoueurs().put(6, av6);
+                //
+                grille.setJoueurCourant(grille.getJoueurs().get(1));
+                vueAventurier = new VueAventurier(grille, Color.white, this);
 
                 break;
 
@@ -154,12 +153,10 @@ public class Controleur implements Observateur {
                 if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur && grille.getJoueurCourant().getNbTuileAssech() == 0) {
                     grille.getJoueurCourant().setNbTuileAssech(1);
                     grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
+                } else if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
+                    grille.getJoueurCourant().setNbTuileAssech(0);
                 } else {
-                    if (grille.getJoueurCourant().getTypeRole() == TypeRole.Ingénieur) {
-                        grille.getJoueurCourant().setNbTuileAssech(0);
-                    } else {
-                         grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
-                    }
+                    grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
                 }
 
                 break;
@@ -220,20 +217,20 @@ public class Controleur implements Observateur {
     public void debutPartie() {
 
     }
-    
-    public Aventurier getAvi(int i){
-        switch (i){
-            case 0:
-                return av1;
+
+    public Aventurier getAvi(int i) {
+        switch (i) {
             case 1:
-                return av2;
+                return av1;
             case 2:
-                return av3;
+                return av2;
             case 3:
-                return av4;
+                return av3;
             case 4:
-                return av5;
+                return av4;
             case 5:
+                return av5;
+            case 6:
                 return av6;
         }
         return null;
