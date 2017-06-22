@@ -84,7 +84,7 @@ public class Controleur implements Observateur {
                 grille.getJoueurCourant().getTuileAssechable().clear();
                 grille.getJoueurCourant().setTuileAssechable(grille);
 
-                break;
+                break; 
 
             case DEPLACEMENT_SPE:
 
@@ -97,8 +97,7 @@ public class Controleur implements Observateur {
                 if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                     //CONDITION si nombre de points de tirage > 0 OU (prévoir un bouton qui set à 0 les pointdt pour finir tour completement)
                     if(grille.getJoueurCourant().getNbCarteTiré() > 0){    
-                        cartesTresor.tirerCarteJoueurCourant(grille);
-                        grille.getJoueurCourant().setNbCarteTiré(grille.getJoueurCourant().getNbCarteTiré()-1);
+                       
                     } else {
                         if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                         grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
@@ -114,8 +113,8 @@ public class Controleur implements Observateur {
                     } else if (grille.getJoueurCourant().getTypeRole() == TypeRole.Navigateur) {
                         grille.getJoueurCourant().setNbPA(nbmaxPa + 1);
                     }
-                    }
                 }
+            }
 
                 grille.getJoueurCourant().getTuileAssechable().clear();
                 grille.getJoueurCourant().getTuileAtteignable().clear();
@@ -127,6 +126,7 @@ public class Controleur implements Observateur {
 
             case PIOCHER_CARTE_TRESOR:
                 cartesTresor.tirerCarteJoueurCourant(grille);
+                 grille.getJoueurCourant().setNbCarteTiré(grille.getJoueurCourant().getNbCarteTiré()-1);
                 break;
 
             case ASSECHER:

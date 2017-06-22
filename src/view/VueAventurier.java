@@ -372,7 +372,7 @@ public class VueAventurier {
                         joueurCourant.assecher(t);
                         m.type = TypesMessages.ASSECHER;
                         o.traiterMessage(m);
-                        m.type = TypesMessages.FIN_TOUR;
+                         m.type = TypesMessages.FIN_TOUR;
                         o.traiterMessage(m);
                         plateau.removeAll();//efface le plateau
                         peinture(grille, grille.getJoueurCourant(), couleur, false);//réaffiche le plateau
@@ -415,63 +415,63 @@ public class VueAventurier {
         
         
         
-      
-       btnPiocherCTrésors.addMouseListener(new MouseListener() {
+     
+    if(grille.getJoueurCourant().getNbPA() == 0 && grille.getJoueurCourant().getNbCarteTiré() > 0){
+        btnPiocherCTrésors.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                m.type = TypesMessages.PIOCHER_CARTE_TRESOR;
+                o.traiterMessage(m);
+                for (int i = 0; i < grille.getJoueurCourant().getMain().size(); i++) {
+                    System.out.println(grille.getJoueurCourant().getMain().get(i).getTypeCarte());
+                }
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
-
+       
        
      
        btnDéfausseCTrésors.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
-       
+      } else if(grille.getJoueurCourant().getNbPA() == 0 && grille.getJoueurCourant().getNbCarteTiré() == 0){
+            m.type = TypesMessages.FIN_TOUR;
+            o.traiterMessage(m);
+      }
       
     }
     

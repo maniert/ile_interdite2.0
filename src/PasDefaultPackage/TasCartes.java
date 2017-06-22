@@ -1,5 +1,8 @@
 package PasDefaultPackage;
 
+import static PasDefaultPackage.Etat.immergé;
+import static PasDefaultPackage.Etat.innondé;
+import static PasDefaultPackage.Etat.sec;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -34,5 +37,11 @@ public class TasCartes {
 
     public void melangerCarteTresorDefausse() {
         Collections.shuffle(cartesDefausse);
+    }
+    
+    public void changeEtat(Tuile t, Etat etatOrigin, Etat etatFinal ) {
+        if (t.getEtat() == etatOrigin) {
+            t.setEtat(etatFinal);
+        }
     }
 }

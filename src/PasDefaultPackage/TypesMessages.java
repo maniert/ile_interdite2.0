@@ -17,7 +17,6 @@ public enum TypesMessages {
     ASSECHEMENT_SPE,
     FIN_PARTIE,
     FIN_TOUR,
-    TIRER_CARTES_TRESOR,
     DEPLACER,
     PIOCHER_CARTE_TRESOR,
     ASSECHER,

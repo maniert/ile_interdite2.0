@@ -46,13 +46,7 @@ public class TasCartesInnondation extends TasCartes {
         getCartesEnJeu().remove(c);
     }
 
-    public void changeEtat(Tuile t) {
-        if (t.getEtat() == sec) {
-            t.setEtat(innondé);
-        } else if (t.getEtat() == innondé) {
-            t.setEtat(immergé);
-        }
-    }
+    
 
     public void deplacerCartesDefausseVersCartesEnJeu() {
         while (getCartesDefausse().size() != 0) {
