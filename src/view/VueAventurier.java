@@ -103,7 +103,7 @@ public class VueAventurier {
 
         // =================================================================================
         // Est : Les boutons assècher ect
-        this.panelBoutons = new JPanel(new GridLayout(6, 1));
+        this.panelBoutons = new JPanel(new GridLayout(5, 1));
         this.btnDeplacer = new JButton("Se Déplacer");
         this.btnAssecher = new JButton("Assecher");
         this.btnActionSpecial = new JButton("Action Spécial");
@@ -215,13 +215,13 @@ public class VueAventurier {
 
         // =========================================================
         // Sud : Main du joueur ++
-        this.mainJoueur = new JPanel(new GridLayout(1, 0)); 
+        this.mainJoueur = new JPanel(new GridLayout(1,0)); 
         this.mainJoueur.setOpaque(false);
-        mainPanel.add(this.mainJoueur, BorderLayout.SOUTH);
+       
         for (int i = 0; i <= 9; i++) {
             btnMainJoueur[i] = new JButton();
             btnMainJoueur[i].setName(Integer.toString(i));
-            mainJoueur.add(btnMainJoueur[i]);
+            mainJoueur.add(btnMainJoueur[i], BorderLayout.WEST);
         }
 
         this.btnDéfausseCTrésors = new JButton("Défausse Cartes Trésors");
@@ -231,10 +231,9 @@ public class VueAventurier {
         btnMainJ.add(btnPiocherCTrésors);
         btnMainJ.add(btnDéfausseCTrésors);
         btnMainJ.add(btnDonnerCTrésors);
-
-        mainJoueur.add(btnMainJ, BorderLayout.EAST);
+        mainJoueur.add(btnMainJ, BorderLayout.CENTER);
         
-        
+mainPanel.add(mainJoueur, BorderLayout.SOUTH);
         
         
         jl = new JLabel(grille.getJoueurCourant().getTypeRole().toString(), CENTER);
