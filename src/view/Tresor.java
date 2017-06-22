@@ -44,9 +44,9 @@ public class Tresor extends JPanel {
         }
         paint = new GradientPaint(0, 0, getForeground(), getWidth(), getHeight(), getBackground());
         g2d.setPaint(paint);
-            g.fillRect( 180, 85, getWidth() - 180, getHeight() - 80);     //une en dessous, alligné avec les autres 
+            g.fillRect( 65, 65, getWidth(), getHeight());     //une en dessous, alligné avec les autres 
             g.setColor(Color.BLACK);
-            g.drawRect(180, 85, getWidth()-180, getHeight() -80);
+            g.drawRect(65, 65, getWidth(), getHeight());
             
             
        

@@ -18,12 +18,9 @@ public class Grille {
     private ArrayList<Tuile> tuiles;
     private HashMap<Integer, Aventurier> joueurs;
     private Aventurier joueurCourant;
-    private EchelleMontéeDesEaux echelle;
-
     
 
-    public Grille(int i) {
-        this.echelle = new EchelleMontéeDesEaux(i);
+    public Grille() {
         this.nbligne = 6;
         this.nbcolonne = 6;
         tuiles = new ArrayList<>();
@@ -46,48 +43,48 @@ public class Grille {
         t7.setEtat(Etat.vide);
         Tuile t8 = new Tuile(0, "La Caverne Des Ombres", 2, 2,new ImageIcon(Parameters.TUILES + "LaCaverneDesOmbres.png"));
         t8.setFigure(TypeCarte.le_Cristal_Ardent);
-        Tuile t9 = new Tuile(0, "La porte De Fer", 3, 2,new ImageIcon(Parameters.TUILES + "LaPorteDeFer.png"));
-        Tuile t10 = new Tuile(0, "La porte D'or", 4, 2,new ImageIcon(Parameters.TUILES + "LaPortedOr.png"));
+        Tuile t9 = new Tuile(0, "La porte De Fer", 3, 2,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t10 = new Tuile(0, "La porte D'or", 4, 2,new ImageIcon(Parameters.TUILES + "vide.png"));
         t10.setEtat(Etat.innondé);
-        Tuile t11 = new Tuile(0, "Les Falaises De L'Oubli", 5, 2,new ImageIcon(Parameters.TUILES + "LesFalaisesDeLOubli.png"));
+        Tuile t11 = new Tuile(0, "Les Falaises De L'Oubli", 5, 2,new ImageIcon(Parameters.TUILES + "vide.png"));
         Tuile t12 = new Tuile(0, "", 6, 2,new ImageIcon(Parameters.TUILES + "vide.png"));
         t12.setEtat(Etat.vide);
-        Tuile t13 = new Tuile(0, "Le Palais De Corail", 1, 3,new ImageIcon(Parameters.TUILES + "LePalaisDeCorail.png"));
+        Tuile t13 = new Tuile(0, "Le Palais De Corail", 1, 3,new ImageIcon(Parameters.TUILES + "vide.png"));
         t13.setFigure(TypeCarte.le_Calice_de_londe);
-        Tuile t14 = new Tuile(0, "La porte D'Argent", 2, 3,new ImageIcon(Parameters.TUILES + "LaPortedArgent.png"));
-        Tuile t15 = new Tuile(0, "Les Dunes De L'Illusion", 3, 3,new ImageIcon(Parameters.TUILES + "LesDunesDeLIllusion.png"));
+        Tuile t14 = new Tuile(0, "La porte D'Argent", 2, 3,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t15 = new Tuile(0, "Les Dunes De L'Illusion", 3, 3,new ImageIcon(Parameters.TUILES + "vide.png"));
         t15.setEtat(Etat.immergé);
-        Tuile t16 = new Tuile(0, "Héliport", 4, 3,new ImageIcon(Parameters.TUILES + "Heliport.png"));
-        Tuile t17 = new Tuile(0, "La Porte De Cuivre", 5, 3,new ImageIcon(Parameters.TUILES + "LaPorteDeCuivre.png"));
-        Tuile t18 = new Tuile(0, "Le Jardin des Hurlements", 6, 3,new ImageIcon(Parameters.TUILES + "LeJardinDesHurlements.png"));
+        Tuile t16 = new Tuile(0, "Héliport", 4, 3,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t17 = new Tuile(0, "La Porte De Cuivre", 5, 3,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t18 = new Tuile(0, "Le Jardin des Hurlements", 6, 3,new ImageIcon(Parameters.TUILES + "vide.png"));
         t18.setFigure(TypeCarte.la_Statue_du_Zéphyr);
-        Tuile t19 = new Tuile(0, "La Foret Pourpre", 1, 4,new ImageIcon(Parameters.TUILES + "LaForetPourpre.png"));
-        Tuile t20 = new Tuile(0, "Le Lagon Perdu", 2, 4,new ImageIcon(Parameters.TUILES + "LeLagonPerdu.png"));
+        Tuile t19 = new Tuile(0, "La Foret Pourpre", 1, 4,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t20 = new Tuile(0, "Le Lagon Perdu", 2, 4,new ImageIcon(Parameters.TUILES + "vide.png"));
         t20.setEtat(Etat.innondé);
-        Tuile t21 = new Tuile(0, "Le Marais Brumeux", 3, 4,new ImageIcon(Parameters.TUILES + "LeMaraisBrumeux.png"));
+        Tuile t21 = new Tuile(0, "Le Marais Brumeux", 3, 4,new ImageIcon(Parameters.TUILES + "vide.png"));
         t21.setEtat(Etat.immergé);
-        Tuile t22 = new Tuile(0, "Observatoire", 4, 4,new ImageIcon(Parameters.TUILES + "Observatoire.png"));
+        Tuile t22 = new Tuile(0, "Observatoire", 4, 4,new ImageIcon(Parameters.TUILES + "vide.png"));
         t22.setEtat(Etat.innondé);
-        Tuile t23 = new Tuile(0, "Le Rocher Fantôme", 5, 4,new ImageIcon(Parameters.TUILES + "LeRocherFantome.png"));
+        Tuile t23 = new Tuile(0, "Le Rocher Fantôme", 5, 4,new ImageIcon(Parameters.TUILES + "vide.png"));
         t23.setEtat(Etat.immergé);
-        Tuile t24 = new Tuile(0, "La Caserne Du Brasier", 6, 4,new ImageIcon(Parameters.TUILES + "LaCaserneDuBrasier.png"));
+        Tuile t24 = new Tuile(0, "La Caserne Du Brasier", 6, 4,new ImageIcon(Parameters.TUILES + "vide.png"));
         t24.setFigure(TypeCarte.le_Cristal_Ardent);
         t24.setEtat(Etat.innondé);
         Tuile t25 = new Tuile(0, "", 1, 5,new ImageIcon(Parameters.TUILES + "vide.png"));
         t25.setEtat(Etat.vide);
-        Tuile t26 = new Tuile(0, "Le Temple Du Soleil", 2, 5,new ImageIcon(Parameters.TUILES + "LeTempleDuSoleil.png"));
-        Tuile t27 = new Tuile(0, "Le Temple De La Lune", 3, 5,new ImageIcon(Parameters.TUILES + "LeTempleDeLaLune.png"));
+        Tuile t26 = new Tuile(0, "Le Temple Du Soleil", 2, 5,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t27 = new Tuile(0, "Le Temple De La Lune", 3, 5,new ImageIcon(Parameters.TUILES + "vide.png"));
         t26.setFigure(TypeCarte.la_Pierre_sacrée);
         t27.setEtat(Etat.immergé);
         t27.setFigure(TypeCarte.la_Pierre_sacrée);
-        Tuile t28 = new Tuile(0, "Le Palais Des Marées", 4, 5,new ImageIcon(Parameters.TUILES + "LePalaisDesMarees.png"));
+        Tuile t28 = new Tuile(0, "Le Palais Des Marées", 4, 5,new ImageIcon(Parameters.TUILES + "vide.png"));
         t28.setFigure(TypeCarte.le_Calice_de_londe);
-        Tuile t29 = new Tuile(0, "Le Val Du Crépuscule", 5, 5,new ImageIcon(Parameters.TUILES + "LeValDuCrepuscule.png"));
+        Tuile t29 = new Tuile(0, "Le Val Du Crépuscule", 5, 5,new ImageIcon(Parameters.TUILES + "vide.png"));
         Tuile t30 = new Tuile(0, "", 6, 5,new ImageIcon(Parameters.TUILES + "vide.png"));
         Tuile t31 = new Tuile(0, "", 1, 6,new ImageIcon(Parameters.TUILES + "vide.png"));
         Tuile t32 = new Tuile(0, "", 2, 6,new ImageIcon(Parameters.TUILES + "vide.png"));
-        Tuile t33 = new Tuile(0, "La Tour Du Guet", 3, 6,new ImageIcon(Parameters.TUILES + "LaTourDuGuet.png"));
-        Tuile t34 = new Tuile(0, "Le Jardin Des Murmures", 4, 6,new ImageIcon(Parameters.TUILES + "LeJardinDesMurmures.png"));
+        Tuile t33 = new Tuile(0, "La Tour Du Guet", 3, 6,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t34 = new Tuile(0, "Le Jardin Des Murmures", 4, 6,new ImageIcon(Parameters.TUILES + "vide.png"));
         t34.setFigure(TypeCarte.la_Statue_du_Zéphyr);
         t34.setEtat(Etat.innondé);
         Tuile t35 = new Tuile(0, "", 5, 6,new ImageIcon(Parameters.TUILES + "vide.png"));
@@ -217,10 +214,4 @@ public class Grille {
     
     
     
-    /**
-     * @return the echelle
-     */
-    public EchelleMontéeDesEaux getEchelle() {
-        return echelle;
-    }
 }
