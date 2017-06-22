@@ -41,7 +41,7 @@ public class VueAventurier {
     private final JPanel panelBoutons;
     //private final JPanel mainAutresJoueurs;
     private JPanel plateau;
-    private JPanel mainJoueur;
+    private JPanel mainJoueur, mainJoueur2, mainJoueuradd;
     private final JPanel panelCentre;
     private final JFrame window;
     private final JPanel panelAventurier;
@@ -55,7 +55,8 @@ public class VueAventurier {
     private JButton btnTerminerTour;
     private final JTextField position;
     private JButton[] btnGrille = new JButton[36];
-    private JButton[] btnMainJoueur = new JButton[10];
+    private JButton[] btnMainJoueur = new JButton[5];
+    private JButton[] btnMainJoueur2 = new JButton[5];
     private boolean white = false;
     private Message m;
     private JLabel jl;
@@ -218,12 +219,22 @@ public class VueAventurier {
         this.mainJoueur = new JPanel(new GridLayout(1,0)); 
         this.mainJoueur.setOpaque(false);
        
-        for (int i = 0; i <= 9; i++) {
+        for (int i = 0; i <= 4; i++) {
             btnMainJoueur[i] = new JButton();
             btnMainJoueur[i].setName(Integer.toString(i));
-            mainJoueur.add(btnMainJoueur[i], BorderLayout.WEST);
+            mainJoueur.add(btnMainJoueur[i]);
+        }
+       
+        this.mainJoueur2 = new JPanel(new GridLayout(1,0));
+        
+        for (int i = 0; i <=4; i++) {
+            btnMainJoueur2[i] = new JButton();
+            btnMainJoueur2[i].setName(Integer.toString(i));
+              mainJoueur2.add(btnMainJoueur2[i]);
         }
 
+        
+           
         this.btnDéfausseCTrésors = new JButton("Défausse Cartes Trésors");
         this.btnPiocherCTrésors = new JButton("Pioche Cartes Trésors");
         this.btnDonnerCTrésors = new JButton("Donner une Carte Trésor");
@@ -231,9 +242,13 @@ public class VueAventurier {
         btnMainJ.add(btnPiocherCTrésors);
         btnMainJ.add(btnDéfausseCTrésors);
         btnMainJ.add(btnDonnerCTrésors);
-        mainJoueur.add(btnMainJ, BorderLayout.CENTER);
         
-mainPanel.add(mainJoueur, BorderLayout.SOUTH);
+        mainJoueuradd = new JPanel(new BorderLayout());
+        mainJoueuradd.add(btnMainJ, BorderLayout.EAST);
+        mainJoueuradd.add(mainJoueur2, BorderLayout.CENTER);
+                mainJoueuradd.add(mainJoueur, BorderLayout.CENTER);
+
+mainPanel.add(mainJoueuradd, BorderLayout.SOUTH);
         
         
         jl = new JLabel(grille.getJoueurCourant().getTypeRole().toString(), CENTER);
