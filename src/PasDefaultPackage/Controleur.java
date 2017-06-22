@@ -94,12 +94,13 @@ public class Controleur implements Observateur {
                 }
                 break;
             case FIN_TOUR:
-
                 if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                     //CONDITION si nombre de points de tirage > 0 OU (prévoir un bouton qui set à 0 les pointdt pour finir tour completement)
-                    cartesTresor.tirerCarteJoueurCourant(grille);
-
-                    if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
+                    if(grille.getJoueurCourant().getNbCarteTiré() > 0){    
+                        cartesTresor.tirerCarteJoueurCourant(grille);
+                        grille.getJoueurCourant().setNbCarteTiré(grille.getJoueurCourant().getNbCarteTiré()-1);
+                    } else {
+                        if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
                         grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
                         grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbmaxPa());//prépare les pa du joueur suivant
                     } else {                                                    //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
@@ -113,7 +114,7 @@ public class Controleur implements Observateur {
                     } else if (grille.getJoueurCourant().getTypeRole() == TypeRole.Navigateur) {
                         grille.getJoueurCourant().setNbPA(nbmaxPa + 1);
                     }
-
+                    }
                 }
 
                 grille.getJoueurCourant().getTuileAssechable().clear();

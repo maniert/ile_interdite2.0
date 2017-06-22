@@ -22,5 +22,4 @@ public enum TypesMessages {
     PIOCHER_CARTE_TRESOR,
     ASSECHER,
     ASSECHINGE;
-
 }

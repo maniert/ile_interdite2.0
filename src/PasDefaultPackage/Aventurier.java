@@ -28,7 +28,8 @@ public class Aventurier {
     private ArrayList<Tuile> tuilesAtteignable;
     private ArrayList<Tuile> tuilesAssechable;
     private static int nbmaxPa = 3;
-
+    private int nbCarteTiré = 2;
+    
     public Aventurier(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t) {
         this.nomJoueur = nomJoueur;
         this.typeRole = typeRole;
@@ -293,6 +294,20 @@ public class Aventurier {
      * @param ingeasseche the nbTuileAssech to set
      */
     public void setNbTuileAssech(int ingeasseche) {
+    }
+
+    /**
+     * @return the nbCarteTiré
+     */
+    public int getNbCarteTiré() {
+        return nbCarteTiré;
+    }
+
+    /**
+     * @param nbCarteTiré the nbCarteTiré to set
+     */
+    public void setNbCarteTiré(int nbCarteTiré) {
+        this.nbCarteTiré = nbCarteTiré;
     }
 
 }

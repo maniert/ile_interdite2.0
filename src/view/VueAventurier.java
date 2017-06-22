@@ -41,7 +41,7 @@ public class VueAventurier {
     private final JButton btnAssecher;
     private final JButton btnActionSpecial;
     private JButton btnDonnerTresor;
-    private final JButton btnTerminerTour;
+    private JButton btnTerminerTour;
     private final JTextField position;
     private JButton[] btnGrille = new JButton[36];
     private JButton[] btnMainAutresJoueurs = new JButton[15];
@@ -110,7 +110,7 @@ public class VueAventurier {
         this.btnDeplacer = new JButton("Se Déplacer");
         this.btnAssecher = new JButton("Assecher");
         this.btnActionSpecial = new JButton("Action Spécial");
-        this.btnTerminerTour = new JButton("Terminer Tour");
+        this.btnTerminerTour = new JButton("Fin Action");
         this.btnDonnerTresor = new JButton("Donner Tresor");
 
         this.panelBoutons.add(btnDeplacer);
@@ -139,6 +139,9 @@ public class VueAventurier {
         btnDeplacer.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
+                if(grille.getJoueurCourant().getNbPA() == 0){
+                    System.out.println("tu ne peux plus te déplacer");    
+                } else {                
                 plateau.removeAll();
                 white = false;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
@@ -148,6 +151,7 @@ public class VueAventurier {
                 white = true;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
             }
+                }
 
             @Override
             public void mousePressed(MouseEvent me) {
@@ -170,12 +174,16 @@ public class VueAventurier {
         btnActionSpecial.addMouseListener(new MouseListener() {           //quand le pilote décide d'utiliser
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(grille.getJoueurCourant().getNbPA() == 0){
+                    System.out.println("tu ne peux plus assecher");    
+                } else {
                 grille.getJoueurCourant().getTuileAtteignable().clear();
                 m.type = TypesMessages.DEPLACEMENT_SPE;
                 o.traiterMessage(m);
                 plateau.removeAll();
                 white = true;
                 peinture(grille, grille.getJoueurCourant(), couleur, white);
+                }
             }
 
             @Override
@@ -198,24 +206,25 @@ public class VueAventurier {
         btnAssecher.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                plateau.removeAll();
-                white = false;
-                peinture(grille, grille.getJoueurCourant(), couleur, white);
-                if (grille.getTuiles().get(m.getIndiceTuile()).getEtat() == Etat.innondé && grille.getJoueurCourant().getAssechInge().size() == 2) {
-                    grille.getTuiles().get(grille.getJoueurCourant().getAssechInge().get(0)).setEtat(Etat.selectionné);
-                    grille.getTuiles().get(grille.getJoueurCourant().getAssechInge().get(1)).setEtat(Etat.selectionné);
-                    grille.getJoueurCourant().getAssechInge().clear();
-                    grille.getJoueurCourant().assecherInge(grille);
+                if(grille.getJoueurCourant().getNbPA() == 0){
+                    System.out.println("tu ne peux plus assecher");    
                 } else {
-                    m.type = TypesMessages.DEMANDE_ASSECHEMENT;
-                    o.traiterMessage(m);
-
+                    plateau.removeAll();
+                    white = false;
+                    peinture(grille, grille.getJoueurCourant(), couleur, white);
+                    if (grille.getTuiles().get(m.getIndiceTuile()).getEtat() == Etat.innondé && grille.getJoueurCourant().getAssechInge().size() == 2) {
+                        grille.getTuiles().get(grille.getJoueurCourant().getAssechInge().get(0)).setEtat(Etat.selectionné);
+                        grille.getTuiles().get(grille.getJoueurCourant().getAssechInge().get(1)).setEtat(Etat.selectionné);
+                        grille.getJoueurCourant().getAssechInge().clear();
+                        grille.getJoueurCourant().assecherInge(grille);
+                    } else {
+                        m.type = TypesMessages.DEMANDE_ASSECHEMENT;
+                        o.traiterMessage(m);
+                    }
+                    plateau.removeAll();
+                    white = true;
+                    peinture(grille, grille.getJoueurCourant(), couleur, white);
                 }
-
-                plateau.removeAll();
-                white = true;
-                peinture(grille, grille.getJoueurCourant(), couleur, white);
-
             }
 
             @Override
@@ -239,7 +248,11 @@ public class VueAventurier {
         btnTerminerTour.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                grille.getJoueurCourant().setNbPA(0);
+                if(btnTerminerTour.getText() == "Fin Action"){
+                    grille.getJoueurCourant().setNbPA(0);    
+                } else if(btnTerminerTour.getText() == "Terminer Tour"){
+                     grille.getJoueurCourant().setNbCarteTiré(0);
+                }
                 m.type = TypesMessages.FIN_TOUR;
                 o.traiterMessage(m);
                 plateau.removeAll();
@@ -274,7 +287,7 @@ public class VueAventurier {
         jl = new JLabel(grille.getJoueurCourant().getTypeRole().toString() + ":  " + grille.getJoueurCourant().getNomJoueur(), CENTER);
         jl.setForeground(Color.white);
         panelAventurier.add(jl);
-
+        
         panelAventurier.setBackground(donnerCouleur(grille.getJoueurCourant()));
         for (int i = 0; i <= 35; i++) {
             //this.plateau.add(new JButton(g.getTuiles().get(indiceTuile).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(indiceTuile)));
@@ -286,7 +299,13 @@ public class VueAventurier {
             creationPion(grille, i);
 
             creationTuileTresor(grille, i);
-
+            
+            if(grille.getJoueurCourant().getNbPA() < 1){
+                getBtnTerminerTour().setText("Terminer Tour");    
+            } else if(grille.getJoueurCourant().getNbPA() == Aventurier.getNbmaxPa()){
+                getBtnTerminerTour().setText("Fin Action");
+            }
+            
             if (white && joueurCourant.existedéjà(joueurCourant.getTuileAtteignable(), grille.getTuiles().get(i))) {
                 Tuile t = grille.getTuiles().get(i);
                 btnGrille[i].addMouseListener(new MouseListener() {
@@ -504,5 +523,12 @@ public class VueAventurier {
         }
         return Color.cyan;
 
+    }
+
+    /**
+     * @param btnTerminerTour the btnTerminerTour to set
+     */
+    public void setBtnTerminerTour(JButton btnTerminerTour) {
+        this.btnTerminerTour = btnTerminerTour;
     }
 }
