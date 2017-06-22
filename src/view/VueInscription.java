@@ -5,6 +5,7 @@
  */
 package view;
 
+import PasDefaultPackage.EchelleMontéeDesEaux;
 import PasDefaultPackage.Message;
 import PasDefaultPackage.Observateur;
 import PasDefaultPackage.TypesMessages;
@@ -30,6 +31,7 @@ import util.Parameters;
  */
 public class VueInscription {
 
+   
     private JFrame window;
     private JPanel mainPanel;
      
@@ -43,10 +45,11 @@ public class VueInscription {
     private JLabel nomLabel, nomLabel2, nomLabel3, nomLabel4;
 
     //
-    private JRadioButton level, levelNovice, levelNormal, levelElite, levelLegendaire, levelMortel;
+    private JRadioButton level, levelNovice, levelNormal, levelElite, levelLegendaire;
 
     private Observateur observateur;
     private Message m;
+    private EchelleMontéeDesEaux echelle;
 
     public VueInscription(Observateur o) {
         this.window = new JFrame();
@@ -92,7 +95,7 @@ public class VueInscription {
         // nom Joueur
         JPanel nomPan = new JPanel();
         nomPan.setBackground(Color.white);
-        nomPan.setPreferredSize(new Dimension(500, 100));
+        nomPan.setPreferredSize(new Dimension(300,150));
         nom1 = new JTextField();
         nom1.setPreferredSize(new Dimension(100, 25));
         nom2 = new JTextField();
@@ -125,7 +128,6 @@ public class VueInscription {
         levelNormal = new JRadioButton("Normal");
         levelElite = new JRadioButton("Elite");
         levelLegendaire = new JRadioButton("Légendaire");
-        levelMortel = new JRadioButton("Mortel");
         ButtonGroup btnGrLevel = new ButtonGroup();
         btnGrLevel.add(levelNovice);
         btnGrLevel.add(levelNormal);
@@ -153,7 +155,10 @@ public class VueInscription {
                 m.getNomsJoueurs().add(nom2.getText());
                 m.getNomsJoueurs().add(nom3.getText());
                 m.getNomsJoueurs().add(nom4.getText());
+                m.setEchelledebut(getLevelEchelle());
+                
                 observateur.traiterMessage(m);
+                window.setVisible(false);
 
             }
 
@@ -198,6 +203,21 @@ public class VueInscription {
         } else {
             return 2;
         }
-
+    }
+    
+    public int getLevelEchelle() {
+         if (levelNormal.isSelected()) {
+            return 2;
+        }
+         else if (levelElite.isSelected()) {
+            return 3;
+        }
+         else if (levelLegendaire.isSelected()) {
+            return 4;
+        }
+         else  {
+            return 1;
+        }
+        
     }
 }

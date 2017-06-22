@@ -32,15 +32,6 @@ public class Controleur implements Observateur {
     private Aventurier av6;
 
     public Controleur() {
-        grille = new Grille();
-        av1 = new Ingenieur("le Prof", Ingénieur, 0, grille.getTuiles().get(3));//correspond à t4
-        av2 = new Plongeur("Thibaud", Plongeur, 0, grille.getTuiles().get(8));//correspond à t9
-        av3 = new Navigateur("Alexis", Navigateur, 0, grille.getTuiles().get(9));//correspond à t10
-        av4 = new Messager("Mathilde", Messager, 0, grille.getTuiles().get(13));//correspond à t14
-        av5 = new Pilote("ami", Pilote, 0, grille.getTuiles().get(15));//correspond à t16
-        av6 = new Explorateur("l'autre Prof", Explorateur, 0, grille.getTuiles().get(16));//correspond à t17
-        cartesInnondation = new TasCartesInnondation(grille);
-        cartesTresor = new TasCartesTrésor();
         VueInscription window = new VueInscription(this);
         window.afficher();
 
@@ -51,6 +42,17 @@ public class Controleur implements Observateur {
 
         switch (msg.type) {
             case DEMARRER_PARTIE:
+                grille = new Grille(msg.getEchelledebut());
+                av1 = new Ingenieur("le Prof", Ingénieur, 0, grille.getTuiles().get(3));//correspond à t4
+                av2 = new Plongeur("Thibaud", Plongeur, 0, grille.getTuiles().get(8));//correspond à t9
+                av3 = new Navigateur("Alexis", Navigateur, 0, grille.getTuiles().get(9));//correspond à t10
+                av4 = new Messager("Mathilde", Messager, 0, grille.getTuiles().get(13));//correspond à t14
+                av5 = new Pilote("ami", Pilote, 0, grille.getTuiles().get(15));//correspond à t16
+                av6 = new Explorateur("l'autre Prof", Explorateur, 0, grille.getTuiles().get(16));//correspond à t17
+                cartesInnondation = new TasCartesInnondation(grille);
+                cartesTresor = new TasCartesTrésor();
+                
+                
                 ArrayList<Aventurier> ttAv = new ArrayList<>();
                 ttAv.add(av1);
                 ttAv.add(av2);
@@ -201,5 +203,6 @@ public class Controleur implements Observateur {
     public void debutPartie() {
 
     }
+
 
 }

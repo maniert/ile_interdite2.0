@@ -18,6 +18,7 @@ public class Message {
     public int indiceTuile;
     private int nbj;
     private ArrayList<String> nomsJoueurs;
+    private int echelledebut;
 
     public Message() {
         nomsJoueurs = new ArrayList<>();
@@ -56,5 +57,19 @@ public class Message {
      */
     public ArrayList<String> getNomsJoueurs() {
         return nomsJoueurs;
+    }
+
+    /**
+     * @return the echelledebut
+     */
+    public int getEchelledebut() {
+        return echelledebut;
+    }
+
+    /**
+     * @param echelledebut the echelledebut to set
+     */
+    public void setEchelledebut(int echelledebut) {
+        this.echelledebut = echelledebut;
     }
 }

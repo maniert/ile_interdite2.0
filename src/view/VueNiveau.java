@@ -5,6 +5,8 @@
  */
 package view;
 
+import PasDefaultPackage.Message;
+import PasDefaultPackage.Observateur;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,41 +24,31 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 import util.Parameters;
  
-public class VueNiveau {
+public class VueNiveau extends JPanel {
     
     private Integer niveau ;
-    private final JFrame window ;
     HashMap<Integer, JPanel> panelsGauches ;
-    Integer cellWidth = 50 ;
-    Integer cellHeight = (Parameters.HAUTEUR_AUTRES_VUES - 25 - (Parameters.UNDECORATED ? 0 : Parameters.DECORATION_HEIGHT)) / 10 ;
-    private final JPanel mainPanel;
+    private final JPanel niveauPan;
+    
         
     public VueNiveau(Integer niveauInitial) {
         this.niveau = niveauInitial;
         panelsGauches = new HashMap<>();
 
-        window = new JFrame() ;
-        window.setSize(cellWidth*2+Parameters.SWING_BORDERS_HEIGHT, Parameters.HAUTEUR_AUTRES_VUES);        
-        window.setLocation(30, Parameters.TOP_AUTRES_VUES);
-        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        
-        window.setUndecorated(Parameters.UNDECORATED);
-        window.setResizable(Parameters.RESIZABLE);
-        
-        this.mainPanel = new JPanel() ;
-        this.window.add(mainPanel);
-        this.mainPanel.setLayout(new BorderLayout());
-        this.mainPanel.setBackground(Color.WHITE);
-        this.mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2, false));
+        niveauPan  = new JPanel(new BorderLayout());
+
+        niveauPan.setLayout(new BorderLayout());
+        niveauPan.setBackground(Color.WHITE);
+        niveauPan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2, false));
         
         JLabel labelTitre = new JLabel("Niveau", JLabel.CENTER);
-        this.mainPanel.add(labelTitre, BorderLayout.NORTH);
-        // labelTitre.setFont(labelTitre.getFont().deriveFont(Font.BOLD));
+        niveauPan.add(labelTitre, BorderLayout.NORTH);
+        labelTitre.setFont(labelTitre.getFont().deriveFont(Font.BOLD));
         labelTitre.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 14));
         
         JPanel panelNiveaux = new JPanel(new GridBagLayout());
         panelNiveaux.setOpaque(false);
-        mainPanel.add(panelNiveaux, BorderLayout.CENTER);
+        niveauPan.add(panelNiveaux, BorderLayout.CENTER);
         
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 2 ;
@@ -71,7 +63,7 @@ public class VueNiveau {
             JPanel panelGauche = new JPanel();
             panelGauche.setLayout(new BoxLayout(panelGauche, BoxLayout.Y_AXIS));
             panelGauche.setBackground(getBgColor(10-i));
-            panelGauche.setPreferredSize(new Dimension(cellWidth, cellHeight));
+            panelGauche.setPreferredSize(new Dimension(50, 50));
             if (i < 9) {
                 panelGauche.setBorder(new MatteBorder(0, 0, 1, 0, Color.WHITE));
             } else {
@@ -81,7 +73,7 @@ public class VueNiveau {
             panelNiveaux.add(panelGauche, c);
 
             JLabel labelGauche = new JLabel("", JLabel.LEFT);
-            labelGauche.setPreferredSize(new Dimension(cellWidth, cellHeight));
+            labelGauche.setPreferredSize(new Dimension(50, 50));
             labelGauche.setForeground(i==0 ? new Color(223, 168, 169) : Color.BLACK);
             labelGauche.setFont(new Font(labelGauche.getFont().getFamily(), labelGauche.getFont().getStyle(), 8));
             labelGauche.setText(getLibelle(10-i));
@@ -95,7 +87,7 @@ public class VueNiveau {
             c.gridy = (iPanel==0 ? 0 : (iPanel==1 ? 3 : (iPanel==2 ? 5 : 8))) ;
             c.gridheight = (iPanel==0 || iPanel==2 ? 3 : 2) ;
             JPanel panelDroit = new JPanel();
-            panelDroit.setPreferredSize(new Dimension(cellWidth, cellHeight));
+            panelDroit.setPreferredSize(new Dimension(50, 50));
             panelDroit.setLayout(new GridBagLayout());
             panelNiveaux.add(panelDroit, c);
 
@@ -118,14 +110,14 @@ public class VueNiveau {
                     labelDroit = new JLabel("2", JLabel.CENTER) ;
                     break;
             }
-            labelDroit.setPreferredSize(new Dimension(cellWidth, cellHeight));
+            labelDroit.setPreferredSize(new Dimension(50, 50));
             labelDroit.setForeground(Color.WHITE);
             labelDroit.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 40));
             GridBagConstraints gbc = new GridBagConstraints();
             panelDroit.add(labelDroit, gbc);
         }
         panelsGauches.get(niveauInitial).setBackground(Color.YELLOW);
-        this.window.setVisible(true);
+        
     }
 
     public void setNiveau(Integer niveau) {
@@ -133,7 +125,7 @@ public class VueNiveau {
         panelsGauches.get(this.niveau).setBackground(getBgColor(this.niveau - 1));
         this.niveau = niveau ;
         panelsGauches.get(this.niveau).setBackground(this.niveau == 10 ? Color.RED : Color.YELLOW);
-        this.mainPanel.repaint();
+        this.niveauPan.repaint();
     }
 
     public Integer getNiveau() {
@@ -180,17 +172,8 @@ public class VueNiveau {
         }
     }
     
-    public static void main(String[] args) {   
-        VueNiveau vueNiveau = new VueNiveau(1);
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Pour passer au niveau 5, appuyer sur entrée");
-        String suite = scanner.nextLine();        
-        vueNiveau.setNiveau(1);
-
-        System.out.println("Pour passer au niveau 5, appuyer sur entrée");
-        suite = scanner.nextLine();
-        vueNiveau.setNiveau(1);
-    }    
+   
+    
+    
+    
 }

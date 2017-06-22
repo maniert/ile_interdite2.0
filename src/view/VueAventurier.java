@@ -13,11 +13,17 @@ import PasDefaultPackage.TypesMessages;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,31 +48,42 @@ public class VueAventurier {
     private final JPanel mainPanel;
     private final JButton btnDeplacer;
     private final JButton btnAssecher;
-    private final JButton btnActionSpecial;
+    private  JButton btnActionSpecial;
     private JButton btnDéfausseCTrésors, btnPiocherCTrésors, btnDonnerCTrésors;
-    
+
     private JButton btnObtenirTresor;
     private JButton btnTerminerTour;
     private final JTextField position;
     private JButton[] btnGrille = new JButton[36];
-    private JButton[] btnMainJoueur = new JButton[5];
+    private JButton[] btnMainJoueur = new JButton[10];
     private boolean white = false;
     private Message m;
     private JLabel jl;
     private JPanel mainAutre;
+    private JPanel btnMainJ;
+     private Integer niveau ;
+    
+     HashMap<Integer, JPanel> panelsGauches ;
+    private final JPanel niveauPan;
 
     public VueAventurier(Grille grille, Color couleur, Observateur obs) {
         m = new Message();
         this.o = obs;
-        mainAutre = new VueAutresJoueurs(o);
-        this.window = new JFrame();
-        window.setSize(1080, 720);
-        window.setTitle("L'Ile Interdite");
-        mainPanel = new JPanel(new BorderLayout());
-        this.window.add(mainPanel);
 
+
+        // ========================= 
+        //Instanciation fenètre
+        this.window = new JFrame();
+        window.setSize(1800, 1000);
+        window.setTitle("L'Ile Interdite");
+
+        // ========================= 
+        //Ajout mainPanel dans la fenêtre
+        mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(new Color(230, 230, 230));
         mainPanel.setBorder(BorderFactory.createLineBorder(couleur, 2));
+        this.window.add(mainPanel);
+    
 
         // =================================================================================
         // NORD : le titre = nom de l'aventurier + nom du joueur sur la couleurActive du pion
@@ -78,7 +95,6 @@ public class VueAventurier {
         this.panelCentre = new JPanel(new GridLayout(2, 1));
         this.panelCentre.setOpaque(false);
         this.panelCentre.setBorder(new MatteBorder(0, 0, 2, 0, couleur));
-        mainPanel.add(this.panelCentre, BorderLayout.CENTER);
 
         panelCentre.add(new JLabel("Position", SwingConstants.CENTER));
         position = new JTextField(30);
@@ -87,88 +103,169 @@ public class VueAventurier {
 
         // =================================================================================
         // Est : Les boutons assècher ect
-        this.panelBoutons = new JPanel(new GridLayout(5, 1));
-        this.panelBoutons.setOpaque(false);
-        mainPanel.add(this.panelBoutons, BorderLayout.EAST);
-        
-        // Ouest : les mains des autres joueurs
-        mainAutre.setPreferredSize(new Dimension(500,500));
-        mainPanel.add(mainAutre, BorderLayout.WEST);
-        
-       
-        
-        
-        // Center : Le plateau
-        this.plateau = new JPanel(new GridLayout(6, 6));
-        this.plateau.setOpaque(false);
-        mainPanel.add(this.plateau, BorderLayout.CENTER);
-
-        // Sud : Main du joueur ++
-       this.mainJoueur = new JPanel(new GridLayout(1, 4));
-        this.mainJoueur.setOpaque(false);
-        mainPanel.add(this.mainJoueur, BorderLayout.SOUTH);
-        for (int i = 0; i <= 4; i++) {
-            btnMainJoueur[i] = new JButton();
-            btnMainJoueur[i].setName(Integer.toString(i));
-            mainJoueur.add(btnMainJoueur[i]);
-        } 
-        
-        // West : Main du Joueur
-        this.btnDéfausseCTrésors = new JButton("Défausse Cartes Trésors");
-        this.btnPiocherCTrésors = new JButton("Pioche Cartes Trésors");
-        this.btnDonnerCTrésors = new JButton("Donner une Carte Trésor");
-        mainJoueur.add(btnPiocherCTrésors, BorderLayout.WEST);
-       mainJoueur.add(btnDéfausseCTrésors, BorderLayout.WEST);
-       mainJoueur.add(btnDonnerCTrésors, BorderLayout.WEST);
-        
-        
+        this.panelBoutons = new JPanel(new GridLayout(6, 1));
         this.btnDeplacer = new JButton("Se Déplacer");
         this.btnAssecher = new JButton("Assecher");
         this.btnActionSpecial = new JButton("Action Spécial");
         this.btnTerminerTour = new JButton("Fin Action");
         this.btnObtenirTresor = new JButton("Donner Tresor");
+        panelBoutons.add(btnDeplacer);
+        panelBoutons.add(btnAssecher);
+        panelBoutons.add(btnActionSpecial);
+        panelBoutons.add(btnObtenirTresor);
+        panelBoutons.add(btnTerminerTour);
+        mainPanel.add(panelBoutons, BorderLayout.EAST);
+
+        // =========================================================
+        // Ouest : les mains des autres joueurs
+        //grille.getEchelle().getNiveauEchelle(), 
+        
+        int niveauInitial = grille.getEchelle().getNiveauEchelle();
+          panelsGauches = new HashMap<>();
+
+        niveauPan  = new JPanel(new BorderLayout());
+
+        niveauPan.setLayout(new BorderLayout());
+        niveauPan.setBackground(Color.WHITE);
+        niveauPan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2, false));
+        
+        JLabel labelTitre = new JLabel("Niveau", JLabel.CENTER);
+        niveauPan.add(labelTitre, BorderLayout.NORTH);
+        labelTitre.setFont(labelTitre.getFont().deriveFont(Font.BOLD));
+        labelTitre.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 14));
+        
+        JPanel panelNiveaux = new JPanel(new GridBagLayout());
+        panelNiveaux.setOpaque(false);
+        niveauPan.add(panelNiveaux, BorderLayout.CENTER);
+        
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx = 2 ;
+        c.weighty = 10 ;
+        c.insets = new Insets(0, 0, 0, 0);
+        c.fill = GridBagConstraints.VERTICAL ;
+        
+        // Insertion de la cellule gauche de niveauInitial 10
+        for (int i=0; i < 10; i++) {
+            c.gridx = 0 ;
+            c.gridy = i ;
+            JPanel panelGauche = new JPanel();
+            panelGauche.setLayout(new BoxLayout(panelGauche, BoxLayout.Y_AXIS));
+            panelGauche.setBackground(getBgColor(10-i));
+            panelGauche.setPreferredSize(new Dimension(50, 50));
+            if (i < 9) {
+                panelGauche.setBorder(new MatteBorder(0, 0, 1, 0, Color.WHITE));
+            } else {
+                panelGauche.setBorder(new MatteBorder(1, 0, 0, 0, Color.WHITE));
+            }
+
+            panelNiveaux.add(panelGauche, c);
+
+            JLabel labelGauche = new JLabel("", JLabel.LEFT);
+            labelGauche.setPreferredSize(new Dimension(50, 50));
+            labelGauche.setForeground(i==0 ? new Color(223, 168, 169) : Color.BLACK);
+            labelGauche.setFont(new Font(labelGauche.getFont().getFamily(), labelGauche.getFont().getStyle(), 8));
+            labelGauche.setText(getLibelle(10-i));
+            panelGauche.add(labelGauche);
+            panelsGauches.put((10-i), panelGauche) ;
+        }
+            
+        // Insertion de la cellule droite de niveauInitial 10
+        for (int iPanel=0; iPanel < 4; iPanel++) {
+            c.gridx = 1 ;
+            c.gridy = (iPanel==0 ? 0 : (iPanel==1 ? 3 : (iPanel==2 ? 5 : 8))) ;
+            c.gridheight = (iPanel==0 || iPanel==2 ? 3 : 2) ;
+            JPanel panelDroit = new JPanel();
+            panelDroit.setPreferredSize(new Dimension(50, 50));
+            panelDroit.setLayout(new GridBagLayout());
+            panelNiveaux.add(panelDroit, c);
+
+            JLabel labelDroit;
+            switch (iPanel) {
+                case 0:
+                    panelDroit.setBackground(getBgColor(10));
+                    labelDroit = new JLabel("5", JLabel.CENTER) ;
+                    break;
+                case 1:
+                    panelDroit.setBackground(getBgColor(7));
+                    labelDroit = new JLabel("4", JLabel.CENTER) ;
+                    break;
+                case 2:
+                    panelDroit.setBackground(getBgColor(5));
+                    labelDroit = new JLabel("3", JLabel.CENTER) ;
+                    break;
+                default:
+                    panelDroit.setBackground(getBgColor(1));
+                    labelDroit = new JLabel("2", JLabel.CENTER) ;
+                    break;
+            }
+            labelDroit.setPreferredSize(new Dimension(50, 50));
+            labelDroit.setForeground(Color.WHITE);
+            labelDroit.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 40));
+            GridBagConstraints gbc = new GridBagConstraints();
+            panelDroit.add(labelDroit, gbc);
+        }
+        panelsGauches.get(niveauInitial).setBackground(Color.YELLOW);
+
+        mainPanel.add(niveauPan, BorderLayout.WEST);
+        // =========================================================
+        // Center : Le plateau
+        this.plateau = new JPanel(new GridLayout(6, 6));
+        this.plateau.setOpaque(false);
+        mainPanel.add(this.plateau, BorderLayout.CENTER);
+
+        // =========================================================
+        // Sud : Main du joueur ++
+        this.mainJoueur = new JPanel(new GridLayout(1, 0)); 
+        this.mainJoueur.setOpaque(false);
+        mainPanel.add(this.mainJoueur, BorderLayout.SOUTH);
+        for (int i = 0; i <= 9; i++) {
+            btnMainJoueur[i] = new JButton();
+            btnMainJoueur[i].setName(Integer.toString(i));
+            mainJoueur.add(btnMainJoueur[i]);
+        }
+
+        this.btnDéfausseCTrésors = new JButton("Défausse Cartes Trésors");
+        this.btnPiocherCTrésors = new JButton("Pioche Cartes Trésors");
+        this.btnDonnerCTrésors = new JButton("Donner une Carte Trésor");
+        this.btnMainJ = new JPanel(new GridLayout(3,1));
+        btnMainJ.add(btnPiocherCTrésors);
+        btnMainJ.add(btnDéfausseCTrésors);
+        btnMainJ.add(btnDonnerCTrésors);
+
+        mainJoueur.add(btnMainJ, BorderLayout.EAST);
         
         
-
-        this.panelBoutons.add(btnDeplacer);
-        this.panelBoutons.add(btnAssecher);
-        this.panelBoutons.add(btnActionSpecial);
-        this.panelBoutons.add(btnObtenirTresor);
-        this.panelBoutons.add(btnTerminerTour);
-
+        
+        
         jl = new JLabel(grille.getJoueurCourant().getTypeRole().toString(), CENTER);
 
         peinture(grille, grille.getJoueurCourant(), couleur, white);
-        
+
         JPanel joueurPan = new JPanel();
-         joueurPan.setBackground(Color.white);
+        joueurPan.setBackground(Color.white);
         joueurPan.setBorder(BorderFactory.createTitledBorder(grille.getJoueurs().toString()));
-        
-       
+
         //ferme la fenêtre correctement.
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setVisible(true);
         mainPanel.repaint();
-        
-        
-        
 
         btnDeplacer.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                if(grille.getJoueurCourant().getNbPA() == 0){
-                    System.out.println("tu ne peux plus te déplacer");    
-                } else {                
-                plateau.removeAll();
-                white = false;
-                peinture(grille, grille.getJoueurCourant(), couleur, white);
-                m.type = TypesMessages.DEMANDE_DEPLACEMENT;
-                o.traiterMessage(m);
-                plateau.removeAll();
-                white = true;
-                peinture(grille, grille.getJoueurCourant(), couleur, white);
-            }
+                if (grille.getJoueurCourant().getNbPA() == 0) {
+                    System.out.println("tu ne peux plus te déplacer");
+                } else {
+                    plateau.removeAll();
+                    white = false;
+                    peinture(grille, grille.getJoueurCourant(), couleur, white);
+                    m.type = TypesMessages.DEMANDE_DEPLACEMENT;
+                    o.traiterMessage(m);
+                    plateau.removeAll();
+                    white = true;
+                    peinture(grille, grille.getJoueurCourant(), couleur, white);
                 }
+            }
 
             @Override
             public void mousePressed(MouseEvent me) {
@@ -191,15 +288,15 @@ public class VueAventurier {
         btnActionSpecial.addMouseListener(new MouseListener() {           //quand le pilote décide d'utiliser
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(grille.getJoueurCourant().getNbPA() == 0){
-                    System.out.println("tu ne peux plus assecher");    
+                if (grille.getJoueurCourant().getNbPA() == 0) {
+                    System.out.println("tu ne peux plus assecher");
                 } else {
-                grille.getJoueurCourant().getTuileAtteignable().clear();
-                m.type = TypesMessages.DEPLACEMENT_SPE;
-                o.traiterMessage(m);
-                plateau.removeAll();
-                white = true;
-                peinture(grille, grille.getJoueurCourant(), couleur, white);
+                    grille.getJoueurCourant().getTuileAtteignable().clear();
+                    m.type = TypesMessages.DEPLACEMENT_SPE;
+                    o.traiterMessage(m);
+                    plateau.removeAll();
+                    white = true;
+                    peinture(grille, grille.getJoueurCourant(), couleur, white);
                 }
             }
 
@@ -223,8 +320,8 @@ public class VueAventurier {
         btnAssecher.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                if(grille.getJoueurCourant().getNbPA() == 0){
-                    System.out.println("tu ne peux plus assecher");    
+                if (grille.getJoueurCourant().getNbPA() == 0) {
+                    System.out.println("tu ne peux plus assecher");
                 } else {
                     plateau.removeAll();
                     white = false;
@@ -265,10 +362,10 @@ public class VueAventurier {
         btnTerminerTour.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                if(btnTerminerTour.getText() == "Fin Action"){
-                    grille.getJoueurCourant().setNbPA(0);    
-                } else if(btnTerminerTour.getText() == "Terminer Tour"){
-                     grille.getJoueurCourant().setNbCarteTiré(0);
+                if (btnTerminerTour.getText() == "Fin Action") {
+                    grille.getJoueurCourant().setNbPA(0);
+                } else if (btnTerminerTour.getText() == "Terminer Tour") {
+                    grille.getJoueurCourant().setNbCarteTiré(0);
                 }
                 m.type = TypesMessages.FIN_TOUR;
                 o.traiterMessage(m);
@@ -297,7 +394,6 @@ public class VueAventurier {
 
     }
 
-
     public void peinture(Grille grille, Aventurier joueurCourant, Color couleur, boolean white) {
 
         Tuile premiereTuile;
@@ -305,27 +401,27 @@ public class VueAventurier {
         jl = new JLabel(grille.getJoueurCourant().getTypeRole().toString() + ":  " + grille.getJoueurCourant().getNomJoueur(), CENTER);
         jl.setForeground(Color.white);
         panelAventurier.add(jl);
-        
+
         panelAventurier.setBackground(donnerCouleur(grille.getJoueurCourant()));
         for (int i = 0; i <= 35; i++) {
             //this.plateau.add(new JButton(g.getTuiles().get(indiceTuile).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(indiceTuile)));
             btnGrille[i] = new JButton();
-            switch(i) {
-                case 0 :
-                    
+            switch (i) {
+                case 0:
+
                     btnGrille[0].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\zephyr.png")));
                     break;
-                case 5 : 
-                     btnGrille[5].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\calice.png")));
+                case 5:
+                    btnGrille[5].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\calice.png")));
                     break;
-                    case 30 :
-                    
+                case 30:
+
                     btnGrille[30].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\pierre.png")));
                     break;
-                case 35 : 
-                     btnGrille[35].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\cristal.png")));
-                     break;
-                default : 
+                case 35:
+                    btnGrille[35].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\cristal.png")));
+                    break;
+                default:
                     break;
             }
             this.plateau.add(btnGrille[i]);
@@ -335,13 +431,13 @@ public class VueAventurier {
             creationPion(grille, i);
 
             creationTuileTresor(grille, i);
-            
-            if(grille.getJoueurCourant().getNbPA() < 1){
-                getBtnTerminerTour().setText("Terminer Tour");    
-            } else if(grille.getJoueurCourant().getNbPA() == Aventurier.getNbmaxPa()){
+
+            if (grille.getJoueurCourant().getNbPA() < 1) {
+                getBtnTerminerTour().setText("Terminer Tour");
+            } else if (grille.getJoueurCourant().getNbPA() == Aventurier.getNbmaxPa()) {
                 getBtnTerminerTour().setText("Fin Action");
             }
-            
+
             if (white && joueurCourant.existedéjà(joueurCourant.getTuileAtteignable(), grille.getTuiles().get(i))) {
                 Tuile t = grille.getTuiles().get(i);
                 btnGrille[i].addMouseListener(new MouseListener() {
@@ -389,7 +485,7 @@ public class VueAventurier {
                         joueurCourant.assecher(t);
                         m.type = TypesMessages.ASSECHER;
                         o.traiterMessage(m);
-                         m.type = TypesMessages.FIN_TOUR;
+                        m.type = TypesMessages.FIN_TOUR;
                         o.traiterMessage(m);
                         plateau.removeAll();//efface le plateau
                         peinture(grille, grille.getJoueurCourant(), couleur, false);//réaffiche le plateau
@@ -429,76 +525,72 @@ public class VueAventurier {
             }
 
         }
-        
-        
-        
-     
-    if(grille.getJoueurCourant().getNbPA() == 0 && grille.getJoueurCourant().getNbCarteTiré() > 0){
-        btnPiocherCTrésors.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                m.type = TypesMessages.PIOCHER_CARTE_TRESOR;
-                o.traiterMessage(m);
-                for (int i = 0; i < grille.getJoueurCourant().getMain().size(); i++) {
-                    System.out.println(grille.getJoueurCourant().getMain().get(i).getTypeCarte());
+
+        if (grille.getJoueurCourant().getNbPA() == 0 && grille.getJoueurCourant().getNbCarteTiré() > 0) {
+            btnPiocherCTrésors.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent me) {
+                    m.type = TypesMessages.PIOCHER_CARTE_TRESOR;
+                    o.traiterMessage(m);
+                    for (int i = 0; i < grille.getJoueurCourant().getMain().size(); i++) {
+                        System.out.println(grille.getJoueurCourant().getMain().get(i).getTypeCarte());
+                    }
                 }
-            }
 
-            @Override
-            public void mousePressed(MouseEvent me) {
-            }
+                @Override
+                public void mousePressed(MouseEvent me) {
+                }
 
-            @Override
-            public void mouseReleased(MouseEvent me) {
-            }
+                @Override
+                public void mouseReleased(MouseEvent me) {
+                }
 
-            @Override
-            public void mouseEntered(MouseEvent me) {
-            }
+                @Override
+                public void mouseEntered(MouseEvent me) {
+                }
 
-            @Override
-            public void mouseExited(MouseEvent me) {
-            }
-        });
-       
-       
-     
-       btnDéfausseCTrésors.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                
-            }
+                @Override
+                public void mouseExited(MouseEvent me) {
+                }
+            });
 
-            @Override
-            public void mousePressed(MouseEvent me) {
-            }
+            btnDéfausseCTrésors.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent me) {
 
-            @Override
-            public void mouseReleased(MouseEvent me) {
-            }
+                }
 
-            @Override
-            public void mouseEntered(MouseEvent me) {
-            }
+                @Override
+                public void mousePressed(MouseEvent me) {
+                }
 
-            @Override
-            public void mouseExited(MouseEvent me) {
-            }
-        });
-      } else if(grille.getJoueurCourant().getNbPA() == 0 && grille.getJoueurCourant().getNbCarteTiré() == 0){
+                @Override
+                public void mouseReleased(MouseEvent me) {
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent me) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent me) {
+                }
+            });
+        } else if (grille.getJoueurCourant().getNbPA() == 0 && grille.getJoueurCourant().getNbCarteTiré() == 0) {
             m.type = TypesMessages.FIN_TOUR;
             o.traiterMessage(m);
-      }
-    
+        }
+
         btnObtenirTresor.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Tuile t;
-               
-                        m.type = TypesMessages.DONNE_TRESOR;
-                        o.traiterMessage(m); 
-                    
+
+                m.type = TypesMessages.DONNE_TRESOR;
+                o.traiterMessage(m);
+
             }
+
             @Override
             public void mousePressed(MouseEvent e) {
             }
@@ -515,38 +607,34 @@ public class VueAventurier {
             public void mouseExited(MouseEvent e) {
             }
         });
-        
+
         btnDonnerCTrésors.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                
             }
         });
-      
+        
+    
+
     }
-    
-    
-    
 
     public JButton getBtnAutreAction() {
         return btnActionSpecial;
@@ -567,8 +655,6 @@ public class VueAventurier {
     public JButton getBtnTerminerTour() {
         return btnTerminerTour;
     }
-    
-    
 
     //Mettre tuile sur l'interface selon son état donner une couleur et regarder son nom + Coordonées
     public String affichageTuile(Tuile t) {
@@ -685,4 +771,56 @@ public class VueAventurier {
     public void setBtnTerminerTour(JButton btnTerminerTour) {
         this.btnTerminerTour = btnTerminerTour;
     }
+    
+     public void setNiveau(Integer niveau) {
+        System.out.println("VueNiveau_nopic.setNiveau(" + niveau + ")");
+        panelsGauches.get(this.niveau).setBackground(getBgColor(this.niveau - 1));
+        this.niveau = niveau ;
+        panelsGauches.get(this.niveau).setBackground(this.niveau == 10 ? Color.RED : Color.YELLOW);
+        this.niveauPan.repaint();
+    }
+
+    public Integer getNiveau() {
+        return this.niveau ;
+    }
+
+    public Integer getColoredNiveau() {
+        for (Integer coloredNiveau : panelsGauches.keySet()) {
+            if (panelsGauches.get(coloredNiveau).getBackground() == Color.YELLOW) {
+                return coloredNiveau;
+            }
+        }
+        return -1 ;
+    }
+
+    private Color getBgColor(Integer niveau) {
+        if (niveau <= 2)
+            return new Color(169, 215, 226) ;
+        
+        if (niveau <= 5)
+            return new Color(129, 194, 212) ;
+            
+        
+        if (niveau <= 7)
+            return new Color(67, 119, 204) ;
+        
+        return new Color(42, 76, 127) ;
+    }
+
+    private String getLibelle(int i) {
+        switch (i) {
+            case 1 : 
+                return " novice" ;
+            case 2 : 
+                return " normal" ;
+            case 3 : 
+                return " élite" ;
+            case 4 : 
+                return " légendaire" ;
+            case 10 : 
+                return " mortel" ;
+            default :
+                return "" ;
+        }
+}
 }
