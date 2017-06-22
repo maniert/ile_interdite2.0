@@ -1,10 +1,37 @@
 package PasDefaultPackage;
 
 import static PasDefaultPackage.Etat.vide;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 public class Tuile {
 
+    /**
+     * @return the img
+     */
+    public ImageIcon getImg() {
+        return img;
+    }
+
+    /**
+     * @param img the img to set
+     */
+    public void setImg(ImageIcon img) {
+        this.img = img;
+    }
+
+    private int idTuile;
+    private String nomTuile;
+    private int x;
+    private int y;
+    private Etat etat;
+    private ArrayList<Aventurier> aventuriers;
+    private ArrayList<TypeRole> tresor;
+    private TypeCarte figure;
+    private ImageIcon img;
+    
+    
     /**
      * @return the figure
      */
@@ -33,16 +60,9 @@ public class Tuile {
         this.tresor = tresor;
     }
 
-    private int idTuile;
-    private String nomTuile;
-    private int x;
-    private int y;
-    private Etat etat;
-    private ArrayList<Aventurier> aventuriers;
-    private ArrayList<TypeRole> tresor;
-    private TypeCarte figure;
 
-    public Tuile(int idTuile, String nomTuile, int x, int y) {
+    public Tuile(int idTuile, String nomTuile, int x, int y, ImageIcon img) {
+        this.img = img;
         this.idTuile = idTuile;
         this.nomTuile = nomTuile;
         this.x = x;

@@ -308,9 +308,19 @@ public class VueAventurier {
             switch(i) {
                 case 0 :
                     
-                    btnGrille[0].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\cartes\\Calice.png")));
+                    btnGrille[0].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\zephyr.png")));
                     break;
                 case 5 : 
+                     btnGrille[5].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\calice.png")));
+                    break;
+                    case 30 :
+                    
+                    btnGrille[30].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\pierre.png")));
+                    break;
+                case 35 : 
+                     btnGrille[35].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\tresors\\cristal.png")));
+                     break;
+                default : 
                     break;
             }
             this.plateau.add(btnGrille[i]);
