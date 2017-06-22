@@ -26,20 +26,22 @@ public class Grille {
         tuiles = new ArrayList<>();
         joueurs = new HashMap<>();
 
+        //Faire un type pour toutes les cartes Et ensuite leur affecté une image selon l'état. Plus pratique nop???
+        
         Tuile t1 = new Tuile(0, "", 1, 1, new ImageIcon(Parameters.TUILES + "vide.png"));
         t1.setEtat(Etat.vide);
         Tuile t2 = new Tuile(0, "", 2, 1,new ImageIcon(Parameters.TUILES + "vide.png"));
         t2.setEtat(Etat.vide);
-        Tuile t3 = new Tuile(0, "Le Pont Des Abimes", 3, 1,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t3 = new Tuile(0, "Le Pont Des Abimes", 3, 1,new ImageIcon(Parameters.TUILES + "LePontDesAbimes.png"));
         t3.setEtat(Etat.innondé);
-        Tuile t4 = new Tuile(0, "La porte De Bronze", 4, 1,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t4 = new Tuile(0, "La porte De Bronze", 4, 1,new ImageIcon(Parameters.TUILES + "LaPorteDeBronze.png"));
         Tuile t5 = new Tuile(0, "", 5, 1,new ImageIcon(Parameters.TUILES + "vide.png"));
         t5.setEtat(Etat.vide);
         Tuile t6 = new Tuile(0, "", 6, 1,new ImageIcon(Parameters.TUILES + "vide.png"));
         t6.setEtat(Etat.vide);
         Tuile t7 = new Tuile(0, "", 1, 2,new ImageIcon(Parameters.TUILES + "vide.png"));
         t7.setEtat(Etat.vide);
-        Tuile t8 = new Tuile(0, "La Caverne Des Ombres", 2, 2,new ImageIcon(Parameters.TUILES + "vide.png"));
+        Tuile t8 = new Tuile(0, "La Caverne Des Ombres", 2, 2,new ImageIcon(Parameters.TUILES + "LaCaverneDesOmbres.png"));
         t8.setFigure(TypeCarte.le_Cristal_Ardent);
         Tuile t9 = new Tuile(0, "La porte De Fer", 3, 2,new ImageIcon(Parameters.TUILES + "vide.png"));
         Tuile t10 = new Tuile(0, "La porte D'or", 4, 2,new ImageIcon(Parameters.TUILES + "vide.png"));

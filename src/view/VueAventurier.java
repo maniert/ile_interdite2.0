@@ -12,6 +12,7 @@ import PasDefaultPackage.TypeRole;
 import PasDefaultPackage.TypesMessages;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -42,7 +43,8 @@ public class VueAventurier {
     private final JButton btnDeplacer;
     private final JButton btnAssecher;
     private final JButton btnActionSpecial;
-    private final JButton btnDéfausseCTrésors, btnPiocherCTrésors;
+    private JButton btnDéfausseCTrésors, btnPiocherCTrésors, btnDonnerCTrésors;
+    
     private JButton btnObtenirTresor;
     private JButton btnTerminerTour;
     private final JTextField position;
@@ -90,6 +92,7 @@ public class VueAventurier {
         mainPanel.add(this.panelBoutons, BorderLayout.EAST);
         
         // Ouest : les mains des autres joueurs
+        mainAutre.setPreferredSize(new Dimension(500,500));
         mainPanel.add(mainAutre, BorderLayout.WEST);
         
        
@@ -113,8 +116,10 @@ public class VueAventurier {
         // West : Main du Joueur
         this.btnDéfausseCTrésors = new JButton("Défausse Cartes Trésors");
         this.btnPiocherCTrésors = new JButton("Pioche Cartes Trésors");
+        this.btnDonnerCTrésors = new JButton("Donner une Carte Trésor");
         mainJoueur.add(btnPiocherCTrésors, BorderLayout.WEST);
        mainJoueur.add(btnDéfausseCTrésors, BorderLayout.WEST);
+       mainJoueur.add(btnDonnerCTrésors, BorderLayout.WEST);
         
         
         this.btnDeplacer = new JButton("Se Déplacer");
@@ -508,6 +513,33 @@ public class VueAventurier {
 
             @Override
             public void mouseExited(MouseEvent e) {
+            }
+        });
+        
+        btnDonnerCTrésors.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mousePressed(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
       

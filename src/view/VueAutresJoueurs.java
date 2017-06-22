@@ -26,7 +26,7 @@ import util.Parameters;
 public class VueAutresJoueurs extends  JPanel {
      private JPanel joueurPan;
      private JLabel  nomJoueurLab;
-     private JButton[] btnMainAutresJoueurs = new JButton[15];
+     private JButton[] btnMainAutresJoueurs = new JButton[6];
      private JPanel mainAutresJoueurs;
      
      
@@ -46,7 +46,7 @@ public class VueAutresJoueurs extends  JPanel {
           joueurPan = new JPanel(new BorderLayout());
           joueurPan.setBackground(Color.yellow);
           joueurPan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
-          joueurPan.setSize(new Dimension(500,500));
+          joueurPan.setPreferredSize(new Dimension(500,500));
           
           //Je veux des cartes mais sur quoi je les veux ? boutons ? Image ? Panel ? 
           // Façon je les met dans un panel les 5 ou + comme ça hop hop 
@@ -63,13 +63,14 @@ public class VueAutresJoueurs extends  JPanel {
           // là faudra rajouter les cartes au panel.
           joueurPan.add(lesCartesPan, BorderLayout.CENTER);
           
-           this.mainAutresJoueurs = new JPanel(new GridLayout(3, 5));
+           this.mainAutresJoueurs = new JPanel(new GridLayout(1, 5));
         this.mainAutresJoueurs.setOpaque(false);
         joueurPan.add(this.mainAutresJoueurs, BorderLayout.WEST);
         for (int i = 0; i <= 5; i++) {
             btnMainAutresJoueurs[i] = new JButton();
             btnMainAutresJoueurs[i].setName(Integer.toString(i));
-            mainAutresJoueurs.add(btnMainAutresJoueurs[i]);
+            btnMainAutresJoueurs[i].setPreferredSize(new Dimension(70,70));
+            mainAutresJoueurs.add(btnMainAutresJoueurs[i], BorderLayout.SOUTH);
         } 
           
           
