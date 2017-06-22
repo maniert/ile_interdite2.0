@@ -125,8 +125,12 @@ public class Controleur implements Observateur {
                 break;
 
             case PIOCHER_CARTE_TRESOR:
+                 if (grille.getJoueurCourant().getTuile().getFigure() != TypeCarte.vide){
+                    if(grille.getJoueurCourant().peutRecupeTresor(grille.getJoueurCourant().getMain(), grille.getJoueurCourant().getTuile().getFigure())){    
                 cartesTresor.tirerCarteJoueurCourant(grille);
                  grille.getJoueurCourant().setNbCarteTiré(grille.getJoueurCourant().getNbCarteTiré()-1);
+                 } 
+                }
                 break;
 
             case ASSECHER:

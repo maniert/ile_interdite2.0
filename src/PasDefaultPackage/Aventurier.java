@@ -309,5 +309,23 @@ public class Aventurier {
     public void setNbCarteTiré(int nbCarteTiré) {
         this.nbCarteTiré = nbCarteTiré;
     }
-
+    
+    public boolean peutRecupeTresor(ArrayList<Carte> ac, TypeCarte typeCarte){
+        int nbCarteFigurinePareil = 0;
+        for (int i = 0; i < ac.size(); i++) {
+            if(ac.get(0).getTypeCarte() == typeCarte){
+                nbCarteFigurinePareil++;
+                i++;
+            } else {
+                i++;
+            }
+            if (nbCarteFigurinePareil >= 4){
+                return true;
+            } else {
+                return false;
+            }
+        }
+       return false;
+    }
 }
+

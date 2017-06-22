@@ -20,5 +20,6 @@ public enum TypesMessages {
     DEPLACER,
     PIOCHER_CARTE_TRESOR,
     ASSECHER,
-    ASSECHINGE;
+    ASSECHINGE,
+    DONNE_TRESOR;
 }

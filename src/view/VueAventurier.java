@@ -1,6 +1,7 @@
 package view;
 
 import PasDefaultPackage.Aventurier;
+import PasDefaultPackage.Carte;
 import PasDefaultPackage.Etat;
 import PasDefaultPackage.Grille;
 import PasDefaultPackage.Message;
@@ -14,6 +15,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,7 +43,7 @@ public class VueAventurier {
     private final JButton btnAssecher;
     private final JButton btnActionSpecial;
     private final JButton btnDéfausseCTrésors, btnPiocherCTrésors;
-    private JButton btnDonnerTresor;
+    private JButton btnObtenirTresor;
     private JButton btnTerminerTour;
     private final JTextField position;
     private JButton[] btnGrille = new JButton[36];
@@ -119,14 +121,14 @@ public class VueAventurier {
         this.btnAssecher = new JButton("Assecher");
         this.btnActionSpecial = new JButton("Action Spécial");
         this.btnTerminerTour = new JButton("Fin Action");
-        this.btnDonnerTresor = new JButton("Donner Tresor");
+        this.btnObtenirTresor = new JButton("Donner Tresor");
         
         
 
         this.panelBoutons.add(btnDeplacer);
         this.panelBoutons.add(btnAssecher);
         this.panelBoutons.add(btnActionSpecial);
-        this.panelBoutons.add(btnDonnerTresor);
+        this.panelBoutons.add(btnObtenirTresor);
         this.panelBoutons.add(btnTerminerTour);
 
         jl = new JLabel(grille.getJoueurCourant().getTypeRole().toString(), CENTER);
@@ -472,6 +474,32 @@ public class VueAventurier {
             m.type = TypesMessages.FIN_TOUR;
             o.traiterMessage(m);
       }
+    
+        btnObtenirTresor.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Tuile t;
+               
+                        m.type = TypesMessages.DONNE_TRESOR;
+                        o.traiterMessage(m); 
+                    
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
       
     }
     
