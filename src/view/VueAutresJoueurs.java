@@ -10,17 +10,24 @@ import PasDefaultPackage.Observateur;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import util.Parameters;
 
 /**
  *
  * @author Princesse Mathilde
  */
-public class VueAutresJoueurs {
+public class VueAutresJoueurs extends  JPanel {
      private JPanel joueurPan;
      private JLabel  nomJoueurLab;
+     private JButton[] btnMainAutresJoueurs = new JButton[15];
+     private JPanel mainAutresJoueurs;
      
      
     private Observateur observateur;
@@ -47,8 +54,8 @@ public class VueAutresJoueurs {
           JPanel nomRolePan = new JPanel();
           nomRolePan.setBackground(Color.white);
           //nomJoueurLab = new JLabel(.getNomsJoueurs()); // nom Joueur + role
-          nomRolePan.add(nomJoueurLab);
-          joueurPan.add(nomRolePan, BorderLayout.NORTH);
+//          nomRolePan.add(nomJoueurLab);
+         // joueurPan.add(nomRolePan, BorderLayout.NORTH);
           
           
           JPanel lesCartesPan = new JPanel();
@@ -56,12 +63,23 @@ public class VueAutresJoueurs {
           // là faudra rajouter les cartes au panel.
           joueurPan.add(lesCartesPan, BorderLayout.CENTER);
           
+           this.mainAutresJoueurs = new JPanel(new GridLayout(3, 5));
+        this.mainAutresJoueurs.setOpaque(false);
+        joueurPan.add(this.mainAutresJoueurs, BorderLayout.WEST);
+        for (int i = 0; i <= 5; i++) {
+            btnMainAutresJoueurs[i] = new JButton();
+            btnMainAutresJoueurs[i].setName(Integer.toString(i));
+            mainAutresJoueurs.add(btnMainAutresJoueurs[i]);
+        } 
+          
           
           JPanel lesTrésorsPan = new JPanel();
           lesTrésorsPan.setBackground(Color.white);
           //Rajouter trésors si posseder.
-          
+                 
           joueurPan.add(lesTrésorsPan, BorderLayout.EAST);
+          this.add(joueurPan);
+          
           
           
           

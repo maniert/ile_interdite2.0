@@ -43,7 +43,7 @@ public class VueInscription {
     private JLabel nomLabel, nomLabel2, nomLabel3, nomLabel4;
 
     //
-    private JRadioButton level, levelNovice, levelNormal, levelElite, levelLegendaire;
+    private JRadioButton level, levelNovice, levelNormal, levelElite, levelLegendaire, levelMortel;
 
     private Observateur observateur;
     private Message m;
@@ -125,6 +125,7 @@ public class VueInscription {
         levelNormal = new JRadioButton("Normal");
         levelElite = new JRadioButton("Elite");
         levelLegendaire = new JRadioButton("Légendaire");
+        levelMortel = new JRadioButton("Mortel");
         ButtonGroup btnGrLevel = new ButtonGroup();
         btnGrLevel.add(levelNovice);
         btnGrLevel.add(levelNormal);

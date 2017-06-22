@@ -30,7 +30,7 @@ public class VueAventurier {
 
     private Observateur o;
     private final JPanel panelBoutons;
-    private final JPanel mainAutresJoueurs;
+    //private final JPanel mainAutresJoueurs;
     private JPanel plateau;
     private JPanel mainJoueur;
     private final JPanel panelCentre;
@@ -40,22 +40,24 @@ public class VueAventurier {
     private final JButton btnDeplacer;
     private final JButton btnAssecher;
     private final JButton btnActionSpecial;
+    private final JButton btnDéfausseCTrésors, btnPiocherCTrésors;
     private JButton btnDonnerTresor;
     private final JButton btnTerminerTour;
     private final JTextField position;
     private JButton[] btnGrille = new JButton[36];
-    private JButton[] btnMainAutresJoueurs = new JButton[15];
     private JButton[] btnMainJoueur = new JButton[5];
     private boolean white = false;
     private Message m;
     private JLabel jl;
+    private JPanel mainAutre;
 
     public VueAventurier(Grille grille, Color couleur, Observateur obs) {
         m = new Message();
         this.o = obs;
+        mainAutre = new VueAutresJoueurs(o);
         this.window = new JFrame();
         window.setSize(1080, 720);
-        window.setTitle("L''Ile Interdite");
+        window.setTitle("L'Ile Interdite");
         mainPanel = new JPanel(new BorderLayout());
         this.window.add(mainPanel);
 
@@ -84,34 +86,42 @@ public class VueAventurier {
         this.panelBoutons = new JPanel(new GridLayout(5, 1));
         this.panelBoutons.setOpaque(false);
         mainPanel.add(this.panelBoutons, BorderLayout.EAST);
+        
         // Ouest : les mains des autres joueurs
-        this.mainAutresJoueurs = new JPanel(new GridLayout(3, 5));
-        this.mainAutresJoueurs.setOpaque(false);
-        mainPanel.add(this.mainAutresJoueurs, BorderLayout.WEST);
-        for (int i = 0; i <= 14; i++) {
-            btnMainAutresJoueurs[i] = new JButton();
-            btnMainAutresJoueurs[i].setName(Integer.toString(i));
-            mainAutresJoueurs.add(btnMainAutresJoueurs[i]);
-        }
+        mainPanel.add(mainAutre, BorderLayout.WEST);
+        
+       
+        
+        
         // Center : Le plateau
         this.plateau = new JPanel(new GridLayout(6, 6));
         this.plateau.setOpaque(false);
         mainPanel.add(this.plateau, BorderLayout.CENTER);
 
         // Sud : Main du joueur ++
-        this.mainJoueur = new JPanel(new GridLayout(1, 4));
+       this.mainJoueur = new JPanel(new GridLayout(1, 4));
         this.mainJoueur.setOpaque(false);
         mainPanel.add(this.mainJoueur, BorderLayout.SOUTH);
         for (int i = 0; i <= 4; i++) {
             btnMainJoueur[i] = new JButton();
             btnMainJoueur[i].setName(Integer.toString(i));
             mainJoueur.add(btnMainJoueur[i]);
-        }
+        } 
+        
+        // West : Main du Joueur
+        this.btnDéfausseCTrésors = new JButton("Défausse Cartes Trésors");
+        this.btnPiocherCTrésors = new JButton("Pioche Cartes Trésors");
+        mainJoueur.add(btnPiocherCTrésors, BorderLayout.WEST);
+       mainJoueur.add(btnDéfausseCTrésors, BorderLayout.WEST);
+        
+        
         this.btnDeplacer = new JButton("Se Déplacer");
         this.btnAssecher = new JButton("Assecher");
         this.btnActionSpecial = new JButton("Action Spécial");
         this.btnTerminerTour = new JButton("Terminer Tour");
         this.btnDonnerTresor = new JButton("Donner Tresor");
+        
+        
 
         this.panelBoutons.add(btnDeplacer);
         this.panelBoutons.add(btnAssecher);
@@ -267,6 +277,7 @@ public class VueAventurier {
 
     }
 
+
     public void peinture(Grille grille, Aventurier joueurCourant, Color couleur, boolean white) {
 
         Tuile premiereTuile;
@@ -279,6 +290,14 @@ public class VueAventurier {
         for (int i = 0; i <= 35; i++) {
             //this.plateau.add(new JButton(g.getTuiles().get(indiceTuile).getNomTuile())).setBackground(CouleurTuile(g.getTuiles().get(indiceTuile)));
             btnGrille[i] = new JButton();
+            switch(i) {
+                case 0 :
+                    
+                    btnGrille[0].add(new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\cartes\\Calice.png")));
+                    break;
+                case 5 : 
+                    break;
+            }
             this.plateau.add(btnGrille[i]);
             btnGrille[i].setText(grille.getTuiles().get(i).getNomTuile());
             btnGrille[i].setBackground(CouleurTuile(grille.getTuiles().get(i)));
@@ -374,8 +393,71 @@ public class VueAventurier {
             }
 
         }
+        
+        
+        
+      
+       btnPiocherCTrésors.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
 
+            @Override
+            public void mousePressed(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+
+       
+     
+       btnDéfausseCTrésors.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mousePressed(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+       
+      
     }
+    
+    
+    
 
     public JButton getBtnAutreAction() {
         return btnActionSpecial;
@@ -396,6 +478,8 @@ public class VueAventurier {
     public JButton getBtnTerminerTour() {
         return btnTerminerTour;
     }
+    
+    
 
     //Mettre tuile sur l'interface selon son état donner une couleur et regarder son nom + Coordonées
     public String affichageTuile(Tuile t) {
