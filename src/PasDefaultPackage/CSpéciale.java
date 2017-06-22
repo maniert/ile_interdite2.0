@@ -1,9 +1,11 @@
 package PasDefaultPackage;
 
+import javax.swing.ImageIcon;
+
 public class CSpéciale extends Carte {
 
-    public CSpéciale(int numID, TypeCarte typeCarte) {
-        super(numID, typeCarte);
+    public CSpéciale(int numID, TypeCarte typeCarte, ImageIcon img) {
+        super(numID, typeCarte, img);
     }
 
 }

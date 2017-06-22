@@ -10,7 +10,8 @@ public class TasCartesInnondation extends TasCartes {
     public TasCartesInnondation(Grille g) {
         for (int i = 0; i < 35; i++) {
             if (g.getTuiles().get(i).getEtat() != vide) {
-                getCartesEnJeu().add(new CInnondation(i, g.getTuiles().get(i).getNomTuile(), g.getTuiles().get(i)));
+                getCartesEnJeu().add(new CInnondation(i, g.getTuiles().get(i).getNomTuile(), t, img);
+                getCartesEnJeu().add(new CInnondation(i, g.getTuiles().get(i).getNomTuile(), g.getTuiles().get(i), g.getTuiles().get(i).getImg());
             }
         }
 

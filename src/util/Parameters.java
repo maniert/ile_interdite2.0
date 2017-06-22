@@ -49,9 +49,9 @@ public class Parameters {
     public static final String ROOT = System.getProperty("user.dir") ;
     public static final String IMAGES = ROOT + "/images/" ;
     public static final String PIONS = ROOT + "/images/pions/" ;
-    public static final String TRESORS = ROOT + "/images/tresors/" ;
-    public static final String TUILES = ROOT + "/images/tuiles/" ;
-    public static final String CARTES = ROOT + "/images/cartes/" ;
+    public static final String TRESORS = ROOT + "\\src\\images\\images\\tresors\\" ;
+    public static final String TUILES = ROOT + "\\src\\images\\images\\tuiles\\" ;
+    public static final String CARTES = ROOT + "\\src\\images\\images\\cartes\\" ;
     public static final String ICONS = ROOT + "/images/icones/" ;
 
     // ====================================================================================
