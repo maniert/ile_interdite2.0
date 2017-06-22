@@ -6,4 +6,11 @@ public class Navigateur extends Aventurier {
         super(nomJoueur, typeRole, idaventurier, t);
     }
 
+    /**
+     * @return the nbmaxPa
+     */
+    @Override
+    public int getNbmaxPa() {
+        return 4;
+    }
 }

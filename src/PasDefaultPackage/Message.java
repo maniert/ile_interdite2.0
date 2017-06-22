@@ -15,7 +15,8 @@ public class Message {
 
     public TypesMessages type;  // type de message
     public Tuile t;
-    public int indiceTuile;
+    private int indiceTuile;
+    private int indiceMain;
     private int nbj;
     private ArrayList<String> nomsJoueurs;
 
@@ -56,5 +57,19 @@ public class Message {
      */
     public ArrayList<String> getNomsJoueurs() {
         return nomsJoueurs;
+    }
+
+    /**
+     * @return the indiceMain
+     */
+    public int getIndiceMain() {
+        return indiceMain;
+    }
+
+    /**
+     * @param indiceMain the indiceMain to set
+     */
+    public void setIndiceMain(int indiceMain) {
+        this.indiceMain = indiceMain;
     }
 }

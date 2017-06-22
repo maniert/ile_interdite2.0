@@ -4,7 +4,6 @@ import java.util.*;
 import javax.swing.ImageIcon;
 import util.Parameters;
 
-
 public class TasCartesTrésor extends TasCartes {
 
     /* private ArrayList<CFigurine> cartesFigurineEnJeu;
@@ -27,9 +26,9 @@ public class TasCartesTrésor extends TasCartes {
         cartesMonteeDesEauxEnJeuDefausse = new ArrayList<>();*/
 
         Carte cfps = new CFigurine(0, TypeCarte.la_Pierre_sacrée, new ImageIcon(Parameters.CARTES + "Pierre.png"));
-        Carte cfsz = new CFigurine(0, TypeCarte.la_Statue_du_Zéphyr,new ImageIcon(Parameters.CARTES + "Zephyr.png"));
-        Carte cfcl = new CFigurine(0, TypeCarte.le_Calice_de_londe,new ImageIcon(Parameters.CARTES + "Calice.png"));
-        Carte cfca = new CFigurine(0, TypeCarte.le_Cristal_Ardent,new ImageIcon(Parameters.CARTES + "Cristal.png"));
+        Carte cfsz = new CFigurine(0, TypeCarte.la_Statue_du_Zéphyr, new ImageIcon(Parameters.CARTES + "Zephyr.png"));
+        Carte cfcl = new CFigurine(0, TypeCarte.le_Calice_de_londe, new ImageIcon(Parameters.CARTES + "Calice.png"));
+        Carte cfca = new CFigurine(0, TypeCarte.le_Cristal_Ardent, new ImageIcon(Parameters.CARTES + "Cristal.png"));
         Carte cs = new CSpéciale(0, TypeCarte.sacDeSable, new ImageIcon(Parameters.CARTES + "SacsDeSable.png"));
         Carte ch = new CSpéciale(0, TypeCarte.helicoptere, new ImageIcon(Parameters.CARTES + "Helicoptere.png"));
         Carte cmde = new CMonteeDesEaux(0, TypeCarte.MonteesDesEaux, new ImageIcon(Parameters.CARTES + "MonteeDesEaux.png"));
@@ -54,17 +53,9 @@ public class TasCartesTrésor extends TasCartes {
     }
 
     public void tirerCarteJoueurCourant(Grille grille) {
-        if (getCartesEnJeu().get(0).getTypeCarte() == TypeCarte.MonteesDesEaux) {
-            //Modifier lechelle etc
-        } else if (grille.getJoueurCourant().getMain().size() <= 3) {
-            grille.getJoueurCourant().getMain().add(getCartesEnJeu().get(0));
-            getCartesEnJeu().remove(0);//TODO ihm
-            grille.getJoueurCourant().getMain().add(getCartesEnJeu().get(0));
-            getCartesEnJeu().remove(0);//TODO ihm
-        } else if (grille.getJoueurCourant().getMain().size() == 4) {
-            grille.getJoueurCourant().getMain().add(getCartesEnJeu().get(0));
-            getCartesEnJeu().remove(0);//TODO ihm
-        }
-    }
+        grille.getJoueurCourant().getMain().add(getCartesEnJeu().get(0));
+        System.out.println(getCartesEnJeu().get(0));
+        getCartesEnJeu().remove(0);//TODO ihm
 
+    }
 }

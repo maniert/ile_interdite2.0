@@ -22,7 +22,6 @@ public class Controleur implements Observateur {
     private TasCartesTrésor cartesTresor;
     private TasCartesInnondation cartesInnondation;
     private static boolean finPartie;
-    private static int nbmaxPa = 3;
     private int nbj;
     private Aventurier av1;
     private Aventurier av2;
@@ -43,7 +42,6 @@ public class Controleur implements Observateur {
         cartesTresor = new TasCartesTrésor();
         VueInscription window = new VueInscription(this);
         window.afficher();
-
     }
 
     @Override
@@ -84,7 +82,7 @@ public class Controleur implements Observateur {
                 grille.getJoueurCourant().getTuileAssechable().clear();
                 grille.getJoueurCourant().setTuileAssechable(grille);
 
-                break; 
+                break;
 
             case DEPLACEMENT_SPE:
 
@@ -96,25 +94,22 @@ public class Controleur implements Observateur {
             case FIN_TOUR:
                 if (grille.getJoueurCourant().getNbPA() < 1) { // verifie  si le joueur peux encore agir sinon au tour du joueur suivant
                     //CONDITION si nombre de points de tirage > 0 OU (prévoir un bouton qui set à 0 les pointdt pour finir tour completement)
-                    if(grille.getJoueurCourant().getNbCarteTiré() > 0){    
-                       
-                    } else {
+                    if (grille.getJoueurCourant().getNbCarteTiré() < 1 && grille.getJoueurCourant().getMain().size() <= 5) {
                         if (grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) != grille.getnbJ()) {//regarde son rang si il n'est pas dernier
-                        grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
-                        grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbmaxPa());//prépare les pa du joueur suivant
-                    } else {                                                    //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
-                        grille.setJoueurCourant(grille.getJoueurs().get(0));
-                        grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbmaxPa());
-
-                    }
-                    if (grille.getJoueurCourant().getTypeRole() == TypeRole.Pilote) {
-                        grille.getJoueurCourant().setHelicoDispo(true);
-                        grille.getJoueurCourant().setDeplSpePilote(true);   //redonner le déplacement spécial au joueur Pilote
-                    } else if (grille.getJoueurCourant().getTypeRole() == TypeRole.Navigateur) {
-                        grille.getJoueurCourant().setNbPA(nbmaxPa + 1);
+                            grille.setJoueurCourant(grille.getJoueurs().get(grille.getRang(grille.getJoueurs(), grille.getJoueurCourant()) + 1));// au tour du suivant
+                            grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbmaxPa());//prépare les pa du joueur suivant
+                            grille.getJoueurCourant().setNbCarteTiré(2);
+                        } else {                                                    //sinon meme chose mais pour le joueur 1 puisque le dernier joueur finis son tour
+                            grille.setJoueurCourant(grille.getJoueurs().get(0));
+                            grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbmaxPa());
+                            grille.getJoueurCourant().setNbCarteTiré(2);
+                        }
+                        if (grille.getJoueurCourant().getTypeRole() == TypeRole.Pilote) {
+                            grille.getJoueurCourant().setHelicoDispo(true);
+                            grille.getJoueurCourant().setDeplSpePilote(true);   //redonner le déplacement spécial au joueur Pilote
+                        }
                     }
                 }
-            }
 
                 grille.getJoueurCourant().getTuileAssechable().clear();
                 grille.getJoueurCourant().getTuileAtteignable().clear();
@@ -125,11 +120,12 @@ public class Controleur implements Observateur {
                 break;
 
             case PIOCHER_CARTE_TRESOR:
-                 if (grille.getJoueurCourant().getTuile().getFigure() != TypeCarte.vide){
-                    if(grille.getJoueurCourant().peutRecupeTresor(grille.getJoueurCourant().getMain(), grille.getJoueurCourant().getTuile().getFigure())){    
-                cartesTresor.tirerCarteJoueurCourant(grille);
-                 grille.getJoueurCourant().setNbCarteTiré(grille.getJoueurCourant().getNbCarteTiré()-1);
-                 } 
+                /* if (cartesTresor.getCartesEnJeu().get(0).getTypeCarte() == TypeCarte.MonteesDesEaux) {
+                    //Modifier lechelle etc
+                //grille.getJoueurCourant().setNbCarteTiré(grille.getJoueurCourant().getNbCarteTiré() - 1);
+                } else*/ if (cartesTresor.getCartesEnJeu().get(0).getTypeCarte() != TypeCarte.vide) {
+                    cartesTresor.tirerCarteJoueurCourant(grille);
+                    grille.getJoueurCourant().setNbCarteTiré(grille.getJoueurCourant().getNbCarteTiré() - 1);
                 }
                 break;
 
@@ -142,8 +138,10 @@ public class Controleur implements Observateur {
                 } else {
                     grille.getJoueurCourant().setNbPA(grille.getJoueurCourant().getNbPA() - 1);//retire un pa au joueur
                 }
-
                 break;
+            case DEFFAUSE_CARTE:
+                cartesTresor.getCartesDefausse().add(grille.getJoueurCourant().getMain().get(msg.getIndiceMain()));
+                grille.getJoueurCourant().getMain().remove(msg.getIndiceMain());
 
         }
     }

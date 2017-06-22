@@ -8,28 +8,20 @@ public class Aventurier {
     /**
      * @return the nbmaxPa
      */
-    public static int getNbmaxPa() {
-        return nbmaxPa;
-    }
-
-    /**
-     * @param aNbmaxPa the nbmaxPa to set
-     */
-    public static void setNbmaxPa(int aNbmaxPa) {
-        nbmaxPa = aNbmaxPa;
+    public int getNbmaxPa() {
+        return 3;
     }
 
     private String nomJoueur;
     private TypeRole typeRole;
-    private int nbPA = nbmaxPa;
+    private int nbPA;
     private int idaventurier;
     private Tuile t;
     private ArrayList<Carte> main;
     private ArrayList<Tuile> tuilesAtteignable;
     private ArrayList<Tuile> tuilesAssechable;
-    private static int nbmaxPa = 3;
-    private int nbCarteTiré = 2;
-    
+    private int nbCarteATiré;
+
     public Aventurier(String nomJoueur, TypeRole typeRole, int idaventurier, Tuile t) {
         this.nomJoueur = nomJoueur;
         this.typeRole = typeRole;
@@ -39,7 +31,8 @@ public class Aventurier {
         this.tuilesAtteignable = new ArrayList<Tuile>();
         this.tuilesAssechable = new ArrayList<Tuile>();
         this.main = new ArrayList<>();
-
+        this.nbCarteATiré = 2;
+        this.nbPA = 3;
     }
 
     public Aventurier() {
@@ -297,35 +290,34 @@ public class Aventurier {
     }
 
     /**
-     * @return the nbCarteTiré
+     * @return the nbCarteATiré
      */
     public int getNbCarteTiré() {
-        return nbCarteTiré;
+        return nbCarteATiré;
     }
 
     /**
-     * @param nbCarteTiré the nbCarteTiré to set
+     * @param nbCarteTiré the nbCarteATiré to set
      */
     public void setNbCarteTiré(int nbCarteTiré) {
-        this.nbCarteTiré = nbCarteTiré;
+        this.nbCarteATiré = nbCarteTiré;
     }
-    
-    public boolean peutRecupeTresor(ArrayList<Carte> ac, TypeCarte typeCarte){
+
+    public boolean peutRecupeTresor(ArrayList<Carte> ac, TypeCarte typeCarte) {
         int nbCarteFigurinePareil = 0;
         for (int i = 0; i < ac.size(); i++) {
-            if(ac.get(0).getTypeCarte() == typeCarte){
+            if (ac.get(0).getTypeCarte() == typeCarte) {
                 nbCarteFigurinePareil++;
                 i++;
             } else {
                 i++;
             }
-            if (nbCarteFigurinePareil >= 4){
+            if (nbCarteFigurinePareil >= 4) {
                 return true;
             } else {
                 return false;
             }
         }
-       return false;
+        return false;
     }
 }
-
