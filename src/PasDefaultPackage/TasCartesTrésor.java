@@ -54,8 +54,7 @@ public class TasCartesTrésor extends TasCartes {
 
     public void tirerCarteJoueurCourant(Grille grille) {
         grille.getJoueurCourant().getMain().add(getCartesEnJeu().get(0));
-        System.out.println(getCartesEnJeu().get(0));
-        getCartesEnJeu().remove(0);//TODO ihm
+        getCartesEnJeu().remove(0);
 
     }
 }

@@ -143,6 +143,10 @@ public class Controleur implements Observateur {
                 cartesTresor.getCartesDefausse().add(grille.getJoueurCourant().getMain().get(msg.getIndiceMain()));
                 grille.getJoueurCourant().getMain().remove(msg.getIndiceMain());
 
+                break;
+            //case TEST_FINPARTIE:
+
+               // break;
         }
     }
 
