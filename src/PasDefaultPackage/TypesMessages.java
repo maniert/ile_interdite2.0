@@ -22,5 +22,6 @@ public enum TypesMessages {
     ASSECHER,
     ASSECHINGE,
     DONNE_TRESOR,
-    DEFFAUSE_CARTE;
+    DEFFAUSE_CARTE,
+    TEST_FINPARTIE;
 }

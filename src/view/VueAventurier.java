@@ -294,8 +294,6 @@ public class VueAventurier {
                 if (grille.getJoueurCourant().getNbPA() == 0 && grille.getJoueurCourant().getNbCarteTiré() > 0) {
                     m.type = TypesMessages.PIOCHER_CARTE_TRESOR;
                     o.traiterMessage(m);
-                    //tasCartesTrésor.tirerCarteJoueurCourant(grille);
-                    System.out.println(grille.getJoueurCourant().getNbCarteTiré());
                     plateau.removeAll();//efface le plateau
                     peinture(grille, couleur, false, mainAutre, false);
                 }
@@ -342,6 +340,31 @@ public class VueAventurier {
             }
         });
 
+        btnObtenirTresor.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Tuile t;
+                m.type = TypesMessages.DONNE_TRESOR;
+                o.traiterMessage(m);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+
     }
 
     public void peinture(Grille grille, Color couleur, boolean white, VueAutresJoueurs mainAutre, boolean deffausseCT) {
@@ -355,7 +378,7 @@ public class VueAventurier {
 
         if (grille.getJoueurCourant().getNbCarteTiré() == 2) {
             for (int w = 0; w < 9; w++) {
-                btnMainJoueur[w].setText("vide");
+
             }
         }
 
@@ -476,9 +499,11 @@ public class VueAventurier {
                     btnMainJoueur[main].addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent me) {
+
+                            plateau.removeAll();//efface le plateau
+                            peinture(grille, couleur, false, mainAutre, false);//réaffiche le plateau
                             m.type = TypesMessages.DEFFAUSE_CARTE;
                             o.traiterMessage(m);
-                            btnMainJoueur[m.getIndiceMain()].setText("vide");
                             plateau.removeAll();//efface le plateau
                             peinture(grille, couleur, false, mainAutre, false);//réaffiche le plateau
                         }
@@ -509,31 +534,6 @@ public class VueAventurier {
             }
 
         }
-
-        btnObtenirTresor.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Tuile t;
-                m.type = TypesMessages.DONNE_TRESOR;
-                o.traiterMessage(m);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
 
         btnDonnerCTrésors.addMouseListener(new MouseListener() {
             @Override
@@ -602,12 +602,12 @@ public class VueAventurier {
 
     public void creationPionetMain(Grille grille, int i) {
         for (int j = 0; j <= grille.getTuiles().get(i).getAventuriers().size() - 1; j++) {
-            for (int k = 0; k <= grille.getTuiles().get(i).getAventuriers().get(j).getMain().size() - 1; k++) {
-                if (grille.getTuiles().get(i).getAventuriers().get(j) == grille.getJoueurCourant()) {
-                    btnMainJoueur[k].setText(grille.getTuiles().get(i).getAventuriers().get(j).getMain().get(k).getTypeCarte().toString());
-
-                    //add(new JLabel(new ImageIcon(Parameters.CARTES + setImageCarte(grille.getJoueurCourant().getMain().get(k)))));
-                    // } else {
+            for (int k = 0; k <= grille.getJoueurCourant().getMain().size() - 1; k++) {
+                if (m.getIndiceMain() == k) {
+                    System.out.println(k);
+                    btnMainJoueur[k].setText(grille.getJoueurCourant().getMain().get(k).getTypeCarte().toString());
+                } else {
+                    btnMainJoueur[k].setText("vide");
                 }
             }
             if (0 != grille.getTuiles().get(i).getAventuriers().size()) {
