@@ -32,9 +32,9 @@ public class VueInscription {
 
     private JFrame window;
     private JPanel mainPanel;
-     
+
     private JLabel icon;
-    
+
     // nb Joueur
     private JRadioButton rnbJoueur2, rnbJoueur3, rnbJoueur4;
 
@@ -52,25 +52,21 @@ public class VueInscription {
         this.window = new JFrame();
         this.observateur = o;
         m = new Message();
-          
+
         window.setTitle("Demarrage partie");
-         window.setBackground(Color.yellow);
+        window.setBackground(Color.yellow);
         mainPanel = new JPanel(new BorderLayout());
 
-        
-        mainPanel.setBackground(Color.PINK);        
+        mainPanel.setBackground(Color.PINK);
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 5));
-        
-        
-        
-        //image
-            icon = new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\ile.png"));
-            JPanel panIcon = new JPanel();
-            panIcon.setBackground(Color.white);
-            panIcon.setLayout(new BorderLayout());
-            panIcon.add(icon);
 
-        
+        //image
+        icon = new JLabel(new ImageIcon(Parameters.ROOT + "\\src\\images\\images\\ile.png"));
+        JPanel panIcon = new JPanel();
+        panIcon.setBackground(Color.white);
+        panIcon.setLayout(new BorderLayout());
+        panIcon.add(icon);
+
         // nb Joueur
         JPanel nbJoueurPan = new JPanel();
         nbJoueurPan.setBackground(Color.white);
@@ -92,7 +88,7 @@ public class VueInscription {
         // nom Joueur
         JPanel nomPan = new JPanel();
         nomPan.setBackground(Color.white);
-        nomPan.setPreferredSize(new Dimension(500, 100));
+        nomPan.setPreferredSize(new Dimension(300, 150));
         nom1 = new JTextField();
         nom1.setPreferredSize(new Dimension(100, 25));
         nom2 = new JTextField();
@@ -153,6 +149,8 @@ public class VueInscription {
                 m.getNomsJoueurs().add(nom2.getText());
                 m.getNomsJoueurs().add(nom3.getText());
                 m.getNomsJoueurs().add(nom4.getText());
+                m.setEchelledebut(getLevelEchelle());
+
                 observateur.traiterMessage(m);
 
             }
@@ -197,6 +195,18 @@ public class VueInscription {
             return 4;
         } else {
             return 2;
+        }
+    }
+
+    public int getLevelEchelle() {
+        if (levelNormal.isSelected()) {
+            return 2;
+        } else if (levelElite.isSelected()) {
+            return 3;
+        } else if (levelLegendaire.isSelected()) {
+            return 4;
+        } else {
+            return 1;
         }
 
     }
